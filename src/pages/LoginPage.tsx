@@ -18,9 +18,15 @@ const LoginPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple validation
-    if (formData.role && formData.mobile && formData.password) {
+    console.log("Form submitted:", formData);
+    
+    // Simple validation - check if all fields are filled
+    if (formData.role.trim() && formData.mobile.trim() && formData.password.trim()) {
+      console.log("All fields filled, navigating to dashboard");
       navigate("/dashboard");
+    } else {
+      console.log("Some fields are empty");
+      alert("请填写所有字段");
     }
   };
 
@@ -86,6 +92,7 @@ const LoginPage = () => {
                     value={formData.role}
                     onChange={(e) => setFormData({...formData, role: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                    required
                   />
                 </div>
                 
@@ -97,6 +104,7 @@ const LoginPage = () => {
                     value={formData.mobile}
                     onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                    required
                   />
                 </div>
                 
@@ -110,12 +118,13 @@ const LoginPage = () => {
                       value={formData.password}
                       onChange={(e) => setFormData({...formData, password: e.target.value})}
                       className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 pr-10"
+                      required
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0 hover:bg-slate-600/50"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
@@ -129,7 +138,7 @@ const LoginPage = () => {
                 
                 <Button
                   type="submit"
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 transition-colors"
                 >
                   立即登录
                 </Button>
