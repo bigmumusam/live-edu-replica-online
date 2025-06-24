@@ -170,7 +170,8 @@ const Dashboard = () => {
                         <p className="text-slate-400 text-xs mb-3 line-clamp-2">
                           {course.title === "PHP工程" ? "Learn Php Codeigniter and understand working with MVC and HMVC code by using to hero" : 
                            course.title === "生物学" ? "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills..." :
-                           course.title === "数据统计" ? "Dive in and learn React 16.8 from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js..."}
+                           course.title === "数据统计" ? "Dive in and learn React 16.8 from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js..." : 
+                           "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度"}
                         </p>
                         <div className="flex items-center space-x-2 mb-3">
                           <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
@@ -303,7 +304,7 @@ const Dashboard = () => {
                       <p className="text-green-400 text-xs">距离上课还有4小时</p>
                     </div>
                   </div>
-                </div>
+                </CardContent>
               </Card>
 
               {/* Start Discussion Button */}
