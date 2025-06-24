@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Star, Play, ArrowRight, MessageSquare, Eye, Clock } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Star, Play, ArrowRight, MessageSquare, Eye, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { useNavigate } from "react-router-dom";
@@ -91,60 +92,98 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            {/* Left Content - My Courses (smaller) */}
-            <div className="lg:col-span-3 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Content - My Courses */}
+            <div className="lg:col-span-2 space-y-6">
               {/* My Courses */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-slate-400">选择：</span>
-                    <select className="bg-slate-700 text-white px-3 py-1 rounded text-sm border-slate-600">
-                      <option>全部</option>
-                    </select>
+                    <Select defaultValue="all">
+                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">难易程度</SelectItem>
+                        <SelectItem value="easy">简单</SelectItem>
+                        <SelectItem value="medium">中等</SelectItem>
+                        <SelectItem value="hard">困难</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select defaultValue="type">
+                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="type">课程类型</SelectItem>
+                        <SelectItem value="live">直播课</SelectItem>
+                        <SelectItem value="record">录播课</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select defaultValue="direction">
+                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="direction">课程方向</SelectItem>
+                        <SelectItem value="math">数学</SelectItem>
+                        <SelectItem value="science">科学</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {courses.map((course) => (
                     <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer">
-                      <CardContent className="p-4">
-                        <div className="flex items-center space-x-2 mb-3">
-                          <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
+                      <CardContent className="p-3">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <div className={`w-6 h-6 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-xs`}>
                             A
                           </div>
                           <Badge variant={course.status === "即将开始" ? "secondary" : course.status === "进行中" ? "default" : "outline"} className="text-xs">
                             {course.status}
                           </Badge>
                         </div>
-                        <h4 className="text-white font-medium mb-2">{course.title}</h4>
-                        <p className="text-slate-400 text-sm mb-3 line-clamp-2">
-                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂
+                        <h4 className="text-white font-medium mb-1 text-sm">{course.title}</h4>
+                        <p className="text-slate-400 text-xs mb-2 line-clamp-2">
+                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度
                         </p>
-                        <div className="flex items-center space-x-2 mb-3">
-                          <div className="w-5 h-5 bg-blue-500 rounded-full"></div>
-                          <span className="text-slate-400 text-sm">{course.instructor}</span>
-                          <span className="text-slate-400 text-sm">{course.students}</span>
+                        <div className="flex items-center space-x-2 mb-2">
+                          <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                          <span className="text-slate-400 text-xs">{course.instructor}</span>
+                          <span className="text-slate-400 text-xs">{course.students}</span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-1">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className={`h-3 w-3 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
+                              <Star key={i} className={`h-2 w-2 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
                             ))}
                             <span className="text-slate-400 text-xs ml-1">难度系数</span>
                           </div>
-                          <span className="text-green-400 font-bold text-sm">{course.price}</span>
+                          <span className="text-green-400 font-bold text-xs">{course.price}</span>
                         </div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
+
+                {/* Pagination */}
+                <div className="flex items-center justify-center space-x-2">
+                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <span className="text-slate-400 text-sm">1 / 5</span>
+                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
 
             {/* Right Sidebar - User Info and Tasks */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6">
               {/* User Info Card */}
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4">
@@ -198,30 +237,6 @@ const Dashboard = () => {
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Discussion Categories */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm">讨论专区</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {categories.map((category) => (
-                    <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
-                      <div className="flex items-center space-x-2">
-                        {category.color !== "bg-transparent" && (
-                          <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
-                        )}
-                        <span className="text-sm">{category.name}</span>
-                      </div>
-                      {category.count && (
-                        <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
-                          {category.count}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
             </div>
           </div>
 
@@ -230,10 +245,37 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-white">最新课程</h3>
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-slate-400">选择：</span>
-                <select className="bg-slate-700 text-white px-3 py-1 rounded text-sm border-slate-600">
-                  <option>全部</option>
-                </select>
+                <Select defaultValue="all">
+                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">难易程度</SelectItem>
+                    <SelectItem value="easy">简单</SelectItem>
+                    <SelectItem value="medium">中等</SelectItem>
+                    <SelectItem value="hard">困难</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="type">
+                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="type">课程类型</SelectItem>
+                    <SelectItem value="live">直播课</SelectItem>
+                    <SelectItem value="record">录播课</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="direction">
+                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="direction">课程方向</SelectItem>
+                    <SelectItem value="math">数学</SelectItem>
+                    <SelectItem value="science">科学</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
@@ -273,9 +315,20 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
+
+            {/* Pagination */}
+            <div className="flex items-center justify-center space-x-2">
+              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <span className="text-slate-400 text-sm">1 / 5</span>
+              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
 
-          {/* Discussion Area - Full Width */}
+          {/* Discussion Area */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Hot Discussions */}
             <div className="lg:col-span-3 space-y-4">
@@ -335,11 +388,35 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Start Discussion Button - Right side */}
-            <div className="lg:col-span-1">
+            {/* Right Sidebar */}
+            <div className="space-y-6">
               <Button className="w-full bg-green-600 hover:bg-green-700 h-12">
                 发起话题讨论
               </Button>
+              
+              {/* Discussion Categories */}
+              <Card className="bg-slate-800/50 border-slate-700">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-white text-sm">讨论专区</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {categories.map((category) => (
+                    <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
+                      <div className="flex items-center space-x-2">
+                        {category.color !== "bg-transparent" && (
+                          <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
+                        )}
+                        <span className="text-sm">{category.name}</span>
+                      </div>
+                      {category.count && (
+                        <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
+                          {category.count}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             </div>
           </div>
         </main>

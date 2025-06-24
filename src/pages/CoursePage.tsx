@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, ChevronRight, MoreHorizontal } from "lucide-react";
+import { Star, ChevronRight, MoreHorizontal, ChevronLeft } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { useNavigate } from "react-router-dom";
@@ -55,62 +55,77 @@ const CoursePage = () => {
                   <SelectItem value="upcoming">即将开始</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
             </div>
           </div>
 
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses.map((course) => (
-              <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer group" onClick={() => navigate(`/course/${course.id}`)}>
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
-                      <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
-                        {course.title.charAt(0)}
+              <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer group aspect-square" onClick={() => navigate(`/course/${course.id}`)}>
+                <CardContent className="p-6 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-10 h-10 ${course.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                          {course.title.charAt(0)}
+                        </div>
+                        <Badge className={`${getStatusColor(course.status)} text-white text-xs`}>
+                          {course.status}
+                        </Badge>
                       </div>
-                      <Badge className={`${getStatusColor(course.status)} text-white`}>
-                        {course.status}
-                      </Badge>
+                      <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                        <MoreHorizontal className="h-4 w-4 text-slate-400" />
+                      </Button>
                     </div>
-                    <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <MoreHorizontal className="h-4 w-4 text-slate-400" />
-                    </Button>
+                    
+                    <h3 className="text-white text-lg font-medium mb-3 line-clamp-2">{course.title}</h3>
+                    
+                    <p className="text-slate-400 text-sm mb-4 line-clamp-3">
+                      {course.title === "计算机工程" ? "Learn Php Codeigniter and understand working with MVC and HMVC from zero to hero" :
+                       course.title === "生物学" ? "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills" :
+                       course.title === "数据统计" ? "Dive in and learn React 16.8 from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js" :
+                       "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂"}
+                    </p>
                   </div>
-                  <CardTitle className="text-white text-lg">{course.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-slate-400 text-sm">
-                    探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂
-                  </p>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">{course.instructor.charAt(0)}</span>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">{course.instructor.charAt(0)}</span>
+                      </div>
+                      <span className="text-slate-400 text-sm">{course.instructor}</span>
                     </div>
-                    <span className="text-slate-400 text-sm">{course.instructor}</span>
-                    <span className="text-slate-400 text-sm">{course.students}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
-                      ))}
-                      <span className="text-slate-400 text-sm ml-2">难度系数</span>
+                    <div className="text-slate-400 text-sm">{course.students}</div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={`h-4 w-4 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
+                        ))}
+                        <span className="text-slate-400 text-sm ml-2">难度系数</span>
+                      </div>
+                      <span className="text-green-400 font-bold">{course.price}</span>
                     </div>
-                    <span className="text-green-400 font-bold">{course.price}</span>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          {/* Load More */}
-          <div className="flex justify-center">
+          {/* Load More and Pagination */}
+          <div className="flex flex-col items-center space-y-4">
             <Button variant="outline" className="border-slate-600 text-slate-300 hover:text-white">
               加载更多课程
             </Button>
+            
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <span className="text-slate-400 text-sm">1 / 5</span>
+              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </main>
       </div>

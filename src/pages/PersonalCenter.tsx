@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Star, Users, MessageSquare, BookOpen, Award, Plus, MoreHorizontal } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import DiscussionsTab from "@/components/personal/DiscussionsTab";
+import PointsTab from "@/components/personal/PointsTab";
+import TeachingTab from "@/components/personal/TeachingTab";
 
 const PersonalCenter = () => {
   const courses = [
@@ -95,6 +97,18 @@ const PersonalCenter = () => {
                       </Card>
                     ))}
                   </div>
+                </TabsContent>
+
+                <TabsContent value="discussions" className="space-y-6">
+                  <DiscussionsTab />
+                </TabsContent>
+
+                <TabsContent value="points" className="space-y-6">
+                  <PointsTab />
+                </TabsContent>
+
+                <TabsContent value="teaching" className="space-y-6">
+                  <TeachingTab />
                 </TabsContent>
 
                 <TabsContent value="favorites" className="space-y-6">

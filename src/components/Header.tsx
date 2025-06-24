@@ -2,20 +2,50 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bell, Search } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 interface HeaderProps {
   title?: string;
   showSearch?: boolean;
 }
 
-const Header = ({ title = "首页", showSearch = true }: HeaderProps) => {
+const Header = ({ title, showSearch = true }: HeaderProps) => {
+  const location = useLocation();
+  
+  const getBreadcrumb = () => {
+    const path = location.pathname;
+    
+    if (path === "/dashboard") {
+      return "个人中心 / 我的课程 / 课程详情";
+    } else if (path === "/courses") {
+      return "课程";
+    } else if (path.startsWith("/course/")) {
+      return "课程 / 详情";
+    } else if (path === "/personal") {
+      const urlParams = new URLSearchParams(location.search);
+      const tab = urlParams.get('tab');
+      if (tab === 'discussions') {
+        return "个人中心 / 参与的讨论";
+      } else if (tab === 'points') {
+        return "个人中心 / 我的积分";
+      } else if (tab === 'teaching') {
+        return "个人中心 / 教授课时";
+      }
+      return "个人中心 / 我的课程";
+    } else if (path === "/forum") {
+      return "话题论坛";
+    }
+    
+    return "个人中心 / 我的课程 / 课程详情";
+  };
+
   return (
     <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-semibold text-white">{title}</h1>
+          <h1 className="text-xl font-semibold text-white">{title || "首页"}</h1>
           <div className="text-sm text-slate-400">
-            个人中心/ 我的课程 / 课程详情
+            {getBreadcrumb()}
           </div>
         </div>
         

@@ -10,6 +10,8 @@ import CoursePage from "./pages/CoursePage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import PersonalCenter from "./pages/PersonalCenter";
 import ForumPage from "./pages/ForumPage";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/course/:id" element={<CourseDetailPage />} />
           <Route path="/personal" element={<PersonalCenter />} />
           <Route path="/forum" element={<ForumPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
