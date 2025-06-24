@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,9 @@ const Dashboard = () => {
     { id: 1, title: "AP生物考试时间管理有什么技巧?", author: "Nicholas Simmons", category: "生物", replies: 15, time: "2小时前" },
     { id: 2, title: "如何提高数学解题速度？", author: "Sarah Johnson", category: "数学", replies: 8, time: "4小时前" },
     { id: 3, title: "物理力学部分重难点总结", author: "David Chen", category: "物理", replies: 22, time: "1天前" },
+    { id: 4, title: "英语阅读理解技巧分享", author: "Emma Wilson", category: "英语", replies: 12, time: "3小时前" },
+    { id: 5, title: "化学实验安全注意事项", author: "Michael Brown", category: "化学", replies: 6, time: "5小时前" },
+    { id: 6, title: "历史知识点记忆方法", author: "Lisa Zhang", category: "历史", replies: 18, time: "6小时前" },
   ];
 
   const getStatusColor = (status: string) => {
