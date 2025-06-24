@@ -150,14 +150,36 @@ const Dashboard = () => {
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
                   <div className="flex items-center space-x-2">
                     <Select defaultValue="all">
-                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">全部</SelectItem>
-                        <SelectItem value="easy">简单</SelectItem>
+                        <SelectItem value="easy">容易</SelectItem>
                         <SelectItem value="medium">中等</SelectItem>
                         <SelectItem value="hard">困难</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select defaultValue="all-subject">
+                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all-subject">全部</SelectItem>
+                        <SelectItem value="chinese">语文</SelectItem>
+                        <SelectItem value="math">数学</SelectItem>
+                        <SelectItem value="english">英语</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select defaultValue="all-type">
+                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all-type">类型</SelectItem>
+                        <SelectItem value="video">视频</SelectItem>
+                        <SelectItem value="live">直播</SelectItem>
+                        <SelectItem value="text">图文</SelectItem>
                       </SelectContent>
                     </Select>
                     <div className="flex items-center space-x-2 ml-4">
@@ -175,7 +197,7 @@ const Dashboard = () => {
                   {courses.map((course) => (
                     <Card 
                       key={course.id} 
-                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[320px] flex flex-col"
+                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[240px] flex flex-col"
                       onClick={() => handleCourseClick(course.id)}
                     >
                       <CardContent className="p-4 flex flex-col h-full">
@@ -187,9 +209,9 @@ const Dashboard = () => {
                             {course.status}
                           </Badge>
                         </div>
-                        <h4 className="text-white font-medium mb-3 text-sm leading-relaxed">{course.title}</h4>
-                        <p className="text-slate-400 text-xs mb-4 line-clamp-4 flex-1">
-                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。这是一门综合性的数学课程，涵盖了代数的核心概念和应用。
+                        <h4 className="text-white font-medium mb-2 text-sm leading-relaxed">{course.title}</h4>
+                        <p className="text-slate-400 text-xs mb-3 line-clamp-3 flex-1">
+                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。
                         </p>
                         <div className="flex items-center space-x-2 mb-3">
                           <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
@@ -213,7 +235,7 @@ const Dashboard = () => {
             </div>
 
             {/* Right Sidebar - User Info (占1列) */}
-            <div className="lg:col-span-1 space-y-6">
+            <div className="lg:col-span-1 space-y-6 flex flex-col">
               {/* User Info Card */}
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4">
@@ -245,8 +267,8 @@ const Dashboard = () => {
               </Card>
 
               {/* Quick Actions */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardContent className="p-4 space-y-3">
+              <Card className="bg-slate-800/50 border-slate-700 flex-1">
+                <CardContent className="p-4 space-y-3 h-full">
                   <h4 className="text-white font-medium">待办任务</h4>
                   <div className="space-y-2">
                     <div className="bg-slate-700/50 p-3 rounded">
@@ -276,14 +298,36 @@ const Dashboard = () => {
               <h3 className="text-xl font-bold text-white">最新课程</h3>
               <div className="flex items-center space-x-2">
                 <Select defaultValue="all">
-                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">全部</SelectItem>
-                    <SelectItem value="easy">简单</SelectItem>
+                    <SelectItem value="easy">容易</SelectItem>
                     <SelectItem value="medium">中等</SelectItem>
                     <SelectItem value="hard">困难</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="all-subject">
+                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all-subject">全部</SelectItem>
+                    <SelectItem value="chinese">语文</SelectItem>
+                    <SelectItem value="math">数学</SelectItem>
+                    <SelectItem value="english">英语</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="all-type">
+                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all-type">类型</SelectItem>
+                    <SelectItem value="video">视频</SelectItem>
+                    <SelectItem value="live">直播</SelectItem>
+                    <SelectItem value="text">图文</SelectItem>
                   </SelectContent>
                 </Select>
                 <div className="flex items-center space-x-2 ml-4">
