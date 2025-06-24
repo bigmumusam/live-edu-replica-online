@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -140,10 +141,11 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Content - My Courses */}
-            <div className="lg:col-span-2">
-              <div className="space-y-4 h-[600px] flex flex-col">
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            {/* Left Content - My Courses (占3列) */}
+            <div className="lg:col-span-3">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
                   <div className="flex items-center space-x-2">
@@ -152,30 +154,10 @@ const Dashboard = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">难易程度</SelectItem>
+                        <SelectItem value="all">全部</SelectItem>
                         <SelectItem value="easy">简单</SelectItem>
                         <SelectItem value="medium">中等</SelectItem>
                         <SelectItem value="hard">困难</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Select defaultValue="type">
-                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="type">课程类型</SelectItem>
-                        <SelectItem value="live">直播课</SelectItem>
-                        <SelectItem value="record">录播课</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Select defaultValue="direction">
-                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="direction">课程方向</SelectItem>
-                        <SelectItem value="math">数学</SelectItem>
-                        <SelectItem value="science">科学</SelectItem>
                       </SelectContent>
                     </Select>
                     <div className="flex items-center space-x-2 ml-4">
@@ -189,11 +171,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {courses.map((course) => (
                     <Card 
                       key={course.id} 
-                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[280px] flex flex-col"
+                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[320px] flex flex-col"
                       onClick={() => handleCourseClick(course.id)}
                     >
                       <CardContent className="p-4 flex flex-col h-full">
@@ -206,8 +188,8 @@ const Dashboard = () => {
                           </Badge>
                         </div>
                         <h4 className="text-white font-medium mb-3 text-sm leading-relaxed">{course.title}</h4>
-                        <p className="text-slate-400 text-xs mb-4 line-clamp-3 flex-1">
-                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。
+                        <p className="text-slate-400 text-xs mb-4 line-clamp-4 flex-1">
+                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。这是一门综合性的数学课程，涵盖了代数的核心概念和应用。
                         </p>
                         <div className="flex items-center space-x-2 mb-3">
                           <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
@@ -230,8 +212,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Right Sidebar - User Info and Tasks */}
-            <div className="space-y-6 h-full">
+            {/* Right Sidebar - User Info (占1列) */}
+            <div className="lg:col-span-1 space-y-6">
               {/* User Info Card */}
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4">
@@ -263,7 +245,7 @@ const Dashboard = () => {
               </Card>
 
               {/* Quick Actions */}
-              <Card className="bg-slate-800/50 border-slate-700 flex-1">
+              <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4 space-y-3">
                   <h4 className="text-white font-medium">待办任务</h4>
                   <div className="space-y-2">
@@ -298,30 +280,10 @@ const Dashboard = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">难易程度</SelectItem>
+                    <SelectItem value="all">全部</SelectItem>
                     <SelectItem value="easy">简单</SelectItem>
                     <SelectItem value="medium">中等</SelectItem>
                     <SelectItem value="hard">困难</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Select defaultValue="type">
-                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="type">课程类型</SelectItem>
-                    <SelectItem value="live">直播课</SelectItem>
-                    <SelectItem value="record">录播课</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Select defaultValue="direction">
-                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="direction">课程方向</SelectItem>
-                    <SelectItem value="math">数学</SelectItem>
-                    <SelectItem value="science">科学</SelectItem>
                   </SelectContent>
                 </Select>
                 <div className="flex items-center space-x-2 ml-4">
@@ -379,8 +341,8 @@ const Dashboard = () => {
 
           {/* Discussion Area */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Hot Discussions */}
-            <div className="lg:col-span-2 space-y-4">
+            {/* Hot Discussions (占3列) */}
+            <div className="lg:col-span-3 space-y-4">
               <Tabs value={activeDiscussionTab} onValueChange={setActiveDiscussionTab}>
                 <div className="flex items-center justify-between mb-4">
                   <TabsList className="bg-slate-800/50 border-slate-700">
@@ -494,14 +456,14 @@ const Dashboard = () => {
               </Tabs>
             </div>
 
-            {/* Right Sidebar */}
-            <div className="lg:col-span-2 space-y-6">
+            {/* Right Sidebar (占1列) */}
+            <div className="lg:col-span-1 space-y-6">
               {/* Create Topic Button */}
               <div className="flex justify-center">
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
                     <Button 
-                      className="bg-green-600 hover:bg-green-700 h-12 px-6"
+                      className="bg-green-600 hover:bg-green-700 h-12 px-6 w-full"
                       onClick={handleCreateTopic}
                     >
                       发起话题讨论
@@ -574,7 +536,7 @@ const Dashboard = () => {
                   <CardTitle className="text-white text-sm">讨论专区</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {categories.slice(0, 4).map((category) => (
+                  {categories.map((category) => (
                     <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
                       <div className="flex items-center space-x-2">
                         {category.color !== "bg-transparent" && (
