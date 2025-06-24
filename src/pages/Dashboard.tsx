@@ -143,7 +143,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Content - My Courses */}
             <div className="lg:col-span-2">
-              <div className="space-y-4 h-full">
+              <div className="space-y-4 h-[600px] flex flex-col">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
                   <div className="flex items-center space-x-2">
@@ -189,39 +189,39 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 flex-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
                   {courses.map((course) => (
                     <Card 
                       key={course.id} 
-                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer"
+                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[280px] flex flex-col"
                       onClick={() => handleCourseClick(course.id)}
                     >
-                      <CardContent className="p-3">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className={`w-6 h-6 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-xs`}>
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center space-x-2 mb-3">
+                          <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
                             A
                           </div>
                           <Badge variant={course.status === "即将开始" ? "secondary" : course.status === "进行中" ? "default" : "outline"} className="text-xs">
                             {course.status}
                           </Badge>
                         </div>
-                        <h4 className="text-white font-medium mb-1 text-sm">{course.title}</h4>
-                        <p className="text-slate-400 text-xs mb-2 line-clamp-2">
-                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度
+                        <h4 className="text-white font-medium mb-3 text-sm leading-relaxed">{course.title}</h4>
+                        <p className="text-slate-400 text-xs mb-4 line-clamp-3 flex-1">
+                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。
                         </p>
-                        <div className="flex items-center space-x-2 mb-2">
+                        <div className="flex items-center space-x-2 mb-3">
                           <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
                           <span className="text-slate-400 text-xs">{course.instructor}</span>
                           <span className="text-slate-400 text-xs">{course.students}</span>
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between mt-auto">
                           <div className="flex items-center space-x-1">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className={`h-2 w-2 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
+                              <Star key={i} className={`h-3 w-3 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
                             ))}
                             <span className="text-slate-400 text-xs ml-1">难度系数</span>
                           </div>
-                          <span className="text-green-400 font-bold text-xs">{course.price}</span>
+                          <span className="text-green-400 font-bold text-sm">{course.price}</span>
                         </div>
                       </CardContent>
                     </Card>
