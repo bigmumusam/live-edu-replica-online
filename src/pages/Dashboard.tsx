@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -497,103 +496,101 @@ const Dashboard = () => {
 
             {/* Right Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="flex space-x-4">
-                {/* Discussion Categories */}
-                <Card className="flex-1 bg-slate-800/50 border-slate-700">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-white text-sm">讨论专区</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    {categories.slice(0, 4).map((category) => (
-                      <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
-                        <div className="flex items-center space-x-2">
-                          {category.color !== "bg-transparent" && (
-                            <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
-                          )}
-                          <span className="text-xs">{category.name}</span>
-                        </div>
-                        {category.count && (
-                          <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
-                            {category.count}
-                          </span>
-                        )}
+              {/* Create Topic Button */}
+              <div className="flex justify-center">
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button 
+                      className="bg-green-600 hover:bg-green-700 h-12 px-6"
+                      onClick={handleCreateTopic}
+                    >
+                      发起话题讨论
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-2xl">
+                    <DialogHeader>
+                      <div className="flex items-center justify-between">
+                        <DialogTitle className="text-white">发起话题讨论</DialogTitle>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setIsDialogOpen(false)}
+                          className="text-slate-400 hover:text-white"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
                       </div>
-                    ))}
-                  </CardContent>
-                </Card>
-
-                {/* Create Topic Button */}
-                <div className="flex items-start">
-                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button 
-                        className="bg-green-600 hover:bg-green-700 h-12 px-6"
-                        onClick={handleCreateTopic}
-                      >
-                        发起话题讨论
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-2xl">
-                      <DialogHeader>
-                        <div className="flex items-center justify-between">
-                          <DialogTitle className="text-white">发起话题讨论</DialogTitle>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setIsDialogOpen(false)}
-                            className="text-slate-400 hover:text-white"
-                          >
-                            <X className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </DialogHeader>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="text-sm font-medium text-slate-300 mb-2 block">话题标题</label>
-                          <Input 
-                            placeholder="请输入话题标题..." 
-                            className="bg-slate-700 border-slate-600 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium text-slate-300 mb-2 block">选择分类</label>
-                          <Select>
-                            <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
-                              <SelectValue placeholder="选择话题分类" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="math">数学</SelectItem>
-                              <SelectItem value="physics">物理</SelectItem>
-                              <SelectItem value="biology">生物</SelectItem>
-                              <SelectItem value="chemistry">化学</SelectItem>
-                              <SelectItem value="english">英语</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium text-slate-300 mb-2 block">话题内容</label>
-                          <Textarea 
-                            placeholder="请详细描述您的问题或想要讨论的内容..." 
-                            className="bg-slate-700 border-slate-600 text-white min-h-32"
-                          />
-                        </div>
-                        <div className="flex justify-end space-x-3">
-                          <Button 
-                            variant="outline" 
-                            onClick={() => setIsDialogOpen(false)}
-                            className="border-slate-600 text-slate-300"
-                          >
-                            取消
-                          </Button>
-                          <Button className="bg-green-600 hover:bg-green-700">
-                            发布话题
-                          </Button>
-                        </div>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium text-slate-300 mb-2 block">话题标题</label>
+                        <Input 
+                          placeholder="请输入话题标题..." 
+                          className="bg-slate-700 border-slate-600 text-white"
+                        />
                       </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
+                      <div>
+                        <label className="text-sm font-medium text-slate-300 mb-2 block">选择分类</label>
+                        <Select>
+                          <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                            <SelectValue placeholder="选择话题分类" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="math">数学</SelectItem>
+                            <SelectItem value="physics">物理</SelectItem>
+                            <SelectItem value="biology">生物</SelectItem>
+                            <SelectItem value="chemistry">化学</SelectItem>
+                            <SelectItem value="english">英语</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-slate-300 mb-2 block">话题内容</label>
+                        <Textarea 
+                          placeholder="请详细描述您的问题或想要讨论的内容..." 
+                          className="bg-slate-700 border-slate-600 text-white min-h-32"
+                        />
+                      </div>
+                      <div className="flex justify-end space-x-3">
+                        <Button 
+                          variant="outline" 
+                          onClick={() => setIsDialogOpen(false)}
+                          className="border-slate-600 text-slate-300"
+                        >
+                          取消
+                        </Button>
+                        <Button className="bg-green-600 hover:bg-green-700">
+                          发布话题
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
+
+              {/* Discussion Categories */}
+              <Card className="bg-slate-800/50 border-slate-700">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-white text-sm">讨论专区</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {categories.slice(0, 4).map((category) => (
+                    <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
+                      <div className="flex items-center space-x-2">
+                        {category.color !== "bg-transparent" && (
+                          <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
+                        )}
+                        <span className="text-xs">{category.name}</span>
+                      </div>
+                      {category.count && (
+                        <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
+                          {category.count}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             </div>
           </div>
         </main>
