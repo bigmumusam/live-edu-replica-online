@@ -2,9 +2,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, Play, ArrowRight, MessageSquare, Eye, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, MessageSquare, Eye } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +47,50 @@ const Dashboard = () => {
       views: 75,
       replies: 3,
       tag: "物理"
+    },
+    {
+      id: 3,
+      user: "Sarah Johnson",
+      time: "35分钟前提问",
+      title: "如何提高数学解题速度？",
+      content: "最近做题总是时间不够，有什么好的方法可以提高解题速度吗？特别是在考试的时候，总是最后几题来不及做完。",
+      likes: 25,
+      views: 120,
+      replies: 8,
+      tag: "数学"
+    },
+    {
+      id: 4,
+      user: "David Chen",
+      time: "1小时前回答",
+      title: "物理力学部分重难点总结",
+      content: "刚刚复习完力学部分，总结了一些重难点和易错点，希望对大家有帮助。主要包括牛顿定律的应用、动量守恒等内容。",
+      likes: 67,
+      views: 200,
+      replies: 15,
+      tag: "物理"
+    },
+    {
+      id: 5,
+      user: "Emma Wilson",
+      time: "2小时前提问",
+      title: "化学方程式配平技巧？",
+      content: "总是在化学方程式配平上出错，有没有什么好的技巧和方法？尤其是那些比较复杂的氧化还原反应。",
+      likes: 18,
+      views: 85,
+      replies: 6,
+      tag: "化学"
+    },
+    {
+      id: 6,
+      user: "Mike Zhang",
+      time: "3小时前分享",
+      title: "英语阅读理解提分攻略",
+      content: "分享一些英语阅读理解的解题技巧，包括如何快速定位关键信息、如何理解长难句等。这些方法帮我提高了不少分数。",
+      likes: 92,
+      views: 350,
+      replies: 22,
+      tag: "英语"
     }
   ];
 
@@ -61,6 +104,16 @@ const Dashboard = () => {
     { name: "统计数据", count: "108", color: "bg-purple-500" },
     { name: "微积分实验室", count: "232", color: "bg-orange-500" }
   ];
+
+  const handleDiscussionClick = (discussionId: number) => {
+    // 模拟跳转到讨论详情页
+    console.log(`点击讨论: ${discussionId}`);
+    navigate(`/forum?discussion=${discussionId}`);
+  };
+
+  const handleViewAllDiscussions = () => {
+    navigate("/forum");
+  };
 
   return (
     <div className="min-h-screen gradient-bg flex">
@@ -131,6 +184,14 @@ const Dashboard = () => {
                         <SelectItem value="science">科学</SelectItem>
                       </SelectContent>
                     </Select>
+                    <div className="flex items-center space-x-2 ml-4">
+                      <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 p-2">
+                        <ChevronLeft className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 p-2">
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 
@@ -167,17 +228,6 @@ const Dashboard = () => {
                       </CardContent>
                     </Card>
                   ))}
-                </div>
-
-                {/* Pagination */}
-                <div className="flex items-center justify-center space-x-2">
-                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <span className="text-slate-400 text-sm">1 / 5</span>
-                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
             </div>
@@ -276,6 +326,14 @@ const Dashboard = () => {
                     <SelectItem value="science">科学</SelectItem>
                   </SelectContent>
                 </Select>
+                <div className="flex items-center space-x-2 ml-4">
+                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 p-2">
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 p-2">
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
             
@@ -315,36 +373,34 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
-
-            {/* Pagination */}
-            <div className="flex items-center justify-center space-x-2">
-              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <span className="text-slate-400 text-sm">1 / 5</span>
-              <Button variant="outline" size="sm" className="border-slate-600 text-slate-300">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
           </div>
 
           {/* Discussion Area */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Hot Discussions */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex space-x-6">
                   <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-400 pb-1">热门话题</h3>
                   <h3 className="text-xl text-slate-400 pb-1">最新话题</h3>
                 </div>
-                <Button variant="ghost" size="sm" className="text-slate-400">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-slate-400 hover:text-white"
+                  onClick={handleViewAllDiscussions}
+                >
                   查看全部
                 </Button>
               </div>
 
               <div className="space-y-4">
-                {discussions.map((discussion) => (
-                  <Card key={discussion.id} className="bg-slate-800/50 border-slate-700">
+                {discussions.slice(0, 2).map((discussion) => (
+                  <Card 
+                    key={discussion.id} 
+                    className="bg-slate-800/50 border-slate-700 cursor-pointer hover:border-green-500 transition-colors"
+                    onClick={() => handleDiscussionClick(discussion.id)}
+                  >
                     <CardContent className="p-4">
                       <div className="flex items-start space-x-3">
                         <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex-shrink-0"></div>
@@ -389,34 +445,36 @@ const Dashboard = () => {
             </div>
 
             {/* Right Sidebar */}
-            <div className="space-y-6">
-              <Button className="w-full bg-green-600 hover:bg-green-700 h-12">
-                发起话题讨论
-              </Button>
-              
-              {/* Discussion Categories */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm">讨论专区</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {categories.map((category) => (
-                    <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
-                      <div className="flex items-center space-x-2">
-                        {category.color !== "bg-transparent" && (
-                          <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex space-x-4">
+                <Button className="flex-1 bg-green-600 hover:bg-green-700 h-12">
+                  发起话题讨论
+                </Button>
+                
+                {/* Discussion Categories */}
+                <Card className="flex-1 bg-slate-800/50 border-slate-700">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-white text-sm">讨论专区</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    {categories.slice(0, 4).map((category) => (
+                      <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
+                        <div className="flex items-center space-x-2">
+                          {category.color !== "bg-transparent" && (
+                            <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
+                          )}
+                          <span className="text-xs">{category.name}</span>
+                        </div>
+                        {category.count && (
+                          <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
+                            {category.count}
+                          </span>
                         )}
-                        <span className="text-sm">{category.name}</span>
                       </div>
-                      {category.count && (
-                        <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
-                          {category.count}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+                    ))}
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </main>

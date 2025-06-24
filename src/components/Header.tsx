@@ -1,8 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bell, Search } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Bell, Search, LogOut } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   title?: string;
@@ -11,6 +11,7 @@ interface HeaderProps {
 
 const Header = ({ title, showSearch = true }: HeaderProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   
   const getBreadcrumb = () => {
     const path = location.pathname;
@@ -37,6 +38,10 @@ const Header = ({ title, showSearch = true }: HeaderProps) => {
     }
     
     return "个人中心 / 我的课程 / 课程详情";
+  };
+
+  const handleLogout = () => {
+    navigate("/");
   };
 
   return (
@@ -69,6 +74,15 @@ const Header = ({ title, showSearch = true }: HeaderProps) => {
           </Button>
           
           <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full"></div>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleLogout}
+            className="text-slate-300 hover:text-white hover:bg-slate-700/50"
+          >
+            <LogOut className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </header>

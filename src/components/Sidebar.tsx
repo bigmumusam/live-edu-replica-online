@@ -1,7 +1,7 @@
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Home, BookOpen, MessageSquare, User, LogOut } from "lucide-react";
+import { Home, BookOpen, MessageSquare, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface SidebarProps {
@@ -19,10 +19,6 @@ const Sidebar = ({ className }: SidebarProps) => {
     { icon: User, label: "个人中心", path: "/personal" },
   ];
 
-  const handleLogout = () => {
-    navigate("/");
-  };
-
   return (
     <div className={cn("sidebar-gradient w-64 min-h-screen p-4", className)}>
       {/* Logo */}
@@ -34,7 +30,7 @@ const Sidebar = ({ className }: SidebarProps) => {
       </div>
 
       {/* Menu Items */}
-      <div className="space-y-2 mb-8">
+      <div className="space-y-2">
         {menuItems.map((item) => (
           <Button
             key={item.path}
@@ -56,18 +52,6 @@ const Sidebar = ({ className }: SidebarProps) => {
             )}
           </Button>
         ))}
-      </div>
-
-      {/* Logout Button */}
-      <div className="absolute bottom-4 left-4 right-4">
-        <Button
-          variant="ghost"
-          onClick={handleLogout}
-          className="w-full justify-start text-slate-300 hover:text-white hover:bg-slate-700/50 h-12 px-4"
-        >
-          <LogOut className="mr-3 h-5 w-5" />
-          <span>退出</span>
-        </Button>
       </div>
     </div>
   );
