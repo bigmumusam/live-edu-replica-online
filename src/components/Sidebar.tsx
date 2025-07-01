@@ -20,6 +20,13 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
     { icon: User, label: "个人中心", path: "/personal" },
   ];
 
+  const handleMembershipClick = () => {
+    console.log("Membership button clicked");
+    if (onMembershipClick) {
+      onMembershipClick();
+    }
+  };
+
   return (
     <div className={cn("sidebar-gradient w-64 min-h-screen p-4", className)}>
       {/* Logo */}
@@ -60,7 +67,7 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
         <Button
           variant="outline"
           className="w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
-          onClick={onMembershipClick}
+          onClick={handleMembershipClick}
         >
           <span className="mr-2">👑</span>
           开会员 低至 ¥198
