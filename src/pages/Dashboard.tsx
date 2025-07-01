@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import HeroSection from "@/components/dashboard/HeroSection";
@@ -9,11 +9,28 @@ import UserInfoCard from "@/components/dashboard/UserInfoCard";
 import TodoCard from "@/components/dashboard/TodoCard";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
 import MembershipModal from "@/components/dashboard/MembershipModal";
+import ProfileSetupModal from "@/components/dashboard/ProfileSetupModal";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isBecomeTutorDialogOpen, setIsBecomeTutorDialogOpen] = useState(false);
   const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
+  const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
+
+  // 检查是否需要显示个人资料设置弹窗
+  useEffect(() => {
+    const hasCompletedProfile = localStorage.getItem('profileCompleted');
+    if (!hasCompletedProfile) {
+      setIsProfileSetupOpen(true);
+    }
+  }, []);
+
+  const handleProfileSetupClose = (open: boolean) => {
+    setIsProfileSetupOpen(open);
+    if (!open) {
+      localStorage.setItem('profileCompleted', 'true');
+    }
+  };
 
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "2581人参与", rating: 4.8, price: "¥998", status: "即将开始", color: "bg-red-500" },
@@ -103,6 +120,11 @@ const Dashboard = () => {
           <MembershipModal
             isOpen={isMembershipModalOpen}
             onOpenChange={setIsMembershipModalOpen}
+          />
+
+          <ProfileSetupModal
+            isOpen={isProfileSetupOpen}
+            onOpenChange={handleProfileSetupClose}
           />
         </main>
       </div>

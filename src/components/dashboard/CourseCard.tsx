@@ -1,7 +1,9 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { Star, Heart, UserPlus, UserMinus } from "lucide-react";
+import { useState } from "react";
 
 interface Course {
   id: number;
@@ -20,11 +22,47 @@ interface CourseCardProps {
 }
 
 const CourseCard = ({ course, onClick }: CourseCardProps) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFavorited(!isFavorited);
+  };
+
+  const handleFollow = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFollowing(!isFollowing);
+  };
+
   return (
     <Card 
-      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-full flex flex-col"
+      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-full flex flex-col relative group"
       onClick={() => onClick(course.id)}
     >
+      <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 w-8 p-0 bg-slate-800/80 hover:bg-slate-700"
+          onClick={handleFavorite}
+        >
+          <Star className={`h-4 w-4 ${isFavorited ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 w-8 p-0 bg-slate-800/80 hover:bg-slate-700"
+          onClick={handleFollow}
+        >
+          {isFollowing ? (
+            <UserMinus className="h-4 w-4 text-red-400" />
+          ) : (
+            <UserPlus className="h-4 w-4 text-green-400" />
+          )}
+        </Button>
+      </div>
+      
       <CardContent className="p-4 flex flex-col h-full">
         <div className="flex items-center space-x-2 mb-3">
           <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>

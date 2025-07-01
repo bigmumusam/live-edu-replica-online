@@ -1,6 +1,14 @@
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Circle } from "lucide-react";
+import { useState } from "react";
 
 interface BecomeTutorModalProps {
   isOpen: boolean;
@@ -8,87 +16,174 @@ interface BecomeTutorModalProps {
 }
 
 const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
-  const tasks = [
-    { id: 1, name: "上线满15分钟", experience: "+5", status: "completed", note: "（一天一次，不叠加）" },
-    { id: 2, name: "完整上完一节课", experience: "+15", status: "completed", note: "（每个课程都可一次）" },
-    { id: 3, name: "完整参加一次讨论", experience: "+20", status: "pending", note: "（次数不限）" },
-    { id: 4, name: "完整参加一次1V1老师辅导", experience: "+15", status: "pending", note: "（一周仅限一次）" }
-  ];
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    experience: "",
+    subjects: "",
+    availability: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Tutor application:", formData);
+    onOpenChange(false);
+  };
 
   const taskRecords = [
-    { task: "上线满15分钟", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+5", date: "06/29 19:10:36", status: "completed" },
-    { task: "上线满15分钟", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+5", date: "06/28 18:20:19", status: "completed" },
-    { task: "完整上完一节课", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+15", date: "06/28 18:20:19", status: "completed" },
-    { task: "完整参加一次讨论", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+20", date: "06/28 18:20:19", status: "completed" },
-    { task: "完整参加一次讨论", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+20", date: "06/28 18:20:19", status: "completed" },
-    { task: "完整上完一节课", instructor: "代数课程", name: "Luke", duration: "30mins", experience: "+15", date: "06/27 18:20:19", status: "completed" }
+    { id: 1, task: "完成个人资料", completed: true },
+    { id: 2, task: "上传身份证明", completed: true },
+    { id: 3, task: "完成技能测试", completed: false },
+    { id: 4, task: "录制介绍视频", completed: false },
+    { id: 5, task: "等待审核通过", completed: false }
   ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-6xl">
-        <DialogHeader>
-          <DialogTitle className="text-green-400 text-center text-xl">当前经验值 80/300</DialogTitle>
-        </DialogHeader>
-        
-        <div className="flex gap-8">
-          {/* Left side - Tasks */}
-          <div className="flex-1 space-y-4">
-            <p className="text-center text-slate-300 text-sm">
-              加油！积满300经验值就可以申请成为小老师啦
-            </p>
-            
-            <div className="space-y-3">
-              {tasks.map((task) => (
-                <div key={task.id} className="bg-slate-700/50 p-4 rounded flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <span className="text-white font-medium">任务{task.id}</span>
-                      <span className="text-white">{task.name}</span>
-                    </div>
-                    <div className="text-green-400 text-sm">
-                      经验值 {task.experience} {task.note}
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    {task.status === 'completed' ? (
-                      <div className="text-green-400 text-2xl">✓</div>
-                    ) : (
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700 text-sm px-4">
-                        去完成
-                      </Button>
-                    )}
-                  </div>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden bg-slate-800 border-slate-700 text-white">
+        <div className="p-8">
+          <DialogTitle className="text-2xl font-bold mb-6 text-center">
+            成为一名在线教师
+          </DialogTitle>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* 左侧：申请表单 */}
+            <div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <Label htmlFor="tutor-name" className="text-base font-medium text-slate-300 mb-3 block">
+                    姓名
+                  </Label>
+                  <Input
+                    id="tutor-name"
+                    placeholder="请输入您的姓名"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="bg-slate-700/50 border-slate-600 text-white h-12"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Right side - Task Records */}
-          <div className="flex-1">
-            <h3 className="text-white font-medium mb-4">任务记录</h3>
-            <div className="space-y-1 max-h-80 overflow-y-auto">
-              <div className="grid grid-cols-6 gap-2 text-slate-400 text-xs font-medium pb-2 border-b border-slate-600">
-                <span>任务名称</span>
-                <span>主题名称</span>
-                <span>授课老师</span>
-                <span>上课时长</span>
-                <span>经验值</span>
-                <span>日期</span>
-              </div>
-              {taskRecords.map((record, index) => (
-                <div key={index} className="grid grid-cols-6 gap-2 text-xs py-2 border-b border-slate-700/50 hover:bg-slate-700/20">
-                  <div className="flex items-center space-x-1">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-white">{record.task}</span>
-                  </div>
-                  <span className="text-slate-300">{record.instructor}</span>
-                  <span className="text-slate-300">{record.name}</span>
-                  <span className="text-slate-300">{record.duration}</span>
-                  <span className="text-green-400">{record.experience}</span>
-                  <span className="text-slate-400">{record.date}</span>
+                <div>
+                  <Label htmlFor="tutor-email" className="text-base font-medium text-slate-300 mb-3 block">
+                    邮箱
+                  </Label>
+                  <Input
+                    id="tutor-email"
+                    type="email"
+                    placeholder="请输入您的邮箱"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="bg-slate-700/50 border-slate-600 text-white h-12"
+                  />
                 </div>
-              ))}
+
+                <div>
+                  <Label htmlFor="tutor-phone" className="text-base font-medium text-slate-300 mb-3 block">
+                    联系电话
+                  </Label>
+                  <Input
+                    id="tutor-phone"
+                    placeholder="请输入您的联系电话"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="bg-slate-700/50 border-slate-600 text-white h-12"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="tutor-subjects" className="text-base font-medium text-slate-300 mb-3 block">
+                    教学科目
+                  </Label>
+                  <Select onValueChange={(value) => setFormData({...formData, subjects: value})}>
+                    <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white h-12">
+                      <SelectValue placeholder="请选择您的教学科目" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="math">数学</SelectItem>
+                      <SelectItem value="english">英语</SelectItem>
+                      <SelectItem value="science">科学</SelectItem>
+                      <SelectItem value="physics">物理</SelectItem>
+                      <SelectItem value="chemistry">化学</SelectItem>
+                      <SelectItem value="biology">生物</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="tutor-experience" className="text-base font-medium text-slate-300 mb-3 block">
+                    教学经验
+                  </Label>
+                  <Textarea
+                    id="tutor-experience"
+                    placeholder="请描述您的教学经验和背景"
+                    value={formData.experience}
+                    onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                    className="bg-slate-700/50 border-slate-600 text-white min-h-[120px]"
+                    rows={5}
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full bg-green-600 hover:bg-green-700 text-white h-12 text-base"
+                >
+                  提交申请
+                </Button>
+              </form>
+            </div>
+
+            {/* 右侧：任务记录 */}
+            <div>
+              <Card className="bg-slate-700/50 border-slate-600 h-full">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-6">申请进度</h3>
+                  <div className="space-y-4">
+                    {taskRecords.map((record) => (
+                      <div key={record.id} className="flex items-center space-x-4 p-4 rounded-lg bg-slate-800/50">
+                        {record.completed ? (
+                          <CheckCircle className="h-6 w-6 text-green-400 flex-shrink-0" />
+                        ) : (
+                          <Circle className="h-6 w-6 text-slate-400 flex-shrink-0" />
+                        )}
+                        <div className="flex-1">
+                          <span className={`text-base ${record.completed ? 'text-white' : 'text-slate-400'}`}>
+                            {record.task}
+                          </span>
+                        </div>
+                        <Badge 
+                          variant={record.completed ? "default" : "secondary"}
+                          className={`text-sm ${record.completed ? 'bg-green-600' : 'bg-slate-600'}`}
+                        >
+                          {record.completed ? "已完成" : "待完成"}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                    <h4 className="text-lg font-semibold text-blue-400 mb-3">成为讲师的好处</h4>
+                    <ul className="space-y-2 text-slate-300">
+                      <li className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span>灵活的工作时间安排</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span>丰厚的课程收入分成</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span>专业的教学支持团队</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span>完善的培训体系</span>
+                      </li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

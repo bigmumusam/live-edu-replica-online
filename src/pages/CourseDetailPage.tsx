@@ -110,10 +110,9 @@ const CourseDetailPage = () => {
               {/* Course Info Tabs */}
               <Card className="bg-slate-800/50 border-slate-700 mt-6">
                 <Tabs defaultValue="overview" className="w-full">
-                  <TabsList className="grid w-full grid-cols-6 bg-slate-700/50">
+                  <TabsList className="grid w-full grid-cols-5 bg-slate-700/50">
                     <TabsTrigger value="overview" className="text-slate-300 data-[state=active]:text-green-400">简介</TabsTrigger>
                     <TabsTrigger value="qa" className="text-slate-300 data-[state=active]:text-green-400">问答</TabsTrigger>
-                    <TabsTrigger value="discussions" className="text-slate-300 data-[state=active]:text-green-400">讨论</TabsTrigger>
                     <TabsTrigger value="reviews" className="text-slate-300 data-[state=active]:text-green-400">课程评价</TabsTrigger>
                     <TabsTrigger value="assignments" className="text-slate-300 data-[state=active]:text-green-400">作业</TabsTrigger>
                     <TabsTrigger value="downloads" className="text-slate-300 data-[state=active]:text-green-400">课件下载</TabsTrigger>

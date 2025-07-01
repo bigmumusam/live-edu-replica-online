@@ -22,8 +22,12 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
 
   const handleMembershipClick = () => {
     console.log("Membership button clicked");
-    if (onMembershipClick) {
+    // 只有在首页才能打开会员弹窗
+    if (location.pathname === "/dashboard" && onMembershipClick) {
       onMembershipClick();
+    } else {
+      // 如果不在首页，先跳转到首页
+      navigate("/dashboard");
     }
   };
 
@@ -66,8 +70,12 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
       <div className="mt-8 px-2">
         <Button
           variant="outline"
-          className="w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
+          className={cn(
+            "w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white",
+            location.pathname !== "/dashboard" && "opacity-50 cursor-not-allowed"
+          )}
           onClick={handleMembershipClick}
+          disabled={location.pathname !== "/dashboard"}
         >
           <span className="mr-2">👑</span>
           开会员 低至 ¥198
