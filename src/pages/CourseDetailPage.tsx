@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -111,12 +110,13 @@ const CourseDetailPage = () => {
               {/* Course Info Tabs */}
               <Card className="bg-slate-800/50 border-slate-700 mt-6">
                 <Tabs defaultValue="overview" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 bg-slate-700/50">
+                  <TabsList className="grid w-full grid-cols-6 bg-slate-700/50">
                     <TabsTrigger value="overview" className="text-slate-300 data-[state=active]:text-green-400">简介</TabsTrigger>
                     <TabsTrigger value="qa" className="text-slate-300 data-[state=active]:text-green-400">问答</TabsTrigger>
                     <TabsTrigger value="discussions" className="text-slate-300 data-[state=active]:text-green-400">讨论</TabsTrigger>
-                    <TabsTrigger value="reviews" className="text-slate-300 data-[state=active]:text-green-400 border-b-2 border-green-400">课程评价</TabsTrigger>
+                    <TabsTrigger value="reviews" className="text-slate-300 data-[state=active]:text-green-400">课程评价</TabsTrigger>
                     <TabsTrigger value="assignments" className="text-slate-300 data-[state=active]:text-green-400">作业</TabsTrigger>
+                    <TabsTrigger value="downloads" className="text-slate-300 data-[state=active]:text-green-400">课件下载</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="overview" className="p-6">
@@ -181,6 +181,62 @@ const CourseDetailPage = () => {
                             </div>
                           ))}
                         </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="assignments" className="p-6">
+                    <div className="space-y-6">
+                      <h3 className="text-xl font-bold text-white">课程作业</h3>
+                      <div className="space-y-4">
+                        <div className="bg-slate-700/50 p-4 rounded-lg flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              01
+                            </div>
+                            <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
+                          </div>
+                          <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
+                            开始答题 📝
+                          </Button>
+                        </div>
+                        <div className="bg-slate-700/50 p-4 rounded-lg flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              02
+                            </div>
+                            <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
+                          </div>
+                          <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
+                            开始答题 📝
+                          </Button>
+                        </div>
+                        <div className="bg-slate-700/50 p-4 rounded-lg flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              03
+                            </div>
+                            <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
+                          </div>
+                          <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
+                            开始答题 📝
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="downloads" className="p-6">
+                    <div className="space-y-6">
+                      <h3 className="text-xl font-bold text-white">课件下载</h3>
+                      <div className="flex flex-col items-center justify-center py-12">
+                        <div className="w-24 h-24 bg-slate-600 rounded-lg flex items-center justify-center mb-4">
+                          <div className="text-white text-sm font-bold">ZIP</div>
+                        </div>
+                        <h4 className="text-white text-lg mb-2">第一学期高一物理第三章课件</h4>
+                        <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2">
+                          下载
+                        </Button>
                       </div>
                     </div>
                   </TabsContent>

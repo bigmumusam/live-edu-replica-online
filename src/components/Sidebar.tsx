@@ -6,9 +6,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 interface SidebarProps {
   className?: string;
+  onMembershipClick?: () => void;
 }
 
-const Sidebar = ({ className }: SidebarProps) => {
+const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -59,6 +60,7 @@ const Sidebar = ({ className }: SidebarProps) => {
         <Button
           variant="outline"
           className="w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
+          onClick={onMembershipClick}
         >
           <span className="mr-2">👑</span>
           开会员 低至 ¥198
