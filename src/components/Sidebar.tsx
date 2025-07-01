@@ -14,8 +14,8 @@ const Sidebar = ({ className }: SidebarProps) => {
 
   const menuItems = [
     { icon: Home, label: "首页", path: "/dashboard" },
-    { icon: BookOpen, label: "课程", path: "/courses" },
-    { icon: MessageSquare, label: "话题论坛", path: "/forum", badge: "35" },
+    { icon: BookOpen, label: "课程/课堂", path: "/courses" },
+    { icon: MessageSquare, label: "话题中心", path: "/forum", badge: "35" },
     { icon: User, label: "个人中心", path: "/personal" },
   ];
 
@@ -52,6 +52,17 @@ const Sidebar = ({ className }: SidebarProps) => {
             )}
           </Button>
         ))}
+      </div>
+
+      {/* 开会员按钮 */}
+      <div className="mt-8 px-2">
+        <Button
+          variant="outline"
+          className="w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
+        >
+          <span className="mr-2">👑</span>
+          开会员 低至 ¥198
+        </Button>
       </div>
     </div>
   );

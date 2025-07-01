@@ -12,6 +12,7 @@ import PersonalCenter from "./pages/PersonalCenter";
 import ForumPage from "./pages/ForumPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import ProfileSetupPage from "./pages/ProfileSetupPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/profile-setup" element={<ProfileSetupPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/courses" element={<CoursePage />} />
           <Route path="/course/:id" element={<CourseDetailPage />} />

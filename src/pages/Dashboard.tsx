@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, ChevronLeft, ChevronRight, MessageSquare, Eye, X } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,8 +14,7 @@ import { useState } from "react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [activeDiscussionTab, setActiveDiscussionTab] = useState("hot");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isBecomeTutorDialogOpen, setIsBecomeTutorDialogOpen] = useState(false);
 
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "2581人参与", rating: 4.8, price: "¥998", status: "即将开始", color: "bg-red-500" },
@@ -32,83 +30,12 @@ const Dashboard = () => {
     { id: 4, title: "数据统计", instructor: "Debra Liver", students: "3579人参与", rating: 4.0, price: "¥1288", status: "进行中" }
   ];
 
-  const hotDiscussions = [
-    {
-      id: 1,
-      user: "Nicholas Simmons",
-      time: "23分 2秒前 回答",
-      title: "AP生物考试时间管理有什么技巧?",
-      content: "我看到网上有人说考了7分，但呢我觉得快速溜题目，再快速回人想该，而且让他们。我需要在不去分的情况下，花更多时间做题通过。",
-      likes: 40,
-      views: 75,
-      replies: 3,
-      tag: "生物"
-    },
-    {
-      id: 2,
-      user: "Lori Rodriguez",
-      time: "19分钟前回答",
-      title: "Escriba, plugin for Copy&Paste selected overrides",
-      content: "Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.",
-      likes: -81,
-      views: 75,
-      replies: 3,
-      tag: "物理"
-    }
-  ];
-
-  const latestDiscussions = [
-    {
-      id: 3,
-      user: "Sarah Johnson",
-      time: "35分钟前提问",
-      title: "如何提高数学解题速度？",
-      content: "最近做题总是时间不够，有什么好的方法可以提高解题速度吗？特别是在考试的时候，总是最后几题来不及做完。",
-      likes: 25,
-      views: 120,
-      replies: 8,
-      tag: "数学"
-    },
-    {
-      id: 4,
-      user: "David Chen",
-      time: "1小时前回答",
-      title: "物理力学部分重难点总结",
-      content: "刚刚复习完力学部分，总结了一些重难点和易错点，希望对大家有帮助。主要包括牛顿定律的应用、动量守恒等内容。",
-      likes: 67,
-      views: 200,
-      replies: 15,
-      tag: "物理"
-    }
-  ];
-
-  const categories = [
-    { name: "全部讨论", count: "", color: "bg-transparent", active: true },
-    { name: "代数", count: "383", color: "bg-blue-500" },
-    { name: "几何学", count: "268", color: "bg-yellow-500" },
-    { name: "SAT", count: "197", color: "bg-red-500" },
-    { name: "生物学", count: "661", color: "bg-green-500" },
-    { name: "物理学", count: "845", color: "bg-blue-400" },
-    { name: "统计数据", count: "108", color: "bg-purple-500" },
-    { name: "微积分实验室", count: "232", color: "bg-orange-500" }
-  ];
-
-  const currentDiscussions = activeDiscussionTab === "hot" ? hotDiscussions : latestDiscussions;
-
-  const handleDiscussionClick = (discussionId: number) => {
-    navigate(`/forum?discussion=${discussionId}`);
-  };
-
-  const handleViewAllDiscussions = () => {
-    navigate("/forum");
-  };
-
   const handleCourseClick = (courseId: number) => {
     navigate(`/course/${courseId}`);
   };
 
-  const handleCreateTopic = () => {
-    setIsDialogOpen(true);
+  const handleBecomeTutor = () => {
+    setIsBecomeTutorDialogOpen(true);
   };
 
   return (
@@ -150,36 +77,54 @@ const Dashboard = () => {
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
                   <div className="flex items-center space-x-2">
                     <Select defaultValue="all">
-                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                      <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">全部</SelectItem>
-                        <SelectItem value="easy">容易</SelectItem>
-                        <SelectItem value="medium">中等</SelectItem>
-                        <SelectItem value="hard">困难</SelectItem>
+                        <SelectItem value="all">全部难易度</SelectItem>
+                        <SelectItem value="g1-5">G1-5</SelectItem>
+                        <SelectItem value="g6-8">G6-8</SelectItem>
+                        <SelectItem value="g9-12">G9-12</SelectItem>
                       </SelectContent>
                     </Select>
                     <Select defaultValue="all-subject">
-                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                      <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all-subject">全部</SelectItem>
-                        <SelectItem value="chinese">语文</SelectItem>
-                        <SelectItem value="math">数学</SelectItem>
+                        <SelectItem value="all-subject">全部课程类别</SelectItem>
                         <SelectItem value="english">英语</SelectItem>
+                        <SelectItem value="math">数学</SelectItem>
+                        <SelectItem value="science">科学</SelectItem>
+                        <SelectItem value="economics">经济</SelectItem>
+                        <SelectItem value="humanities">人文</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Select defaultValue="all-type">
-                      <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <Select defaultValue="all-time">
+                      <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all-type">类型</SelectItem>
-                        <SelectItem value="video">视频</SelectItem>
-                        <SelectItem value="live">直播</SelectItem>
-                        <SelectItem value="text">图文</SelectItem>
+                        <SelectItem value="all-time">课程时间段</SelectItem>
+                        <SelectItem value="morning">7:00-9:00</SelectItem>
+                        <SelectItem value="afternoon">16:00-19:00</SelectItem>
+                        <SelectItem value="evening">19:00-22:00</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select defaultValue="all-language">
+                      <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all-language">授课语言</SelectItem>
+                        <SelectItem value="english">英语</SelectItem>
+                        <SelectItem value="chinese">中文</SelectItem>
+                        <SelectItem value="french">法语</SelectItem>
+                        <SelectItem value="german">德语</SelectItem>
+                        <SelectItem value="spanish">西班牙语</SelectItem>
+                        <SelectItem value="italian">意大利语</SelectItem>
+                        <SelectItem value="japanese">日语</SelectItem>
+                        <SelectItem value="korean">韩语</SelectItem>
                       </SelectContent>
                     </Select>
                     <div className="flex items-center space-x-2 ml-4">
@@ -197,7 +142,7 @@ const Dashboard = () => {
                   {courses.map((course) => (
                     <Card 
                       key={course.id} 
-                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[240px] flex flex-col"
+                      className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-[180px] flex flex-col"
                       onClick={() => handleCourseClick(course.id)}
                     >
                       <CardContent className="p-4 flex flex-col h-full">
@@ -210,8 +155,8 @@ const Dashboard = () => {
                           </Badge>
                         </div>
                         <h4 className="text-white font-medium mb-2 text-sm leading-relaxed">{course.title}</h4>
-                        <p className="text-slate-400 text-xs mb-3 line-clamp-3 flex-1">
-                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。通过实际案例和互动练习，帮助学生更好地理解复杂的数学概念。
+                        <p className="text-slate-400 text-xs mb-3 line-clamp-2 flex-1">
+                          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。
                         </p>
                         <div className="flex items-center space-x-2 mb-3">
                           <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
@@ -259,7 +204,10 @@ const Dashboard = () => {
                       <span className="text-slate-400 text-sm">完成不个数字</span>
                     </div>
                     
-                    <Button className="w-full bg-green-600 hover:bg-green-700 mt-4">
+                    <Button 
+                      className="w-full bg-green-600 hover:bg-green-700 mt-4"
+                      onClick={handleBecomeTutor}
+                    >
                       成为一名讲师
                     </Button>
                   </div>
@@ -298,36 +246,54 @@ const Dashboard = () => {
               <h3 className="text-xl font-bold text-white">最新课程</h3>
               <div className="flex items-center space-x-2">
                 <Select defaultValue="all">
-                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                  <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">全部</SelectItem>
-                    <SelectItem value="easy">容易</SelectItem>
-                    <SelectItem value="medium">中等</SelectItem>
-                    <SelectItem value="hard">困难</SelectItem>
+                    <SelectItem value="all">全部难易度</SelectItem>
+                    <SelectItem value="g1-5">G1-5</SelectItem>
+                    <SelectItem value="g6-8">G6-8</SelectItem>
+                    <SelectItem value="g9-12">G9-12</SelectItem>
                   </SelectContent>
                 </Select>
                 <Select defaultValue="all-subject">
-                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                  <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all-subject">全部</SelectItem>
-                    <SelectItem value="chinese">语文</SelectItem>
-                    <SelectItem value="math">数学</SelectItem>
+                    <SelectItem value="all-subject">全部课程类别</SelectItem>
                     <SelectItem value="english">英语</SelectItem>
+                    <SelectItem value="math">数学</SelectItem>
+                    <SelectItem value="science">科学</SelectItem>
+                    <SelectItem value="economics">经济</SelectItem>
+                    <SelectItem value="humanities">人文</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select defaultValue="all-type">
-                  <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
+                <Select defaultValue="all-time">
+                  <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all-type">类型</SelectItem>
-                    <SelectItem value="video">视频</SelectItem>
-                    <SelectItem value="live">直播</SelectItem>
-                    <SelectItem value="text">图文</SelectItem>
+                    <SelectItem value="all-time">课程时间段</SelectItem>
+                    <SelectItem value="morning">7:00-9:00</SelectItem>
+                    <SelectItem value="afternoon">16:00-19:00</SelectItem>
+                    <SelectItem value="evening">19:00-22:00</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="all-language">
+                  <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all-language">授课语言</SelectItem>
+                    <SelectItem value="english">英语</SelectItem>
+                    <SelectItem value="chinese">中文</SelectItem>
+                    <SelectItem value="french">法语</SelectItem>
+                    <SelectItem value="german">德语</SelectItem>
+                    <SelectItem value="spanish">西班牙语</SelectItem>
+                    <SelectItem value="italian">意大利语</SelectItem>
+                    <SelectItem value="japanese">日语</SelectItem>
+                    <SelectItem value="korean">韩语</SelectItem>
                   </SelectContent>
                 </Select>
                 <div className="flex items-center space-x-2 ml-4">
@@ -383,222 +349,57 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Discussion Area */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Hot Discussions (占3列) */}
-            <div className="lg:col-span-3 space-y-4">
-              <Tabs value={activeDiscussionTab} onValueChange={setActiveDiscussionTab}>
-                <div className="flex items-center justify-between mb-4">
-                  <TabsList className="bg-slate-800/50 border-slate-700">
-                    <TabsTrigger value="hot" className="text-slate-300 data-[state=active]:text-green-400">热门话题</TabsTrigger>
-                    <TabsTrigger value="latest" className="text-slate-300 data-[state=active]:text-green-400">最新话题</TabsTrigger>
-                  </TabsList>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-slate-400 hover:text-white"
-                    onClick={handleViewAllDiscussions}
-                  >
-                    查看全部
-                  </Button>
-                </div>
-
-                <TabsContent value="hot" className="space-y-4">
-                  {hotDiscussions.map((discussion) => (
-                    <Card 
-                      key={discussion.id} 
-                      className="bg-slate-800/50 border-slate-700 cursor-pointer hover:border-green-500 transition-colors"
-                      onClick={() => handleDiscussionClick(discussion.id)}
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex items-start space-x-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex-shrink-0"></div>
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <h4 className="text-white font-medium text-sm">{discussion.user}</h4>
-                                <p className="text-slate-400 text-xs">{discussion.time}</p>
-                              </div>
-                              <Badge variant="outline" className="text-xs">{discussion.tag}</Badge>
-                            </div>
-                            <h5 className="text-white font-medium text-sm">{discussion.title}</h5>
-                            <p className="text-slate-400 text-xs line-clamp-2">{discussion.content}</p>
-                            <div className="flex items-center justify-between pt-2">
-                              <div className="flex items-center space-x-4">
-                                <div className="flex items-center space-x-2">
-                                  <Button variant="ghost" size="sm" className="text-green-400 p-0 h-auto text-xs">
-                                    👍 +{Math.abs(discussion.likes)}
-                                  </Button>
-                                  <Button variant="ghost" size="sm" className="text-slate-400 p-0 h-auto text-xs">
-                                    👎 -81
-                                  </Button>
-                                </div>
-                              </div>
-                              <div className="flex items-center space-x-4 text-slate-400 text-xs">
-                                <div className="flex items-center space-x-1">
-                                  <Eye className="h-3 w-3" />
-                                  <span>阅读 {discussion.views}</span>
-                                </div>
-                                <div className="flex items-center space-x-1">
-                                  <MessageSquare className="h-3 w-3" />
-                                  <span>评论 {discussion.replies}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </TabsContent>
-
-                <TabsContent value="latest" className="space-y-4">
-                  {latestDiscussions.map((discussion) => (
-                    <Card 
-                      key={discussion.id} 
-                      className="bg-slate-800/50 border-slate-700 cursor-pointer hover:border-green-500 transition-colors"
-                      onClick={() => handleDiscussionClick(discussion.id)}
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex items-start space-x-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex-shrink-0"></div>
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <h4 className="text-white font-medium text-sm">{discussion.user}</h4>
-                                <p className="text-slate-400 text-xs">{discussion.time}</p>
-                              </div>
-                              <Badge variant="outline" className="text-xs">{discussion.tag}</Badge>
-                            </div>
-                            <h5 className="text-white font-medium text-sm">{discussion.title}</h5>
-                            <p className="text-slate-400 text-xs line-clamp-2">{discussion.content}</p>
-                            <div className="flex items-center justify-between pt-2">
-                              <div className="flex items-center space-x-4">
-                                <div className="flex items-center space-x-2">
-                                  <Button variant="ghost" size="sm" className="text-green-400 p-0 h-auto text-xs">
-                                    👍 +{Math.abs(discussion.likes)}
-                                  </Button>
-                                </div>
-                              </div>
-                              <div className="flex items-center space-x-4 text-slate-400 text-xs">
-                                <div className="flex items-center space-x-1">
-                                  <Eye className="h-3 w-3" />
-                                  <span>阅读 {discussion.views}</span>
-                                </div>
-                                <div className="flex items-center space-x-1">
-                                  <MessageSquare className="h-3 w-3" />
-                                  <span>评论 {discussion.replies}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </TabsContent>
-              </Tabs>
-            </div>
-
-            {/* Right Sidebar (占1列) */}
-            <div className="lg:col-span-1 space-y-6">
-              {/* Create Topic Button */}
-              <div className="flex justify-center">
-                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button 
-                      className="bg-green-600 hover:bg-green-700 h-12 px-6 w-full"
-                      onClick={handleCreateTopic}
-                    >
-                      发起话题讨论
+          {/* Become Tutor Dialog */}
+          <Dialog open={isBecomeTutorDialogOpen} onOpenChange={setIsBecomeTutorDialogOpen}>
+            <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-md">
+              <DialogHeader>
+                <DialogTitle className="text-white text-center">当前经验值 80/300</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <p className="text-center text-slate-300 text-sm">
+                  加油！积满300经验值就可以申请成为小老师啦
+                </p>
+                
+                <div className="space-y-3">
+                  <div className="bg-slate-700/50 p-3 rounded flex items-center justify-between">
+                    <div>
+                      <div className="text-white text-sm">任务一 上线满15分钟</div>
+                      <div className="text-green-400 text-xs">经验值 +5 （一天一次，不叠加）</div>
+                    </div>
+                    <div className="text-green-400 text-xl">✓</div>
+                  </div>
+                  
+                  <div className="bg-slate-700/50 p-3 rounded flex items-center justify-between">
+                    <div>
+                      <div className="text-white text-sm">任务二 完整上完一节课</div>
+                      <div className="text-green-400 text-xs">经验值 +15 （每个课程都可一次）</div>
+                    </div>
+                    <div className="text-green-400 text-xl">✓</div>
+                  </div>
+                  
+                  <div className="bg-slate-700/50 p-3 rounded flex items-center justify-between">
+                    <div>
+                      <div className="text-white text-sm">任务三 完整参加一次讨论</div>
+                      <div className="text-green-400 text-xs">经验值 +20 （次数不限）</div>
+                    </div>
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-xs">
+                      去完成
                     </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-2xl">
-                    <DialogHeader>
-                      <div className="flex items-center justify-between">
-                        <DialogTitle className="text-white">发起话题讨论</DialogTitle>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setIsDialogOpen(false)}
-                          className="text-slate-400 hover:text-white"
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="text-sm font-medium text-slate-300 mb-2 block">话题标题</label>
-                        <Input 
-                          placeholder="请输入话题标题..." 
-                          className="bg-slate-700 border-slate-600 text-white"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium text-slate-300 mb-2 block">选择分类</label>
-                        <Select>
-                          <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
-                            <SelectValue placeholder="选择话题分类" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="math">数学</SelectItem>
-                            <SelectItem value="physics">物理</SelectItem>
-                            <SelectItem value="biology">生物</SelectItem>
-                            <SelectItem value="chemistry">化学</SelectItem>
-                            <SelectItem value="english">英语</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium text-slate-300 mb-2 block">话题内容</label>
-                        <Textarea 
-                          placeholder="请详细描述您的问题或想要讨论的内容..." 
-                          className="bg-slate-700 border-slate-600 text-white min-h-32"
-                        />
-                      </div>
-                      <div className="flex justify-end space-x-3">
-                        <Button 
-                          variant="outline" 
-                          onClick={() => setIsDialogOpen(false)}
-                          className="border-slate-600 text-slate-300"
-                        >
-                          取消
-                        </Button>
-                        <Button className="bg-green-600 hover:bg-green-700">
-                          发布话题
-                        </Button>
-                      </div>
+                  </div>
+                  
+                  <div className="bg-slate-700/50 p-3 rounded flex items-center justify-between">
+                    <div>
+                      <div className="text-white text-sm">任务四 完整参加一次1V1老师辅导</div>
+                      <div className="text-green-400 text-xs">经验值 +15 （一周仅限一次）</div>
                     </div>
-                  </DialogContent>
-                </Dialog>
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-xs">
+                      去完成
+                    </Button>
+                  </div>
+                </div>
               </div>
-
-              {/* Discussion Categories */}
-              <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm">讨论专区</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {categories.map((category) => (
-                    <div key={category.name} className={`flex items-center justify-between p-2 rounded cursor-pointer hover:bg-slate-700/50 ${category.active ? 'text-green-400' : 'text-slate-300'}`}>
-                      <div className="flex items-center space-x-2">
-                        {category.color !== "bg-transparent" && (
-                          <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
-                        )}
-                        <span className="text-xs">{category.name}</span>
-                      </div>
-                      {category.count && (
-                        <span className={`text-xs px-2 py-1 rounded-full ${category.active ? 'bg-green-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
-                          {category.count}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>
