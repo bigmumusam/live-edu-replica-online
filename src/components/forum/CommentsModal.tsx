@@ -134,6 +134,10 @@ const CommentsModal = ({ isOpen, onOpenChange, topicTitle, topicContent }: Comme
                             {comment.dislikes}
                           </Button>
                         )}
+                        <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 p-0 h-auto" onClick={() => setShowReplyInput(true)}>
+                          <MessageSquare className="h-3 w-3 mr-1" />
+                          回复
+                        </Button>
                       </div>
                     </div>
                   </div>

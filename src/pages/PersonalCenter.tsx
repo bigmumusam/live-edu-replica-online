@@ -135,40 +135,42 @@ const enrolledCourses = [
                 </TabsContent>
 
                 <TabsContent value="favorites" className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {courses.map((course) => (
-                      <Card key={course.id} className="bg-slate-800/50 border-slate-700">
-                        <CardContent className="p-6">
-                          <div className="flex items-center space-x-4">
-                            <div className={`w-12 h-12 ${course.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                      <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer h-full flex flex-col relative group">
+                        <CardContent className="p-4 flex flex-col h-full">
+                          <div className="flex items-center space-x-2 mb-3">
+                            <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
                               {course.title.charAt(0)}
                             </div>
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-4 mb-2">
-                                <h3 className="text-white font-medium">{course.title}</h3>
-                                <Badge variant="secondary">{course.title.includes("代数") ? "数学" : course.title.includes("计算机") ? "计算机" : "生物"}</Badge>
-                                <Badge className="bg-blue-500 text-white">{course.status}</Badge>
-                              </div>
-                              <div className="flex items-center space-x-2 mb-2">
-                                <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                                <span className="text-slate-300 text-sm">{course.instructor}</span>
-                              </div>
-                              <p className="text-slate-400 text-sm">
-                                {course.title === "代数2学习实验室" 
-                                  ? "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂"
-                                  : course.title === "计算机工程"
-                                  ? "Learn Php CodeIgniter and understand working with MVC and HMVC from zero to hero"
-                                  : "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
-                                }
-                              </p>
+                            <Badge variant={course.status === "即将开始" ? "secondary" : course.status === "进行中" ? "default" : "outline"} className="text-xs">
+                              {course.status}
+                            </Badge>
+                          </div>
+                          
+                          <h4 className="text-white font-medium mb-3 text-sm leading-relaxed">{course.title}</h4>
+                          
+                          <p className="text-slate-400 text-xs mb-4 line-clamp-3 flex-1">
+                            {course.title === "代数2学习实验室" 
+                              ? "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。"
+                              : course.title === "计算机工程"
+                              ? "Learn Php CodeIgniter and understand working with MVC and HMVC from zero to hero"
+                              : "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
+                            }
+                          </p>
+                          
+                          <div className="space-y-3 mt-auto">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                              <span className="text-slate-400 text-xs">{course.instructor}</span>
                             </div>
-                            <div className="flex flex-col space-y-2">
-                              <Button size="sm" variant="outline" className="border-green-500 text-green-400 bg-green-500/10">
-                                收藏
-                              </Button>
-                              <Button size="sm" variant="outline" className="border-slate-600 text-slate-300">
-                                关注
-                              </Button>
+                            <div className="text-slate-400 text-xs">{course.students}</div>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-1">
+                                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                                <span className="text-slate-400 text-xs">已收藏</span>
+                              </div>
+                              <span className="text-green-400 font-bold text-sm">{course.price}</span>
                             </div>
                           </div>
                         </CardContent>
