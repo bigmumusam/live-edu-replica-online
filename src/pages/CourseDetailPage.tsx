@@ -119,18 +119,6 @@ const CourseDetailPage = () => {
                   </TabsList>
                   
                   <TabsContent value="overview" className="p-6">
-                    <div className="space-y-4">
-                      <h3 className="text-xl font-bold text-white">在线视频教学</h3>
-                      <p className="text-slate-300">
-                        你的积分获得以及申请成为一名在线学习教师，快行动起来吧～
-                      </p>
-                      <Button variant="outline" className="border-slate-600 text-slate-300">
-                        立即申请
-                      </Button>
-                    </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="reviews" className="p-6">
                     <div className="space-y-6">
                       <h3 className="text-xl font-bold text-white">课程介绍</h3>
                       <p className="text-slate-300 leading-relaxed">
@@ -140,17 +128,45 @@ const CourseDetailPage = () => {
                         luctus et sit amet mauris. Suspendisse felis sem, condimentum ullamcorper est sit amet, molestie mollis nulla. Etiam lorem orci, 
                         consequat ac magna quis, facilisis vehicula neque.
                       </p>
-                      <div className="space-y-2">
-                        <h4 className="text-lg font-semibold text-white">你将学习到:</h4>
-                        <ul className="text-slate-300 space-y-1">
-                          <li>• Setting up the environment</li>
-                          <li>• Understanding HTML Programming</li>
-                        </ul>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h4 className="text-lg font-semibold text-white">课程信息</h4>
+                          <div className="space-y-2 text-slate-300">
+                            <div className="flex justify-between">
+                              <span>上课时间:</span>
+                              <span>每周二、四 19:00-20:30</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>授课方式:</span>
+                              <span>直播+课件</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>课程时长:</span>
+                              <span>20课时</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>适合年级:</span>
+                              <span>高一、高二</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <h4 className="text-lg font-semibold text-white">你将学习到</h4>
+                          <ul className="text-slate-300 space-y-1">
+                            <li>• Setting up the environment</li>
+                            <li>• Understanding HTML Programming</li>
+                            <li>• 代数基础概念与运算</li>
+                            <li>• 方程式求解技巧</li>
+                            <li>• 实际问题应用</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </TabsContent>
-
-                  <TabsContent value="qa" className="p-6">
+                  
+                  <TabsContent value="reviews" className="p-6">
                     <div className="space-y-4">
                       <h3 className="text-xl font-bold text-white">学生评价</h3>
                       <div className="flex items-center space-x-6">
@@ -179,6 +195,71 @@ const CourseDetailPage = () => {
                               </div>
                             </div>
                           ))}
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="qa" className="p-6">
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-bold text-white">问答</h3>
+                        <Button className="bg-green-600 hover:bg-green-700 text-white">
+                          提问
+                        </Button>
+                      </div>
+                      
+                      {/* Q&A 内容区 */}
+                      <div className="space-y-4">
+                        <div className="bg-slate-700/30 rounded-lg p-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              Q
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-white font-medium">学生张三</span>
+                                <span className="text-slate-400 text-sm">2024-01-15 14:30</span>
+                              </div>
+                              <p className="text-slate-300 mb-3">
+                                老师，在解二次方程时，什么情况下使用求根公式比较好？什么时候用配方法更合适？
+                              </p>
+                              
+                              <div className="flex items-start space-x-3 mt-4 pl-4 border-l-2 border-green-500">
+                                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                  A
+                                </div>
+                                <div className="flex-1">
+                                  <div className="flex items-center space-x-2 mb-2">
+                                    <span className="text-white font-medium">Gerald Gibson</span>
+                                    <span className="text-slate-400 text-sm">2024-01-15 15:45</span>
+                                  </div>
+                                  <p className="text-slate-300">
+                                    很好的问题！一般来说，当二次项系数为1且常数项较小时，配方法更直观。
+                                    当系数复杂或需要精确计算时，求根公式更可靠。建议先尝试因式分解，
+                                    如果不能分解再考虑其他方法。
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-slate-700/30 rounded-lg p-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              Q
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-white font-medium">学生李四</span>
+                                <span className="text-slate-400 text-sm">2024-01-14 16:20</span>
+                              </div>
+                              <p className="text-slate-300">
+                                请问代数中的消元法有哪些常用技巧？
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

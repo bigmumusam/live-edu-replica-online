@@ -101,7 +101,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
             </div>
 
             {/* 右侧：任务记录 */}
-            <div>
+            <div className="min-h-[400px]">
               <h3 className="text-white font-bold text-lg mb-4">任务记录</h3>
               <div className="bg-slate-700/30 rounded-lg overflow-hidden">
                 {/* 表头 */}
