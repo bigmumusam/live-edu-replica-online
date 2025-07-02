@@ -16,174 +16,121 @@ interface BecomeTutorModalProps {
 }
 
 const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    experience: "",
-    subjects: "",
-    availability: ""
-  });
+  const currentExp = 80;
+  const maxExp = 300;
+  const expProgress = (currentExp / maxExp) * 100;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Tutor application:", formData);
-    onOpenChange(false);
-  };
-
-  const taskRecords = [
-    { id: 1, task: "完成个人资料", completed: true },
-    { id: 2, task: "上传身份证明", completed: true },
-    { id: 3, task: "完成技能测试", completed: false },
-    { id: 4, task: "录制介绍视频", completed: false },
-    { id: 5, task: "等待审核通过", completed: false }
+  const tasks = [
+    { id: 1, name: "任务一", detail: "上线满15分钟", exp: 5, completed: true, note: "一天一次，不叠加" },
+    { id: 2, name: "任务二", detail: "完整上完一节课", exp: 15, completed: true, note: "每个俱乐部限一周一次" },
+    { id: 3, name: "任务三", detail: "完整参加一次讲座", exp: 20, completed: false, note: "次数不限" },
+    { id: 4, name: "任务四", detail: "完整参加一次VIP专属讲座", exp: 15, completed: false, note: "一周仅限一次" }
   ];
+
+  const taskHistory = [
+    { taskName: "上线满15分钟", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+5", date: "06/29 19:10:36" },
+    { taskName: "上线满15分钟", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+5", date: "06/28 18:20:19" },
+    { taskName: "完整上完一节课", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+15", date: "06/28 18:20:19" },
+    { taskName: "完整参加一次讲座", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+20", date: "06/28 18:20:19" },
+    { taskName: "完整参加一次讲座", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+20", date: "06/28 18:20:19" },
+    { taskName: "完整上完一节课", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+15", date: "06/27 18:20:19" }
+  ];
+
+  const handleTaskAction = (taskId: number) => {
+    console.log("Complete task:", taskId);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden bg-slate-800 border-slate-700 text-white">
-        <div className="p-8">
-          <DialogTitle className="text-2xl font-bold mb-6 text-center">
-            成为一名在线教师
-          </DialogTitle>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* 左侧：申请表单 */}
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Label htmlFor="tutor-name" className="text-base font-medium text-slate-300 mb-3 block">
-                    姓名
-                  </Label>
-                  <Input
-                    id="tutor-name"
-                    placeholder="请输入您的姓名"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="bg-slate-700/50 border-slate-600 text-white h-12"
-                  />
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-slate-800 border-slate-700 text-white">
+        <div className="p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 左侧：经验值和任务 */}
+            <div className="space-y-6">
+              {/* 经验值显示 */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-white font-medium">当前经验值</span>
+                  <span className="text-green-400 font-bold">{currentExp}/300</span>
                 </div>
-
-                <div>
-                  <Label htmlFor="tutor-email" className="text-base font-medium text-slate-300 mb-3 block">
-                    邮箱
-                  </Label>
-                  <Input
-                    id="tutor-email"
-                    type="email"
-                    placeholder="请输入您的邮箱"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="bg-slate-700/50 border-slate-600 text-white h-12"
-                  />
+                <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-green-400 to-blue-400 transition-all duration-300"
+                    style={{ width: `${expProgress}%` }}
+                  ></div>
                 </div>
+                <p className="text-slate-400 text-sm mt-2">
+                  加满：积满300经验值可以申请成为小老师哦
+                </p>
+              </div>
 
-                <div>
-                  <Label htmlFor="tutor-phone" className="text-base font-medium text-slate-300 mb-3 block">
-                    联系电话
-                  </Label>
-                  <Input
-                    id="tutor-phone"
-                    placeholder="请输入您的联系电话"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="bg-slate-700/50 border-slate-600 text-white h-12"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="tutor-subjects" className="text-base font-medium text-slate-300 mb-3 block">
-                    教学科目
-                  </Label>
-                  <Select onValueChange={(value) => setFormData({...formData, subjects: value})}>
-                    <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white h-12">
-                      <SelectValue placeholder="请选择您的教学科目" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="math">数学</SelectItem>
-                      <SelectItem value="english">英语</SelectItem>
-                      <SelectItem value="science">科学</SelectItem>
-                      <SelectItem value="physics">物理</SelectItem>
-                      <SelectItem value="chemistry">化学</SelectItem>
-                      <SelectItem value="biology">生物</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <Label htmlFor="tutor-experience" className="text-base font-medium text-slate-300 mb-3 block">
-                    教学经验
-                  </Label>
-                  <Textarea
-                    id="tutor-experience"
-                    placeholder="请描述您的教学经验和背景"
-                    value={formData.experience}
-                    onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                    className="bg-slate-700/50 border-slate-600 text-white min-h-[120px]"
-                    rows={5}
-                  />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full bg-green-600 hover:bg-green-700 text-white h-12 text-base"
-                >
-                  提交申请
-                </Button>
-              </form>
+              {/* 任务列表 */}
+              <div className="space-y-3">
+                {tasks.map((task) => (
+                  <Card key={task.id} className="bg-slate-700/50 border-slate-600">
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <span className="text-white font-medium">{task.name}</span>
+                            <span className="text-slate-300">{task.detail}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-green-400 font-bold">经验值 +{task.exp}</span>
+                            <span className="text-slate-400 text-sm">（{task.note}）</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {task.completed ? (
+                            <CheckCircle className="h-5 w-5 text-green-400" />
+                          ) : (
+                            <Button 
+                              size="sm"
+                              className="bg-green-600 hover:bg-green-700 text-white"
+                              onClick={() => handleTaskAction(task.id)}
+                            >
+                              去完成
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
 
             {/* 右侧：任务记录 */}
             <div>
-              <Card className="bg-slate-700/50 border-slate-600 h-full">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-6">申请进度</h3>
-                  <div className="space-y-4">
-                    {taskRecords.map((record) => (
-                      <div key={record.id} className="flex items-center space-x-4 p-4 rounded-lg bg-slate-800/50">
-                        {record.completed ? (
-                          <CheckCircle className="h-6 w-6 text-green-400 flex-shrink-0" />
-                        ) : (
-                          <Circle className="h-6 w-6 text-slate-400 flex-shrink-0" />
-                        )}
-                        <div className="flex-1">
-                          <span className={`text-base ${record.completed ? 'text-white' : 'text-slate-400'}`}>
-                            {record.task}
-                          </span>
-                        </div>
-                        <Badge 
-                          variant={record.completed ? "default" : "secondary"}
-                          className={`text-sm ${record.completed ? 'bg-green-600' : 'bg-slate-600'}`}
-                        >
-                          {record.completed ? "已完成" : "待完成"}
-                        </Badge>
+              <h3 className="text-white font-bold text-lg mb-4">任务记录</h3>
+              <div className="bg-slate-700/30 rounded-lg overflow-hidden">
+                {/* 表头 */}
+                <div className="grid grid-cols-6 gap-2 p-3 bg-slate-700/50 text-slate-300 text-sm border-b border-slate-600">
+                  <div>任务名称</div>
+                  <div>主题名称</div>
+                  <div>授课老师</div>
+                  <div>上课时长</div>
+                  <div>经验值</div>
+                  <div>日期</div>
+                </div>
+                
+                {/* 记录列表 */}
+                <div className="max-h-64 overflow-y-auto">
+                  {taskHistory.map((record, index) => (
+                    <div key={index} className="grid grid-cols-6 gap-2 p-3 text-sm border-b border-slate-700/50 hover:bg-slate-700/20">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span className="text-white">{record.taskName}</span>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                    <h4 className="text-lg font-semibold text-blue-400 mb-3">成为讲师的好处</h4>
-                    <ul className="space-y-2 text-slate-300">
-                      <li className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span>灵活的工作时间安排</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span>丰厚的课程收入分成</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span>专业的教学支持团队</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span>完善的培训体系</span>
-                      </li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
+                      <div className="text-slate-300">{record.courseName}</div>
+                      <div className="text-slate-300">{record.instructor}</div>
+                      <div className="text-slate-300">{record.duration}</div>
+                      <div className="text-green-400 font-medium">{record.exp}</div>
+                      <div className="text-slate-400">{record.date}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

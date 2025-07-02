@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import EventModal from "./EventModal";
 
 const BannerCarousel = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const banners = [
     {
@@ -23,6 +25,14 @@ const BannerCarousel = () => {
       buttonText: "立即参加",
       gradient: "from-purple-500 to-pink-500",
       action: "event"
+    },
+    {
+      id: 3,
+      title: "精品课程推荐",
+      subtitle: "高质量编程课程，助你快速提升技能",
+      buttonText: "查看课程",
+      gradient: "from-orange-500 to-red-500",
+      action: "course"
     }
   ];
 
@@ -36,8 +46,11 @@ const BannerCarousel = () => {
   const handleBannerAction = (action: string) => {
     if (action === "event") {
       setIsEventModalOpen(true);
+    } else if (action === "membership") {
+      navigate("/membership");
+    } else if (action === "course") {
+      navigate("/course/1");
     }
-    // Handle other actions as needed
   };
 
   return (
