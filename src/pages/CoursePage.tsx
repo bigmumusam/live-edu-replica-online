@@ -1,18 +1,16 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Star, MoreHorizontal } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import MembershipModal from "@/components/dashboard/MembershipModal";
+import CourseFilters from "@/components/dashboard/CourseFilters";
+import CourseCardActions from "@/components/shared/CourseCardActions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const CoursePage = () => {
   const navigate = useNavigate();
-  const [showMembershipModal, setShowMembershipModal] = useState(false);
 
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "2581人报名", rating: 4.8, price: "¥998", status: "即将开始", color: "bg-red-500" },
@@ -51,7 +49,7 @@ const CoursePage = () => {
 
   return (
     <div className="min-h-screen gradient-bg flex">
-      <Sidebar onMembershipClick={() => setShowMembershipModal(true)} />
+      <Sidebar />
       
       <div className="flex-1">
         <Header title="课程" />
@@ -60,38 +58,25 @@ const CoursePage = () => {
           {/* Page Header */}
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold text-white">全部课程</h2>
-            <div className="flex items-center space-x-4">
-              <span className="text-slate-400">筛选：</span>
-              <Select defaultValue="all">
-                <SelectTrigger className="w-20 bg-slate-800/50 border-slate-600 text-white text-xs">
-                  <SelectValue placeholder="全部" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">全部</SelectItem>
-                  <SelectItem value="featured">精选</SelectItem>
-                  <SelectItem value="popular">热门</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <CourseFilters />
           </div>
 
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses.map((course) => (
-              <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer group" onClick={() => navigate(`/course/${course.id}`)}>
+              <Card key={course.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer group relative" onClick={() => navigate(`/course/${course.id}`)}>
+                <CourseCardActions 
+                  courseId={course.id} 
+                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                />
                 <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 ${course.color} rounded-full flex items-center justify-center text-white font-bold`}>
-                        {course.title.charAt(0)}
-                      </div>
-                      <Badge className={`${getStatusBadgeStyle(course.status)} text-xs`}>
-                        {course.status}
-                      </Badge>
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className={`w-10 h-10 ${course.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                      {course.title.charAt(0)}
                     </div>
-                    <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <MoreHorizontal className="h-4 w-4 text-slate-400" />
-                    </Button>
+                    <Badge className={`${getStatusBadgeStyle(course.status)} text-xs`}>
+                      {course.status}
+                    </Badge>
                   </div>
                   
                   <h3 className="text-white text-base font-medium mb-3 line-clamp-2">{course.title}</h3>
@@ -128,9 +113,13 @@ const CoursePage = () => {
           {/* Live Streams Section */}
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-white mb-6">全部直播</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {liveStreams.map((stream) => (
-                <Card key={stream.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer overflow-hidden">
+                <Card key={stream.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer overflow-hidden relative group" onClick={() => navigate(`/livestream/${stream.id}`)}>
+                  <CourseCardActions 
+                    courseId={stream.id} 
+                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                  />
                   <div className={`h-40 ${stream.color} flex items-center justify-center relative`}>
                     <div className="text-6xl font-bold text-white/80">
                       {stream.letter}
@@ -156,10 +145,6 @@ const CoursePage = () => {
         </main>
       </div>
 
-      <MembershipModal 
-        isOpen={showMembershipModal}
-        onOpenChange={setShowMembershipModal}
-      />
     </div>
   );
 };

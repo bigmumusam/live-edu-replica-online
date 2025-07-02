@@ -13,6 +13,8 @@ import ForumPage from "./pages/ForumPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProfileSetupPage from "./pages/ProfileSetupPage";
+import MembershipPage from "./pages/MembershipPage";
+import LiveStreamPage from "./pages/LiveStreamPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/course/:id" element={<CourseDetailPage />} />
           <Route path="/personal" element={<PersonalCenter />} />
           <Route path="/forum" element={<ForumPage />} />
+          <Route path="/membership" element={<MembershipPage />} />
+          <Route path="/livestream/:id" element={<LiveStreamPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
