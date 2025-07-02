@@ -10,18 +10,20 @@ import TodoCard from "@/components/dashboard/TodoCard";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
 import MembershipModal from "@/components/dashboard/MembershipModal";
 import ProfileSetupModal from "@/components/dashboard/ProfileSetupModal";
+import InfoCollectionModal from "@/components/dashboard/InfoCollectionModal";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isBecomeTutorDialogOpen, setIsBecomeTutorDialogOpen] = useState(false);
   const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
+  const [isInfoCollectionOpen, setIsInfoCollectionOpen] = useState(false);
 
-  // 检查是否需要显示个人资料设置弹窗
+  // 检查是否需要显示信息收集弹窗
   useEffect(() => {
-    const hasCompletedProfile = localStorage.getItem('profileCompleted');
-    if (!hasCompletedProfile) {
-      setIsProfileSetupOpen(true);
+    const hasCollectedInfo = localStorage.getItem('infoCollected');
+    if (!hasCollectedInfo) {
+      setIsInfoCollectionOpen(true);
     }
   }, []);
 
@@ -125,6 +127,11 @@ const Dashboard = () => {
           <ProfileSetupModal
             isOpen={isProfileSetupOpen}
             onOpenChange={handleProfileSetupClose}
+          />
+          
+          <InfoCollectionModal
+            isOpen={isInfoCollectionOpen}
+            onOpenChange={setIsInfoCollectionOpen}
           />
         </main>
       </div>

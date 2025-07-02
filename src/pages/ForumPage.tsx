@@ -7,6 +7,7 @@ import { Heart, MessageCircle, Eye, ThumbsUp, ThumbsDown, ChevronDown, ChevronUp
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import CreateTopicModal from "@/components/forum/CreateTopicModal";
+import CommentsModal from "@/components/forum/CommentsModal";
 import { useState } from "react";
 import { showToast } from "@/components/shared/Toast";
 
@@ -17,6 +18,8 @@ const ForumPage = () => {
   const [selectedTag, setSelectedTag] = useState("");
   const [expandedDiscussion, setExpandedDiscussion] = useState<number | null>(null);
   const [joinedClubs, setJoinedClubs] = useState<string[]>([]);
+  const [showComments, setShowComments] = useState(false);
+  const [selectedDiscussion, setSelectedDiscussion] = useState<any>(null);
 
   const allDiscussions = [
     {
@@ -143,7 +146,7 @@ const ForumPage = () => {
       <Sidebar onMembershipClick={() => setShowMembershipModal(true)} />
       
       <div className="flex-1">
-        <Header title="" />
+        <Header title="话题中心" />
         
         <main className="p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -226,10 +229,18 @@ const ForumPage = () => {
                                   <span>{discussion.views}</span>
                                 </div>
                                 
-                                <div className="flex items-center space-x-1 text-slate-400">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  className="flex items-center space-x-1 text-slate-400 hover:text-green-400 p-0 h-auto"
+                                  onClick={() => {
+                                    setSelectedDiscussion(discussion);
+                                    setShowComments(true);
+                                  }}
+                                >
                                   <MessageCircle className="h-3 w-3" />
                                   <span>{discussion.replies}</span>
-                                </div>
+                                </Button>
                               </div>
                             </div>
                           </div>
@@ -336,6 +347,13 @@ const ForumPage = () => {
       <CreateTopicModal 
         isOpen={showCreateTopic}
         onOpenChange={setShowCreateTopic}
+      />
+      
+      <CommentsModal
+        isOpen={showComments}
+        onOpenChange={setShowComments}
+        topicTitle={selectedDiscussion?.title || ""}
+        topicContent={selectedDiscussion?.fullContent || ""}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +10,14 @@ import Header from "@/components/Header";
 import DiscussionsTab from "@/components/personal/DiscussionsTab";
 import PointsTab from "@/components/personal/PointsTab";
 import TeachingTab from "@/components/personal/TeachingTab";
+import UserInfoModal from "@/components/personal/UserInfoModal";
+import EditProfileModal from "@/components/personal/EditProfileModal";
 
 const PersonalCenter = () => {
+  const [showUserInfo, setShowUserInfo] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [favoriteTab, setFavoriteTab] = useState("收藏");
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "Brad Traversy", students: "2581人报名", price: "¥998", status: "取消收藏", color: "bg-red-500" },
     { id: 2, title: "计算机工程", instructor: "InsideCodeMedia", students: "3579人参与", price: "¥1288", status: "已结束", color: "bg-yellow-500" },
@@ -57,7 +64,7 @@ const enrolledCourses = [
                 </TabsList>
 
                 <TabsContent value="courses" className="space-y-6">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-end">
                     <div className="flex items-center space-x-4">
                       <span className="text-slate-400">状态：</span>
                       <Select defaultValue="all">
@@ -128,6 +135,25 @@ const enrolledCourses = [
                 </TabsContent>
 
                 <TabsContent value="favorites" className="space-y-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-4">
+                      <Button 
+                        variant={favoriteTab === "收藏" ? "default" : "outline"}
+                        onClick={() => setFavoriteTab("收藏")}
+                        className={favoriteTab === "收藏" ? "bg-green-600 hover:bg-green-700" : "border-slate-600 text-slate-300"}
+                      >
+                        收藏
+                      </Button>
+                      <Button 
+                        variant={favoriteTab === "关注" ? "default" : "outline"}
+                        onClick={() => setFavoriteTab("关注")}
+                        className={favoriteTab === "关注" ? "bg-green-600 hover:bg-green-700" : "border-slate-600 text-slate-300"}
+                      >
+                        关注
+                      </Button>
+                    </div>
+                  </div>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course) => (
                       <Card key={course.id} className="bg-slate-800/50 border-slate-700">
@@ -176,17 +202,6 @@ const enrolledCourses = [
                 <TabsContent value="following" className="space-y-6">
                   <div className="flex items-center justify-between">
                     <h2 className="text-xl font-bold text-white">全部关注</h2>
-                    <div className="flex items-center space-x-4">
-                      <span className="text-slate-400">选择：</span>
-                      <Select defaultValue="all">
-                        <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">全部</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
 
                   <div className="space-y-4">
@@ -199,7 +214,15 @@ const enrolledCourses = [
                                 {person.name.charAt(0)}
                               </div>
                               <div>
-                                <h3 className="text-white font-medium">{person.name}</h3>
+                                <h3 
+                                  className="text-white font-medium cursor-pointer hover:text-green-400"
+                                  onClick={() => {
+                                    setSelectedUser(person);
+                                    setShowUserInfo(true);
+                                  }}
+                                >
+                                  {person.name}
+                                </h3>
                                 <div className="flex items-center space-x-4 text-sm text-slate-400">
                                   <span>{person.grade}</span>
                                   <span>{person.topics}</span>
@@ -208,14 +231,8 @@ const enrolledCourses = [
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                                <MessageSquare className="h-4 w-4 mr-1" />
-                              </Button>
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                                <Plus className="h-4 w-4 mr-1" />
-                              </Button>
-                              <Button variant="ghost" size="sm">
-                                <MoreHorizontal className="h-4 w-4" />
+                              <Button size="sm" className="bg-red-600 hover:bg-red-700">
+                                取消关注
                               </Button>
                             </div>
                           </div>
@@ -257,7 +274,10 @@ const enrolledCourses = [
                     </div>
                   </div>
                   
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                  <Button 
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    onClick={() => setShowEditProfile(true)}
+                  >
                     编辑
                   </Button>
                 </CardContent>
@@ -276,10 +296,10 @@ const enrolledCourses = [
                   <div className="space-y-2">
                     <h4 className="text-white font-medium">教育</h4>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 text-sm">B.Sc - Informatics Engineering</span>
+                      <span className="text-slate-300 text-sm">B.Sc - Informatics Engineering</span>
                       <span className="text-green-400 text-sm">新增</span>
                     </div>
-                    <div className="text-slate-400 text-sm">University of London United Kingdom 2018</div>
+                    <div className="text-slate-300 text-sm">University of London United Kingdom 2018</div>
                   </div>
                   
                   <div className="space-y-2">
@@ -287,7 +307,7 @@ const enrolledCourses = [
                       <h4 className="text-white font-medium">证书</h4>
                       <span className="text-green-400 text-sm">新增</span>
                     </div>
-                    <div className="text-slate-400 text-sm">承荣证书</div>
+                    <div className="text-slate-300 text-sm">承荣证书</div>
                   </div>
                 </CardContent>
               </Card>
@@ -295,6 +315,19 @@ const enrolledCourses = [
           </div>
         </main>
       </div>
+      
+      {selectedUser && (
+        <UserInfoModal
+          isOpen={showUserInfo}
+          onOpenChange={setShowUserInfo}
+          user={selectedUser}
+        />
+      )}
+      
+      <EditProfileModal
+        isOpen={showEditProfile}
+        onOpenChange={setShowEditProfile}
+      />
     </div>
   );
 };

@@ -75,17 +75,6 @@ const PointsTab = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-white">全部积分 <span className="text-green-400">700</span></h2>
-        <div className="flex items-center space-x-4">
-          <span className="text-slate-400">选择：</span>
-          <Select defaultValue="all">
-            <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">全部</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
       </div>
 
       <div className="space-y-4">
@@ -93,16 +82,16 @@ const PointsTab = () => {
           <Card key={item.id} className="bg-slate-800/50 border-slate-700">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className={`w-10 h-10 ${item.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                <div className="flex items-center space-x-2 flex-1">
+                  <div className={`w-8 h-8 ${item.color} rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
                     {item.course.charAt(0)}
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <h3 className="text-white font-medium">{item.course}</h3>
-                    <p className="text-slate-400 text-sm">{item.task}</p>
-                    <p className="text-slate-400 text-sm">{item.date}</p>
-                    <span className="text-green-400 font-bold">{item.points}</span>
-                    <Badge className={`${getStatusColor(item.status)} text-white text-xs`}>
+                  <div className="grid grid-cols-5 gap-4 flex-1 items-center">
+                    <span className="text-white font-medium text-sm">{item.course}</span>
+                    <span className="text-slate-400 text-sm">{item.task}</span>
+                    <span className="text-slate-400 text-sm">{item.date}</span>
+                    <span className="text-green-400 font-bold text-sm">{item.points}</span>
+                    <Badge className={`${getStatusColor(item.status)} text-white text-xs w-fit`}>
                       {item.status}
                     </Badge>
                   </div>
