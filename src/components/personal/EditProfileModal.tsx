@@ -171,6 +171,21 @@ const EditProfileModal = ({ isOpen, onOpenChange }: EditProfileModalProps) => {
               />
             </div>
           </div>
+
+          {/* 证书信息 */}
+          <div className="space-y-4">
+            <h3 className="text-white font-medium border-b border-slate-700 pb-2">证书信息</h3>
+            
+            <div className="space-y-2">
+              <Label htmlFor="certificates" className="text-slate-300">获得证书</Label>
+              <Input
+                id="certificates"
+                value="承荣证书"
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="请输入您获得的证书"
+              />
+            </div>
+          </div>
         </div>
 
         {/* 操作按钮 */}

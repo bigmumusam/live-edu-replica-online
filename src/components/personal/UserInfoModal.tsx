@@ -169,10 +169,6 @@ const UserInfoModal = ({ isOpen, onOpenChange, user }: UserInfoModalProps) => {
 
           {/* 操作按钮 */}
           <div className="flex justify-end space-x-3 pt-4 border-t border-slate-700">
-            <Button variant="outline" className="border-slate-600 text-slate-300 hover:text-white">
-              <MessageSquare className="h-4 w-4 mr-2" />
-              发消息
-            </Button>
             <Button className="bg-green-600 hover:bg-green-700 text-white">
               <Users className="h-4 w-4 mr-2" />
               关注

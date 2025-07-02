@@ -17,9 +17,11 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
-    age: "",
-    grade: "",
+    email: "",
+    phone: "",
     school: "",
+    grade: "",
+    address: "",
     subjects: [] as string[],
     studyGoals: "",
     studyTime: "",
@@ -57,14 +59,9 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
   };
 
   const handleNext = () => {
-    if (step < 3) {
-      setStep(step + 1);
-    } else {
-      // 提交表单
-      showToast.success("信息收集完成，欢迎加入学习平台！");
-      localStorage.setItem('infoCollected', 'true');
-      onOpenChange(false);
-    }
+    showToast.success("信息收集完成，欢迎加入学习平台！");
+    localStorage.setItem('infoCollected', 'true');
+    onOpenChange(false);
   };
 
   const handleSkip = () => {
@@ -75,80 +72,84 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl bg-slate-900 border-slate-700">
-        <DialogHeader>
-          <DialogTitle className="text-white text-xl">
-            欢迎来到学习平台 ({step}/3)
-          </DialogTitle>
-        </DialogHeader>
-        
         <div className="space-y-6">
-          {step === 1 && (
-            <div className="space-y-4">
-              <div className="text-center mb-6">
-                <h3 className="text-lg font-medium text-white mb-2">基本信息</h3>
-                <p className="text-slate-400">让我们了解一下您的基本情况</p>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-slate-300">姓名</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="bg-slate-800/50 border-slate-600 text-white"
-                    placeholder="请输入您的姓名"
-                  />
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-medium text-white mb-2">为了更好的体验tourloop，请完善您在平台的个人信息</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-slate-300">姓名</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="Randy Walsh"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-slate-300">邮箱</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email || ""}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="randywalsh@agency.com"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-slate-300">手机号</Label>
+              <Input
+                id="phone"
+                value={formData.phone || ""}
+                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="请输入"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="school" className="text-slate-300">学校</Label>
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-4 bg-red-500 rounded-sm flex items-center justify-center">
+                  <span className="text-white text-xs">🇬🇧</span>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="age" className="text-slate-300">年龄</Label>
-                  <Input
-                    id="age"
-                    value={formData.age}
-                    onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
-                    className="bg-slate-800/50 border-slate-600 text-white"
-                    placeholder="请输入您的年龄"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="grade" className="text-slate-300">年级</Label>
-                <Select
-                  value={formData.grade}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, grade: value }))}
-                >
-                  <SelectTrigger className="bg-slate-800/50 border-slate-600 text-white">
-                    <SelectValue placeholder="请选择您的年级" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="初一">初一</SelectItem>
-                    <SelectItem value="初二">初二</SelectItem>
-                    <SelectItem value="初三">初三</SelectItem>
-                    <SelectItem value="高一">高一</SelectItem>
-                    <SelectItem value="高二">高二</SelectItem>
-                    <SelectItem value="高三">高三</SelectItem>
-                    <SelectItem value="大一">大一</SelectItem>
-                    <SelectItem value="大二">大二</SelectItem>
-                    <SelectItem value="大三">大三</SelectItem>
-                    <SelectItem value="大四">大四</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="school" className="text-slate-300">学校</Label>
                 <Input
                   id="school"
                   value={formData.school}
                   onChange={(e) => setFormData(prev => ({ ...prev, school: e.target.value }))}
-                  className="bg-slate-800/50 border-slate-600 text-white"
-                  placeholder="请输入您的学校名称"
+                  className="bg-slate-800/50 border-slate-600 text-white flex-1"
+                  placeholder="London United Kingdom"
                 />
               </div>
             </div>
-          )}
+            
+            <div className="space-y-2">
+              <Label htmlFor="grade" className="text-slate-300">年级</Label>
+              <Input
+                id="grade"
+                value={formData.grade}
+                onChange={(e) => setFormData(prev => ({ ...prev, grade: e.target.value }))}
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="RandyWalsh_76"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="address" className="text-slate-300">邮寄地址</Label>
+              <Input
+                id="address"
+                value={formData.address || ""}
+                onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
+                className="bg-slate-800/50 border-slate-600 text-white"
+                placeholder="RandyWalsh_76"
+              />
+            </div>
+          </div>
 
           {step === 2 && (
             <div className="space-y-4">
@@ -277,32 +278,13 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
         </div>
 
         {/* 操作按钮 */}
-        <div className="flex justify-between pt-4 border-t border-slate-700">
+        <div className="flex justify-end pt-4 border-t border-slate-700">
           <Button 
-            variant="ghost" 
-            onClick={handleSkip}
-            className="text-slate-400 hover:text-white"
+            onClick={handleNext}
+            className="bg-green-600 hover:bg-green-700 text-white px-8"
           >
-            跳过
+            确认提交
           </Button>
-          
-          <div className="flex space-x-3">
-            {step > 1 && (
-              <Button 
-                variant="outline" 
-                onClick={() => setStep(step - 1)}
-                className="border-slate-600 text-slate-300 hover:text-white"
-              >
-                上一步
-              </Button>
-            )}
-            <Button 
-              onClick={handleNext}
-              className="bg-green-600 hover:bg-green-700 text-white"
-            >
-              {step === 3 ? "完成" : "下一步"}
-            </Button>
-          </div>
         </div>
       </DialogContent>
     </Dialog>

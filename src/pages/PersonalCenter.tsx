@@ -135,63 +135,41 @@ const enrolledCourses = [
                 </TabsContent>
 
                 <TabsContent value="favorites" className="space-y-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <Button 
-                        variant={favoriteTab === "收藏" ? "default" : "outline"}
-                        onClick={() => setFavoriteTab("收藏")}
-                        className={favoriteTab === "收藏" ? "bg-green-600 hover:bg-green-700" : "border-slate-600 text-slate-300"}
-                      >
-                        收藏
-                      </Button>
-                      <Button 
-                        variant={favoriteTab === "关注" ? "default" : "outline"}
-                        onClick={() => setFavoriteTab("关注")}
-                        className={favoriteTab === "关注" ? "bg-green-600 hover:bg-green-700" : "border-slate-600 text-slate-300"}
-                      >
-                        关注
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {courses.map((course) => (
                       <Card key={course.id} className="bg-slate-800/50 border-slate-700">
-                        <CardHeader className="pb-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center space-x-2">
-                              <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
-                                {course.title.charAt(0)}
+                        <CardContent className="p-6">
+                          <div className="flex items-center space-x-4">
+                            <div className={`w-12 h-12 ${course.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                              {course.title.charAt(0)}
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-4 mb-2">
+                                <h3 className="text-white font-medium">{course.title}</h3>
+                                <Badge variant="secondary">{course.title.includes("代数") ? "数学" : course.title.includes("计算机") ? "计算机" : "生物"}</Badge>
+                                <Badge className="bg-blue-500 text-white">{course.status}</Badge>
                               </div>
-                              <Badge variant={course.status === "取消收藏" ? "default" : "secondary"}>
-                                {course.status}
-                              </Badge>
+                              <div className="flex items-center space-x-2 mb-2">
+                                <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
+                                <span className="text-slate-300 text-sm">{course.instructor}</span>
+                              </div>
+                              <p className="text-slate-400 text-sm">
+                                {course.title === "代数2学习实验室" 
+                                  ? "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂"
+                                  : course.title === "计算机工程"
+                                  ? "Learn Php CodeIgniter and understand working with MVC and HMVC from zero to hero"
+                                  : "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
+                                }
+                              </p>
                             </div>
-                          </div>
-                          <CardTitle className="text-white text-lg">{course.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                          <p className="text-slate-400 text-sm">
-                            {course.title === "代数2学习实验室" 
-                              ? "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂"
-                              : course.title === "计算机工程"
-                              ? "Learn Php CodeIgniter and understand working with MVC and HMVC from zero to hero"
-                              : "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
-                            }
-                          </p>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                            <span className="text-slate-400 text-sm">{course.instructor}</span>
-                            <span className="text-slate-400 text-sm">{course.students}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-1">
-                              {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                              ))}
-                              <span className="text-slate-400 text-sm ml-2">难度系数</span>
+                            <div className="flex flex-col space-y-2">
+                              <Button size="sm" variant="outline" className="border-green-500 text-green-400 bg-green-500/10">
+                                收藏
+                              </Button>
+                              <Button size="sm" variant="outline" className="border-slate-600 text-slate-300">
+                                关注
+                              </Button>
                             </div>
-                            <span className="text-green-400 font-bold">{course.price}</span>
                           </div>
                         </CardContent>
                       </Card>
@@ -247,30 +225,44 @@ const enrolledCourses = [
             {/* Sidebar */}
             <div className="space-y-6">
               <Card className="bg-slate-800/50 border-slate-700">
-                <CardHeader>
-                  <CardTitle className="text-green-400">个人简介</CardTitle>
+                <CardHeader className="pb-0">
+                  <div className="relative h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-t-lg -mx-6 -mt-6 mb-4">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-blue-500/20"></div>
+                  </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <span className="text-white text-2xl font-bold">👤</span>
+                <CardContent className="space-y-4 pt-0">
+                  <div className="text-center -mt-12">
+                    <div className="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-slate-800">
+                      <span className="text-white text-xl">👤</span>
                     </div>
-                    <h3 className="text-white font-semibold">陈俊杰 👋</h3>
+                    <h3 className="text-white font-semibold text-lg">陈俊杰 👋</h3>
                     <p className="text-slate-400 text-sm">Fike it until you make it, fighting~</p>
                   </div>
                   
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">成就</span>
-                      <span className="text-green-400">完成全部</span>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-green-400">700 积分</span>
+                  <div className="text-center space-y-1">
+                    <div className="text-slate-400 text-sm">成就</div>
+                    <div className="text-green-400 font-semibold">完成全部</div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-green-400">700 积分</span>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 bg-yellow-400 rounded-full"></div>
                         <span className="text-slate-400">学习达人</span>
                       </div>
-                      <div className="text-slate-400 text-sm">500 积分</div>
-                      <div className="text-slate-400 text-sm">300 积分</div>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">500 积分</span>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">300 积分</span>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 bg-orange-400 rounded-full"></div>
+                      </div>
                     </div>
                   </div>
                   
@@ -286,7 +278,7 @@ const enrolledCourses = [
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-white">用户信息</CardTitle>
+                    <CardTitle className="text-white text-lg">用户信息</CardTitle>
                     <Button variant="ghost" size="sm">
                       <Plus className="h-4 w-4 text-green-400" />
                     </Button>
@@ -294,7 +286,7 @@ const enrolledCourses = [
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <h4 className="text-white font-medium">教育</h4>
+                    <h4 className="text-white font-medium text-lg">教育</h4>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-300 text-sm">B.Sc - Informatics Engineering</span>
                       <span className="text-green-400 text-sm">新增</span>
@@ -304,7 +296,7 @@ const enrolledCourses = [
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-white font-medium">证书</h4>
+                      <h4 className="text-white font-medium text-lg">证书</h4>
                       <span className="text-green-400 text-sm">新增</span>
                     </div>
                     <div className="text-slate-300 text-sm">承荣证书</div>
