@@ -120,22 +120,18 @@ const TeachingTab = () => {
       <div className="space-y-4">
         {teachingHistory.map((item) => (
           <Card key={item.id} className="bg-slate-800/50 border-slate-700">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className={`w-10 h-10 ${item.color} rounded-full flex items-center justify-center text-white font-bold`}>
-                    {item.course.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="text-white font-medium">{item.course}</h3>
-                    <p className="text-slate-400 text-sm">{item.task}</p>
-                  </div>
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  A
                 </div>
-                <div className="text-right">
-                  <p className="text-slate-400 text-sm">{item.date}</p>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <span className="text-green-400 font-bold">{item.points}</span>
-                    <Badge className="bg-blue-500 text-white text-xs">
+                <div className="flex-1">
+                  <div className="flex items-center space-x-4 mb-1">
+                    <span className="text-white font-medium text-sm">{item.course}</span>
+                    <span className="text-slate-300 text-sm">{item.task}</span>
+                    <span className="text-slate-300 text-sm">{item.date}</span>
+                    <span className="text-green-400 text-sm font-medium">{item.points}</span>
+                    <Badge className="bg-green-600 text-white text-xs">
                       {item.status}
                     </Badge>
                   </div>

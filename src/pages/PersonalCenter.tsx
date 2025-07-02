@@ -20,12 +20,12 @@ const PersonalCenter = () => {
     { id: 6, title: "生物学", instructor: "JuanD MeGon", students: "3579人参与", price: "¥998", status: "取消收藏", color: "bg-red-500" }
   ];
 
-  const enrolledCourses = [
-    { id: 1, title: "代数2学习实验室", subject: "代数", instructor: "Brad Traversy", description: "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂", checked: true },
-    { id: 2, title: "CodeIgniter", subject: "计算机", instructor: "InsideCodeMedia", description: "Learn Php CodeIgniter and understanding working with MVC and HMVC from zero to hero", checked: false },
-    { id: 3, title: "Laravel", subject: "统计学", instructor: "JuanD MeGon", description: "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills", checked: false },
-    { id: 4, title: "NodeJS", subject: "代码程序", instructor: "Anthony Alicea", description: "Dive deep under the hood of NodeJS. Learn V8, Express, Angular, MongoDB, and more!", checked: false },
-    { id: 5, title: "Bootstrap", subject: "计算机", instructor: "Janice Carroll", description: "This tutorial has been prepared for beginners to help them understand the basics of Bootstrap", checked: false }
+const enrolledCourses = [
+    { id: 1, title: "代数2学习实验室", subject: "代数", instructor: "Brad Traversy", description: "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度探索代数 2 学习实验室概念难懂", status: "进行中", statusColor: "bg-blue-500" },
+    { id: 2, title: "CodeIgniter", subject: "计算机", instructor: "InsideCodeMedia", description: "Learn Php CodeIgniter and understanding working with MVC and HMVC from zero to hero", status: "已完成", statusColor: "bg-green-500" },
+    { id: 3, title: "Laravel", subject: "统计学", instructor: "JuanD MeGon", description: "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills", status: "未开始", statusColor: "bg-gray-500" },
+    { id: 4, title: "NodeJS", subject: "代码程序", instructor: "Anthony Alicea", description: "Dive deep under the hood of NodeJS. Learn V8, Express, Angular, MongoDB, and more!", status: "进行中", statusColor: "bg-blue-500" },
+    { id: 5, title: "Bootstrap", subject: "计算机", instructor: "Janice Carroll", description: "This tutorial has been prepared for beginners to help them understand the basics of Bootstrap", status: "已完成", statusColor: "bg-green-500" }
   ];
 
   const following = [
@@ -53,20 +53,36 @@ const PersonalCenter = () => {
                   <TabsTrigger value="favorites" className="text-slate-300 data-[state=active]:text-green-400">我的收藏</TabsTrigger>
                   <TabsTrigger value="points" className="text-slate-300 data-[state=active]:text-green-400">我的积分</TabsTrigger>
                   <TabsTrigger value="following" className="text-slate-300 data-[state=active]:text-green-400">我的关注</TabsTrigger>
-                  <TabsTrigger value="teaching" className="text-slate-300 data-[state=active]:text-green-400">教授课时</TabsTrigger>
+                  <TabsTrigger value="teaching" className="text-slate-300 data-[state=active]:text-green-400">我的课时</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="courses" className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-bold text-white">全部课程</h2>
                     <div className="flex items-center space-x-4">
-                      <span className="text-slate-400">选择：</span>
+                      <span className="text-slate-400">状态：</span>
                       <Select defaultValue="all">
-                        <SelectTrigger className="w-24 bg-slate-800/50 border-slate-600 text-white">
+                        <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="all">全部</SelectItem>
+                          <SelectItem value="not-started">未开始</SelectItem>
+                          <SelectItem value="in-progress">进行中</SelectItem>
+                          <SelectItem value="completed">已完成</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      
+                      <span className="text-slate-400">分类：</span>
+                      <Select defaultValue="all-category">
+                        <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all-category">全部</SelectItem>
+                          <SelectItem value="algebra">代数</SelectItem>
+                          <SelectItem value="computer">计算机</SelectItem>
+                          <SelectItem value="statistics">统计学</SelectItem>
+                          <SelectItem value="programming">代码程序</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -77,20 +93,20 @@ const PersonalCenter = () => {
                       <Card key={course.id} className="bg-slate-800/50 border-slate-700">
                         <CardContent className="p-6">
                           <div className="flex items-center space-x-4">
-                            <input type="checkbox" defaultChecked={course.checked} className="w-5 h-5 rounded border-slate-600" />
                             <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
                               {course.title.charAt(0)}
                             </div>
                             <div className="flex-1">
-                              <div className="flex items-center space-x-4">
+                              <div className="flex items-center space-x-4 mb-2">
                                 <h3 className="text-white font-medium">{course.title}</h3>
                                 <Badge variant="secondary">{course.subject}</Badge>
-                                <div className="flex items-center space-x-2">
-                                  <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                                  <span className="text-slate-300 text-sm">{course.instructor}</span>
-                                </div>
+                                <Badge className={`${course.statusColor} text-white`}>{course.status}</Badge>
                               </div>
-                              <p className="text-slate-400 text-sm mt-2">{course.description}</p>
+                              <div className="flex items-center space-x-2 mb-2">
+                                <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
+                                <span className="text-slate-300 text-sm">{course.instructor}</span>
+                              </div>
+                              <p className="text-slate-400 text-sm">{course.description}</p>
                             </div>
                           </div>
                         </CardContent>

@@ -8,6 +8,7 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import CreateTopicModal from "@/components/forum/CreateTopicModal";
 import { useState } from "react";
+import { showToast } from "@/components/shared/Toast";
 
 const ForumPage = () => {
   const [showMembershipModal, setShowMembershipModal] = useState(false);
@@ -124,8 +125,10 @@ const ForumPage = () => {
   const handleJoinClub = (clubName: string) => {
     if (joinedClubs.includes(clubName)) {
       setJoinedClubs(joinedClubs.filter(club => club !== clubName));
+      showToast.success(`已退出${clubName}俱乐部`);
     } else {
       setJoinedClubs([...joinedClubs, clubName]);
+      showToast.success(`已加入${clubName}俱乐部`);
     }
   };
 
@@ -140,7 +143,7 @@ const ForumPage = () => {
       <Sidebar onMembershipClick={() => setShowMembershipModal(true)} />
       
       <div className="flex-1">
-        <Header title="话题中心" />
+        <Header title="" />
         
         <main className="p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">

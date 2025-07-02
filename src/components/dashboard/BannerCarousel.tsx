@@ -3,10 +3,16 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import EventModal from "./EventModal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { showToast } from "@/components/shared/Toast";
 
 const BannerCarousel = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [isLectureModalOpen, setIsLectureModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const banners = [
@@ -33,6 +39,14 @@ const BannerCarousel = () => {
       buttonText: "查看课程",
       gradient: "from-orange-500 to-red-500",
       action: "course"
+    },
+    {
+      id: 4,
+      title: "名师讲座：AI与未来教育",
+      subtitle: "资深教育专家分享前沿教学理念",
+      buttonText: "立即报名",
+      gradient: "from-indigo-500 to-purple-500",
+      action: "lecture"
     }
   ];
 
@@ -50,7 +64,15 @@ const BannerCarousel = () => {
       navigate("/membership");
     } else if (action === "course") {
       navigate("/course/1");
+    } else if (action === "lecture") {
+      setIsLectureModalOpen(true);
     }
+  };
+
+  const handleLectureRegistration = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLectureModalOpen(false);
+    showToast.success("报名成功！我们会尽快联系您确认详情");
   };
 
   return (
@@ -103,6 +125,69 @@ const BannerCarousel = () => {
         isOpen={isEventModalOpen}
         onOpenChange={setIsEventModalOpen}
       />
+
+      <Dialog open={isLectureModalOpen} onOpenChange={setIsLectureModalOpen}>
+        <DialogContent className="bg-slate-800 border-slate-700 text-white max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-green-400">讲座报名</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleLectureRegistration} className="space-y-4">
+            <div>
+              <Label htmlFor="name" className="text-slate-300">姓名</Label>
+              <Input 
+                id="name" 
+                required 
+                className="bg-slate-700 border-slate-600 text-white"
+                placeholder="请输入您的姓名"
+              />
+            </div>
+            <div>
+              <Label htmlFor="email" className="text-slate-300">邮箱</Label>
+              <Input 
+                id="email" 
+                type="email" 
+                required 
+                className="bg-slate-700 border-slate-600 text-white"
+                placeholder="请输入您的邮箱"
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone" className="text-slate-300">手机号</Label>
+              <Input 
+                id="phone" 
+                required 
+                className="bg-slate-700 border-slate-600 text-white"
+                placeholder="请输入您的手机号"
+              />
+            </div>
+            <div>
+              <Label htmlFor="message" className="text-slate-300">备注信息（可选）</Label>
+              <Textarea 
+                id="message" 
+                className="bg-slate-700 border-slate-600 text-white"
+                placeholder="请输入您的特殊需求或问题"
+                rows={3}
+              />
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => setIsLectureModalOpen(false)}
+                className="flex-1 border-slate-600 text-slate-300"
+              >
+                取消
+              </Button>
+              <Button 
+                type="submit" 
+                className="flex-1 bg-green-600 hover:bg-green-700"
+              >
+                确认报名
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

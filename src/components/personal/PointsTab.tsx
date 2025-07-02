@@ -97,14 +97,10 @@ const PointsTab = () => {
                   <div className={`w-10 h-10 ${item.color} rounded-full flex items-center justify-center text-white font-bold`}>
                     {item.course.charAt(0)}
                   </div>
-                  <div>
+                  <div className="flex items-center space-x-4">
                     <h3 className="text-white font-medium">{item.course}</h3>
                     <p className="text-slate-400 text-sm">{item.task}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-slate-400 text-sm">{item.date}</p>
-                  <div className="flex items-center space-x-2 mt-1">
+                    <p className="text-slate-400 text-sm">{item.date}</p>
                     <span className="text-green-400 font-bold">{item.points}</span>
                     <Badge className={`${getStatusColor(item.status)} text-white text-xs`}>
                       {item.status}

@@ -101,7 +101,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
             </div>
 
             {/* 右侧：任务记录 */}
-            <div className="min-h-[400px]">
+            <div className="flex flex-col min-h-[500px]">
               <h3 className="text-white font-bold text-lg mb-4">任务记录</h3>
               <div className="bg-slate-700/30 rounded-lg overflow-hidden">
                 {/* 表头 */}
@@ -115,7 +115,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
                 </div>
                 
                 {/* 记录列表 */}
-                <div className="max-h-64 overflow-y-auto">
+                <div className="flex-1 overflow-y-auto">
                   {taskHistory.map((record, index) => (
                     <div key={index} className="grid grid-cols-6 gap-2 p-3 text-sm border-b border-slate-700/50 hover:bg-slate-700/20">
                       <div className="flex items-center space-x-2">

@@ -2,9 +2,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Eye, MessageSquare, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Eye, MessageSquare, ThumbsUp, ThumbsDown, ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 const DiscussionsTab = () => {
+  const [expandedDiscussion, setExpandedDiscussion] = useState<number | null>(null);
   const discussions = [
     {
       id: 1,
@@ -66,8 +68,20 @@ const DiscussionsTab = () => {
                 </div>
                 
                 <div className="space-y-3">
-                  <h5 className="text-white font-medium text-lg">{discussion.title}</h5>
-                  <p className="text-slate-300 leading-relaxed">{discussion.content}</p>
+                  <h5 
+                    className="text-white font-medium text-lg cursor-pointer hover:text-green-400 flex items-center"
+                    onClick={() => setExpandedDiscussion(expandedDiscussion === discussion.id ? null : discussion.id)}
+                  >
+                    {discussion.title}
+                    {expandedDiscussion === discussion.id ? (
+                      <ChevronUp className="h-4 w-4 ml-2" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 ml-2" />
+                    )}
+                  </h5>
+                  {expandedDiscussion === discussion.id && (
+                    <p className="text-slate-300 leading-relaxed">{discussion.content}</p>
+                  )}
                 </div>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-700">
