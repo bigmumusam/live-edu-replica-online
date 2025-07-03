@@ -2,14 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import HeroSection from "@/components/dashboard/HeroSection";
-import LearningPaths from "@/components/dashboard/LearningPaths";
 import HotRecommendations from "@/components/dashboard/HotRecommendations";
-import LimitedTimeOffers from "@/components/dashboard/LimitedTimeOffers";
 import MyCourses from "@/components/dashboard/MyCourses";
-import SuccessStories from "@/components/dashboard/SuccessStories";
-import PlatformStats from "@/components/dashboard/PlatformStats";
-import BottomCTA from "@/components/dashboard/BottomCTA";
 import UserInfoCard from "@/components/dashboard/UserInfoCard";
 import TodoCard from "@/components/dashboard/TodoCard";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
@@ -73,34 +67,34 @@ const Dashboard = () => {
         <Header title="首页" />
         
         <main className="p-6 space-y-8">
-          <HeroSection />
+          {/* 个性化欢迎区域 */}
+          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-2xl p-8 border border-blue-500/20">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-white mb-2">早上好，陈俊杰 👋</h1>
+                <p className="text-gray-300">继续你的学习之旅，你已经完成了3门课程</p>
+              </div>
+              <div className="text-right">
+                <div className="text-blue-400 text-sm">本周学习时间</div>
+                <div className="text-2xl font-bold text-white">12.5小时</div>
+              </div>
+            </div>
+          </div>
 
-          <LearningPaths />
-
-          {/* 我的学习仪表板 - 参考顶级教育平台布局 */}
+          {/* 学习仪表板 */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* 主要内容区域 */}
             <div className="lg:col-span-2 space-y-8">
-              <HotRecommendations courses={courses} onCourseClick={handleCourseClick} />
-
-              <LimitedTimeOffers courses={latestCourses} onCourseClick={handleCourseClick} />
-
               <MyCourses courses={courses} onCourseClick={handleCourseClick} />
+              <HotRecommendations courses={courses} onCourseClick={handleCourseClick} />
             </div>
 
-            {/* 右侧边栏 - 个人信息和待办事项 */}
+            {/* 右侧边栏 */}
             <div className="lg:col-span-1 space-y-6">
               <UserInfoCard onBecomeTutor={handleBecomeTutor} />
               <TodoCard />
             </div>
           </div>
-
-          <SuccessStories />
-
-          <PlatformStats />
-
-
-          <BottomCTA />
 
           <BecomeTutorModal 
             isOpen={isBecomeTutorDialogOpen}
