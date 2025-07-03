@@ -138,77 +138,86 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* 热门推荐区域 - 优化版 */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-                  🔥
+          {/* 我的学习仪表板 - 参考顶级教育平台布局 */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* 主要内容区域 */}
+            <div className="lg:col-span-2 space-y-8">
+              
+              {/* 热门推荐区域 - 优化版 */}
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                      🔥
+                    </div>
+                    热门推荐
+                    <span className="text-sm font-normal text-gray-400 ml-2">本周最受欢迎</span>
+                  </h3>
+                  <Button variant="ghost" className="text-blue-400 hover:text-blue-300">
+                    查看全部 →
+                  </Button>
                 </div>
-                热门推荐
-                <span className="text-sm font-normal text-gray-400 ml-2">本周最受欢迎</span>
-              </h3>
-              <Button variant="ghost" className="text-blue-400 hover:text-blue-300">
-                查看全部 →
-              </Button>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {courses.slice(0, 4).map((course) => (
-                <div key={course.id} className="relative group">
-                  <CourseCard 
-                    course={course}
-                    onClick={handleCourseClick}
-                  />
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
-                    🔥 热门
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 限时优惠专区 - 增强版 */}
-          <div className="bg-gradient-to-r from-red-900/30 to-pink-900/30 rounded-2xl p-6 border border-red-500/20">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center animate-pulse">
-                    ⚡
-                  </div>
-                  限时优惠专区
-                </h3>
-                <p className="text-gray-300">错过今天，再等一年</p>
-              </div>
-              <div className="text-right">
-                <div className="text-red-400 text-sm font-semibold">距离结束还有</div>
-                <div className="text-2xl font-mono text-white bg-red-500/20 px-4 py-2 rounded-lg">
-                  23:45:12
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {courses.slice(0, 4).map((course) => (
+                    <div key={course.id} className="relative group">
+                      <div className="relative">
+                        <CourseCard 
+                          course={course}
+                          onClick={handleCourseClick}
+                        />
+                        {/* 热门标签 - 左上角，不遮挡内容 */}
+                        <div className="absolute -top-2 -left-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg z-10">
+                          🔥 热门
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {latestCourses.slice(0, 3).map((course) => (
-                <div key={course.id} className="relative group">
-                  <CourseCard 
-                    course={course}
-                    onClick={handleCourseClick}
-                  />
-                  <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full font-bold shadow-lg">
-                    7折
+
+              {/* 限时优惠专区 - 增强版 */}
+              <div className="bg-gradient-to-r from-red-900/30 to-pink-900/30 rounded-2xl p-6 border border-red-500/20">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center animate-pulse">
+                        ⚡
+                      </div>
+                      限时优惠专区
+                    </h3>
+                    <p className="text-gray-300">错过今天，再等一年</p>
                   </div>
-                  <div className="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse font-semibold">
-                    限时
+                  <div className="text-right">
+                    <div className="text-red-400 text-sm font-semibold">距离结束还有</div>
+                    <div className="text-2xl font-mono text-white bg-red-500/20 px-4 py-2 rounded-lg">
+                      23:45:12
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {latestCourses.slice(0, 2).map((course) => (
+                    <div key={course.id} className="relative group">
+                      <div className="relative">
+                        <CourseCard 
+                          course={course}
+                          onClick={handleCourseClick}
+                        />
+                        {/* 优惠标签组 - 避免遮挡 */}
+                        <div className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full font-bold shadow-lg z-10">
+                          7折
+                        </div>
+                        <div className="absolute -top-2 -left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse font-semibold z-10">
+                          限时
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-3">
+              {/* 我的课程 */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
@@ -228,7 +237,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-1 space-y-6 flex flex-col h-fit">
+            {/* 右侧边栏 - 个人信息和待办事项 */}
+            <div className="lg:col-span-1 space-y-6">
               <UserInfoCard onBecomeTutor={handleBecomeTutor} />
               <TodoCard />
             </div>
@@ -280,33 +290,6 @@ const Dashboard = () => {
             ))}
           </div>
 
-          {/* 最新课程 - 重新设计 */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-                  ✨
-                </div>
-                最新上线
-                <span className="text-sm font-normal text-gray-400 ml-2">抢先体验最新内容</span>
-              </h3>
-              <CourseFilters />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {latestCourses.map((course) => (
-                <div key={course.id} className="relative group">
-                  <CourseCard 
-                    course={course}
-                    onClick={handleCourseClick}
-                  />
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs px-3 py-1 rounded-full font-semibold">
-                    NEW
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* 底部CTA区域 */}
           <div className="bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 rounded-3xl p-12 text-center relative overflow-hidden">
