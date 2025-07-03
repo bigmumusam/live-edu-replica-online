@@ -3,6 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes slideShow {
+  0%, 45% {
+    transform: translateX(0);
+  }
+  50%, 95% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
