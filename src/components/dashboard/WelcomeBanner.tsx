@@ -44,27 +44,21 @@ const WelcomeBanner = ({ onBecomeTutor, onInfoCollection }: WelcomeBannerProps) 
           <div className="grid grid-cols-3 gap-4">
             {/* 合并本周目标和学习积分 */}
             <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-              <div className="grid grid-cols-2 gap-4 h-full">
+              <div className="space-y-3">
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <Target className="h-4 w-4" />
-                    <span className="text-xs font-medium">本周目标</span>
+                    <span className="text-sm font-medium">本周目标：学习时长 8.5/12h</span>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs">
-                      <span>学习时长</span>
-                      <span>8.5/12h</span>
-                    </div>
-                    <Progress value={71} className="h-2" />
-                  </div>
+                  <Progress value={71} className="h-2" />
                 </div>
                 <div>
-                  <div className="flex items-center space-x-2 mb-2">
+                  <div className="flex items-center space-x-2">
                     <Award className="h-4 w-4" />
-                    <span className="text-xs font-medium">学习积分</span>
+                    <span className="text-sm font-medium">学习积分：</span>
+                    <span className="text-lg font-bold">2,340</span>
+                    <span className="text-xs text-green-200">本周 +120</span>
                   </div>
-                  <div className="text-lg font-bold">2,340</div>
-                  <div className="text-xs text-green-200">本周 +120</div>
                 </div>
               </div>
             </div>
