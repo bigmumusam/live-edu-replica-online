@@ -50,7 +50,9 @@ const WelcomeBanner = ({ onBecomeTutor, onInfoCollection }: WelcomeBannerProps) 
                     <Target className="h-4 w-4" />
                     <span className="text-sm font-medium">本周目标：学习时长 8.5/12h</span>
                   </div>
-                  <Progress value={71} className="h-2" />
+                  <div className="w-full">
+                    <Progress value={71} className="h-2 w-full" />
+                  </div>
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
