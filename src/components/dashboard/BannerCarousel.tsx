@@ -2,9 +2,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Play, Trophy, BookOpen, Users } from "lucide-react";
+import { Play, Trophy, BookOpen, Users, Gift } from "lucide-react";
+import { useEffect } from "react";
+import useEmblaCarousel from 'embla-carousel-react';
 
-const BannerCarousel = () => {
+interface BannerCarouselProps {
+  onInfoCollection?: () => void;
+}
+
+const BannerCarousel = ({ onInfoCollection }: BannerCarouselProps) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+
   const banners = [
     {
       id: 1,
@@ -14,7 +22,8 @@ const BannerCarousel = () => {
       bgColor: "from-purple-600 to-pink-600",
       icon: <Trophy className="h-8 w-8" />,
       cta: "立即查看",
-      tag: "限时优惠"
+      tag: "限时优惠",
+      action: "view"
     },
     {
       id: 2,
@@ -24,7 +33,8 @@ const BannerCarousel = () => {
       bgColor: "from-blue-600 to-cyan-600",
       icon: <BookOpen className="h-8 w-8" />,
       cta: "免费试学",
-      tag: "热门课程"
+      tag: "热门课程",
+      action: "trial"
     },
     {
       id: 3,
@@ -34,16 +44,44 @@ const BannerCarousel = () => {
       bgColor: "from-green-600 to-teal-600",
       icon: <Users className="h-8 w-8" />,
       cta: "参加挑战",
-      tag: "活动进行中"
+      tag: "活动进行中",
+      action: "challenge"
+    },
+    {
+      id: 4,
+      title: "填写资料领奖励",
+      subtitle: "完善个人信息获得积分",
+      description: "填写完整的学习资料，立即获得200积分奖励",
+      bgColor: "from-orange-600 to-red-600",
+      icon: <Gift className="h-8 w-8" />,
+      cta: "立即填写",
+      tag: "奖励活动",
+      action: "info"
     }
   ];
 
+  useEffect(() => {
+    if (emblaApi) {
+      const autoplay = setInterval(() => {
+        emblaApi.scrollNext();
+      }, 5000);
+
+      return () => clearInterval(autoplay);
+    }
+  }, [emblaApi]);
+
+  const handleBannerClick = (action: string) => {
+    if (action === "info" && onInfoCollection) {
+      onInfoCollection();
+    }
+  };
+
   return (
-    <div className="mb-6">
-      <Carousel className="w-full">
-        <CarouselContent>
+    <div className="mb-6" ref={emblaRef}>
+      <div className="overflow-hidden">
+        <div className="flex">
           {banners.map((banner) => (
-            <CarouselItem key={banner.id}>
+            <div key={banner.id} className="flex-none w-full">
               <Card className={`bg-gradient-to-r ${banner.bgColor} border-0 text-white overflow-hidden`}>
                 <CardContent className="p-8">
                   <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -65,7 +103,11 @@ const BannerCarousel = () => {
                       </div>
                       
                       <div className="flex space-x-4 pt-4">
-                        <Button size="lg" className="bg-white/20 hover:bg-white/30 border-white/30 text-white">
+                        <Button 
+                          size="lg" 
+                          className="bg-white/20 hover:bg-white/30 border-white/30 text-white"
+                          onClick={() => handleBannerClick(banner.action)}
+                        >
                           {banner.cta}
                         </Button>
                         <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
@@ -83,12 +125,10 @@ const BannerCarousel = () => {
                   </div>
                 </CardContent>
               </Card>
-            </CarouselItem>
+            </div>
           ))}
-        </CarouselContent>
-        <CarouselPrevious className="left-4" />
-        <CarouselNext className="right-4" />
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 };

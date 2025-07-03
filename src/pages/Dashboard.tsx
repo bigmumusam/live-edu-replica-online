@@ -67,7 +67,7 @@ const Dashboard = () => {
         
         <main className="p-6 space-y-6">
           {/* Banner轮播 */}
-          <BannerCarousel />
+          <BannerCarousel onInfoCollection={handleInfoCollection} />
           
           {/* 欢迎横幅 */}
           <WelcomeBanner onBecomeTutor={handleBecomeTutor} onInfoCollection={handleInfoCollection} />
