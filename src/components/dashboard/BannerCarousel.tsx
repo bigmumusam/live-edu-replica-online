@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Play, Trophy, BookOpen, Users, Gift } from "lucide-react";
 import { useEffect } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
@@ -106,7 +105,7 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
       <div className="overflow-hidden">
         <div className="flex">
           {banners.map((banner) => (
-            <div key={banner.id} className="flex-none w-full">
+            <div key={banner.id} className="flex-none w-full min-w-0">
               <Card className={`bg-gradient-to-r ${banner.bgColor} border-0 text-white overflow-hidden`}>
                 <CardContent className="p-8">
                   <div className="grid lg:grid-cols-2 gap-8 items-center">

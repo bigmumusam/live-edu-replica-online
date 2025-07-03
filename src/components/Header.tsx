@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Search, LogOut } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -44,7 +45,10 @@ const Header = ({ title, showSearch = true }: HeaderProps) => {
             <Bell className="h-5 w-5" />
           </Button>
           
-          <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full"></div>
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="用户头像" />
+            <AvatarFallback className="bg-gradient-to-r from-green-400 to-blue-500 text-white text-sm">小明</AvatarFallback>
+          </Avatar>
           
           <Button
             variant="ghost"

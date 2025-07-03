@@ -16,7 +16,7 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
   const menuItems = [
     { icon: Home, label: "首页", path: "/dashboard" },
     { icon: BookOpen, label: "课程/课堂", path: "/courses" },
-    { icon: MessageSquare, label: "话题中心", path: "/forum", badge: "35" },
+    { icon: MessageSquare, label: "话题中心", path: "/forum" },
     { icon: User, label: "个人中心", path: "/personal" },
   ];
 
@@ -50,11 +50,6 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
           >
             <item.icon className="mr-3 h-5 w-5" />
             <span className="flex-1">{item.label}</span>
-            {item.badge && (
-              <span className="bg-green-600 text-white text-xs px-2 py-1 rounded-full">
-                {item.badge}
-              </span>
-            )}
           </Button>
         ))}
       </div>
