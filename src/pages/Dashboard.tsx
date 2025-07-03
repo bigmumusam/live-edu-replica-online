@@ -70,6 +70,61 @@ const Dashboard = () => {
         <main className="p-6 space-y-6">
           <HeroSection />
 
+          {/* 热门推荐区域 */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <span className="text-orange-400">🔥</span>
+                热门推荐
+              </h3>
+              <button className="text-sm text-blue-400 hover:text-blue-300">查看全部</button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {courses.slice(0, 4).map((course) => (
+                <div key={course.id} className="relative">
+                  <CourseCard 
+                    course={course}
+                    onClick={handleCourseClick}
+                  />
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                    热门
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 限时优惠专区 */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <span className="text-green-400">💰</span>
+                限时优惠
+              </h3>
+              <div className="text-sm text-red-400">
+                距离结束还有 <span className="font-mono">23:45:12</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {latestCourses.slice(0, 3).map((course) => (
+                <div key={course.id} className="relative">
+                  <CourseCard 
+                    course={course}
+                    onClick={handleCourseClick}
+                  />
+                  <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded">
+                    7折
+                  </div>
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded animate-pulse">
+                    限时
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">
               <div className="space-y-4">
@@ -94,6 +149,37 @@ const Dashboard = () => {
             <div className="lg:col-span-1 space-y-6 flex flex-col h-fit">
               <UserInfoCard onBecomeTutor={handleBecomeTutor} />
               <TodoCard />
+            </div>
+          </div>
+
+          {/* 课程分类推荐 */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <span className="text-purple-400">📚</span>
+              分类推荐
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-700/50 transition-colors cursor-pointer">
+                <div className="text-2xl mb-2">💻</div>
+                <h4 className="text-white font-semibold mb-1">编程开发</h4>
+                <p className="text-slate-400 text-sm">528门课程</p>
+              </div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-700/50 transition-colors cursor-pointer">
+                <div className="text-2xl mb-2">🎨</div>
+                <h4 className="text-white font-semibold mb-1">设计创意</h4>
+                <p className="text-slate-400 text-sm">342门课程</p>
+              </div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-700/50 transition-colors cursor-pointer">
+                <div className="text-2xl mb-2">📊</div>
+                <h4 className="text-white font-semibold mb-1">数据分析</h4>
+                <p className="text-slate-400 text-sm">256门课程</p>
+              </div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-700/50 transition-colors cursor-pointer">
+                <div className="text-2xl mb-2">🤖</div>
+                <h4 className="text-white font-semibold mb-1">人工智能</h4>
+                <p className="text-slate-400 text-sm">189门课程</p>
+              </div>
             </div>
           </div>
 
