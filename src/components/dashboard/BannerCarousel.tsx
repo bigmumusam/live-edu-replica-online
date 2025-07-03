@@ -1,9 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Trophy, BookOpen, Users, Gift } from "lucide-react";
-import { useEffect } from "react";
-import useEmblaCarousel from 'embla-carousel-react';
+import { Play, Trophy, BookOpen, Users, Gift, Calendar, Award } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface BannerCarouselProps {
   onInfoCollection?: () => void;
@@ -11,14 +10,14 @@ interface BannerCarouselProps {
 }
 
 const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const banners = [
     {
       id: 1,
       title: "新学期特惠季",
       subtitle: "所有课程享受8折优惠",
-      description: "为新学期做好准备，精选课程助你快速提升",
+      description: "为新学期做好准备，精选课程助你快速提升技能",
       bgColor: "from-purple-600 to-pink-600",
       icon: <Trophy className="h-8 w-8" />,
       cta: "立即查看",
@@ -42,7 +41,7 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
       subtitle: "30天学习打卡活动",
       description: "坚持学习30天，赢取丰厚奖品和证书",
       bgColor: "from-green-600 to-teal-600",
-      icon: <Users className="h-8 w-8" />,
+      icon: <Award className="h-8 w-8" />,
       cta: "参加挑战",
       tag: "活动进行中",
       action: "challenge"
@@ -75,37 +74,43 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
       subtitle: "展现你的编程实力",
       description: "参与编程竞赛，与全国高手同台竞技，赢取丰厚奖品",
       bgColor: "from-red-600 to-orange-600",
-      icon: <Trophy className="h-8 w-8" />,
+      icon: <Calendar className="h-8 w-8" />,
       cta: "报名参赛",
       tag: "竞赛活动",
       action: "event"
     }
   ];
 
+  // 自动轮播
   useEffect(() => {
-    if (emblaApi) {
-      const autoplay = setInterval(() => {
-        emblaApi.scrollNext();
-      }, 5000);
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+    }, 5000);
 
-      return () => clearInterval(autoplay);
-    }
-  }, [emblaApi]);
+    return () => clearInterval(interval);
+  }, [banners.length]);
 
   const handleBannerClick = (action: string) => {
     if (action === "info" && onInfoCollection) {
       onInfoCollection();
-    } else if ((action === "lecture" || action === "event") && onEventRegister) {
+    } else if ((action === "lecture" || action === "event" || action === "challenge") && onEventRegister) {
       onEventRegister();
     }
   };
 
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return (
-    <div className="mb-6" ref={emblaRef}>
-      <div className="overflow-hidden">
-        <div className="flex">
+    <div className="relative mb-6">
+      <div className="overflow-hidden rounded-lg">
+        <div 
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
           {banners.map((banner) => (
-            <div key={banner.id} className="flex-none w-full min-w-0">
+            <div key={banner.id} className="flex-none w-full">
               <Card className={`bg-gradient-to-r ${banner.bgColor} border-0 text-white overflow-hidden`}>
                 <CardContent className="p-8">
                   <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -152,6 +157,21 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
             </div>
           ))}
         </div>
+      </div>
+
+      {/* 轮播指示器 */}
+      <div className="flex justify-center space-x-2 mt-4">
+        {banners.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex 
+                ? 'bg-white' 
+                : 'bg-white/40 hover:bg-white/60'
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
