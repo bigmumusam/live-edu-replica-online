@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import HotRecommendations from "@/components/dashboard/HotRecommendations";
-import MyCourses from "@/components/dashboard/MyCourses";
+import HeroSection from "@/components/dashboard/HeroSection";
+import CourseFilters from "@/components/dashboard/CourseFilters";
+import CourseCard from "@/components/dashboard/CourseCard";
 import UserInfoCard from "@/components/dashboard/UserInfoCard";
 import TodoCard from "@/components/dashboard/TodoCard";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
@@ -66,33 +67,50 @@ const Dashboard = () => {
       <div className="flex-1">
         <Header title="首页" />
         
-        <main className="p-6 space-y-8">
-          {/* 个性化欢迎区域 */}
-          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-2xl p-8 border border-blue-500/20">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-white mb-2">早上好，陈俊杰 👋</h1>
-                <p className="text-gray-300">继续你的学习之旅，你已经完成了3门课程</p>
+        <main className="p-6 space-y-6">
+          <HeroSection />
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-3">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-white">我的课程</h3>
+                  <CourseFilters />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {courses.map((course) => (
+                    <div key={course.id} className="h-48">
+                      <CourseCard 
+                        course={course}
+                        onClick={handleCourseClick}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="text-right">
-                <div className="text-blue-400 text-sm">本周学习时间</div>
-                <div className="text-2xl font-bold text-white">12.5小时</div>
-              </div>
+            </div>
+
+            <div className="lg:col-span-1 space-y-6 flex flex-col h-fit">
+              <UserInfoCard onBecomeTutor={handleBecomeTutor} />
+              <TodoCard />
             </div>
           </div>
 
-          {/* 学习仪表板 */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* 主要内容区域 */}
-            <div className="lg:col-span-2 space-y-8">
-              <MyCourses courses={courses} onCourseClick={handleCourseClick} />
-              <HotRecommendations courses={courses} onCourseClick={handleCourseClick} />
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-white">最新课程</h3>
+              <CourseFilters />
             </div>
-
-            {/* 右侧边栏 */}
-            <div className="lg:col-span-1 space-y-6">
-              <UserInfoCard onBecomeTutor={handleBecomeTutor} />
-              <TodoCard />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {latestCourses.map((course) => (
+                <CourseCard 
+                  key={course.id}
+                  course={course}
+                  onClick={handleCourseClick}
+                />
+              ))}
             </div>
           </div>
 
