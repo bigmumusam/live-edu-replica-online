@@ -1,13 +1,17 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Calendar, Clock, Award, Target } from "lucide-react";
+import { Calendar, Clock, Award, Target, Users, CheckCircle } from "lucide-react";
 
-const WelcomeBanner = () => {
+interface WelcomeBannerProps {
+  onBecomeTutor?: () => void;
+}
+
+const WelcomeBanner = ({ onBecomeTutor }: WelcomeBannerProps) => {
   return (
     <Card className="bg-gradient-to-r from-green-600 to-blue-600 border-0 text-white">
       <CardContent className="p-6">
-        <div className="grid lg:grid-cols-3 gap-6 items-center">
+        <div className="grid lg:grid-cols-4 gap-6 items-center">
           {/* 欢迎信息 */}
           <div className="lg:col-span-2 space-y-4">
             <div>
@@ -54,15 +58,42 @@ const WelcomeBanner = () => {
             </div>
           </div>
           
-          {/* 快速操作 */}
-          <div className="space-y-3">
-            <Button className="w-full bg-white/20 hover:bg-white/30 border-white/30">
-              <Clock className="mr-2 h-4 w-4" />
-              继续上次学习
+          {/* 成为讲师区域 */}
+          <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+            <div className="flex items-center space-x-2 mb-3">
+              <Users className="h-5 w-5" />
+              <span className="text-sm font-medium">成为讲师</span>
+            </div>
+            <p className="text-xs text-green-200 mb-3">分享您的知识，获得额外收益</p>
+            <Button 
+              onClick={onBecomeTutor}
+              size="sm" 
+              className="w-full bg-white/20 hover:bg-white/30 border-white/30 text-xs"
+            >
+              立即申请
             </Button>
-            <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10">
-              今日打卡签到
-            </Button>
+          </div>
+          
+          {/* 待办任务 */}
+          <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+            <div className="flex items-center space-x-2 mb-3">
+              <CheckCircle className="h-5 w-5" />
+              <span className="text-sm font-medium">今日待办</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span>完成作业：数学练习</span>
+                <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span>观看视频：Python基础</span>
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span>今日打卡签到</span>
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+              </div>
+            </div>
           </div>
         </div>
       </CardContent>

@@ -41,11 +41,23 @@ const HomePage = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Carousel */}
       <section className="relative overflow-hidden pt-20 pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
+              {/* Marketing Carousel */}
+              <div className="bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-xl p-6 backdrop-blur-sm border border-green-500/30">
+                <div className="flex items-center space-x-4 text-green-400 mb-4">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium">🔥 限时优惠活动</span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-white font-bold text-lg">新用户专享 7 折优惠</h3>
+                  <p className="text-slate-300 text-sm">所有精品课程享受限时折扣，机会难得，不容错过！</p>
+                </div>
+              </div>
+
               <div className="space-y-4">
                 <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
                   🎯 个性化学习体验

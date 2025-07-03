@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import WelcomeBanner from "@/components/dashboard/WelcomeBanner";
+import BannerCarousel from "@/components/dashboard/BannerCarousel";
 import CourseFilters from "@/components/dashboard/CourseFilters";
 import CourseCard from "@/components/dashboard/CourseCard";
-import UserInfoCard from "@/components/dashboard/UserInfoCard";
-import TodoCard from "@/components/dashboard/TodoCard";
 import HotRecommendations from "@/components/dashboard/HotRecommendations";
 import LimitedTimeOffers from "@/components/dashboard/LimitedTimeOffers";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
@@ -43,11 +42,10 @@ const Dashboard = () => {
     { id: 4, title: "微积分微分学习实验室", instructor: "Debra Liver", students: "3579人参与", rating: 4.8, price: "¥1288", status: "进行中", color: "bg-blue-500" }
   ];
 
-  const latestCourses = [
-    { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "258人参与", rating: 4.0, price: "¥998", status: "即将开始", color: "bg-red-500" },
-    { id: 2, title: "PHP工程", instructor: "John", students: "3579人参与", rating: 4.0, price: "¥1288", status: "已结束", color: "bg-red-500" },
-    { id: 3, title: "生物学", instructor: "JuanD MeGon", students: "3579人参与", rating: 4.0, price: "¥1288", status: "进行中", color: "bg-red-500" },
-    { id: 4, title: "数据统计", instructor: "Debra Liver", students: "3579人参与", rating: 4.0, price: "¥1288", status: "进行中", color: "bg-red-500" }
+  const liveCourses = [
+    { id: 5, title: "实时编程直播", instructor: "李老师", students: "156人在线", rating: 4.8, price: "免费", status: "直播中", color: "bg-red-500", type: "live" },
+    { id: 6, title: "数学答疑直播", instructor: "王教授", students: "89人在线", rating: 4.9, price: "免费", status: "直播中", color: "bg-blue-500", type: "live" },
+    { id: 7, title: "英语口语练习", instructor: "张老师", students: "203人在线", rating: 4.7, price: "免费", status: "直播中", color: "bg-green-500", type: "live" }
   ];
 
   const handleCourseClick = (courseId: number) => {
@@ -70,58 +68,49 @@ const Dashboard = () => {
         <Header title="首页" />
         
         <main className="p-6 space-y-6">
+          {/* Banner轮播 */}
+          <BannerCarousel />
+          
           {/* 欢迎横幅 */}
-          <WelcomeBanner />
+          <WelcomeBanner onBecomeTutor={handleBecomeTutor} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* 主要内容区域 */}
-            <div className="lg:col-span-3 space-y-6">
-              {/* 我的课程 */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-white">我的课程</h3>
-                  <CourseFilters />
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {courses.map((course) => (
-                    <div key={course.id} className="h-48">
-                      <CourseCard 
-                        course={course}
-                        onClick={handleCourseClick}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 推荐课程 */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-white">推荐课程</h3>
-                  <CourseFilters />
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {latestCourses.map((course) => (
-                    <CourseCard 
-                      key={course.id}
-                      course={course}
-                      onClick={handleCourseClick}
-                    />
-                  ))}
-                </div>
-              </div>
+          {/* 我的课程 */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-white">我的课程</h3>
+              <CourseFilters />
             </div>
-
-            {/* 右侧边栏 */}
-            <div className="lg:col-span-1 space-y-6 flex flex-col h-fit">
-              <UserInfoCard onBecomeTutor={handleBecomeTutor} />
-              <TodoCard />
-              <HotRecommendations />
-              <LimitedTimeOffers />
+            
+            {/* 第一行：课程卡片 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {courses.slice(0, 3).map((course) => (
+                <div key={course.id} className="h-48">
+                  <CourseCard 
+                    course={course}
+                    onClick={handleCourseClick}
+                  />
+                </div>
+              ))}
+            </div>
+            
+            {/* 第二行：直播课卡片 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {liveCourses.map((course) => (
+                <div key={course.id} className="h-48">
+                  <CourseCard 
+                    course={course}
+                    onClick={handleCourseClick}
+                  />
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* 限时促销区域 */}
+          <LimitedTimeOffers />
+
+          {/* 热门推荐区域 */}
+          <HotRecommendations />
 
           <BecomeTutorModal 
             isOpen={isBecomeTutorDialogOpen}

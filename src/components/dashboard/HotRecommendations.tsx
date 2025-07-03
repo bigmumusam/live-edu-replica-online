@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Users, Clock, TrendingUp } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const HotRecommendations = () => {
   const recommendations = [
@@ -59,66 +60,71 @@ const HotRecommendations = () => {
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {recommendations.map((course) => (
-          <Card key={course.id} className="bg-slate-700/30 border-slate-600 hover:border-green-500 transition-colors group cursor-pointer">
-            <CardContent className="p-4">
-              <div className="flex space-x-4">
-                <div className={`w-16 h-16 bg-gradient-to-r ${course.color} rounded-xl flex items-center justify-center text-2xl flex-shrink-0`}>
-                  {course.image}
-                </div>
-                
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h4 className="text-white font-medium text-sm leading-tight group-hover:text-green-400 transition-colors">
-                        {course.title}
-                      </h4>
-                      <p className="text-slate-400 text-xs mt-1">{course.instructor}</p>
+      <CardContent>
+        <Carousel className="w-full">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {recommendations.map((course) => (
+              <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/3">
+                <Card className="bg-slate-700/30 border-slate-600 hover:border-green-500 transition-colors group cursor-pointer h-full">
+                  <CardContent className="p-4">
+                    <div className="space-y-3">
+                      <div className={`w-12 h-12 bg-gradient-to-r ${course.color} rounded-xl flex items-center justify-center text-xl mx-auto`}>
+                        {course.image}
+                      </div>
+                      
+                      <div className="text-center space-y-2">
+                        <h4 className="text-white font-medium text-sm leading-tight group-hover:text-green-400 transition-colors">
+                          {course.title}
+                        </h4>
+                        <p className="text-slate-400 text-xs">{course.instructor}</p>
+                        
+                        <div className="flex items-center justify-center space-x-4 text-xs text-slate-400">
+                          <div className="flex items-center space-x-1">
+                            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                            <span>{course.rating}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Users className="h-3 w-3" />
+                            <span>{course.students}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{course.duration}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center justify-center space-x-2">
+                          <span className="text-green-400 font-bold text-sm">{course.price}</span>
+                          <span className="text-slate-500 text-xs line-through">{course.originalPrice}</span>
+                        </div>
+                        
+                        <div className="flex flex-wrap justify-center gap-1">
+                          {course.tags.map((tag, index) => (
+                            <Badge 
+                              key={index} 
+                              className={`text-xs ${
+                                tag === "热门" ? "bg-red-600" : 
+                                tag === "新课" ? "bg-blue-600" :
+                                tag === "精品" ? "bg-purple-600" :
+                                tag === "认证" ? "bg-green-600" :
+                                tag === "实战" ? "bg-orange-600" :
+                                "bg-gray-600"
+                              }`}
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-green-400 font-bold text-sm">{course.price}</div>
-                      <div className="text-slate-500 text-xs line-through">{course.originalPrice}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 text-xs text-slate-400">
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-3 w-3 text-yellow-400 fill-current" />
-                      <span>{course.rating}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Users className="h-3 w-3" />
-                      <span>{course.students}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{course.duration}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    {course.tags.map((tag, index) => (
-                      <Badge 
-                        key={index} 
-                        className={`text-xs ${
-                          tag === "热门" ? "bg-red-600" : 
-                          tag === "新课" ? "bg-blue-600" :
-                          tag === "精品" ? "bg-purple-600" :
-                          tag === "认证" ? "bg-green-600" :
-                          tag === "实战" ? "bg-orange-600" :
-                          "bg-gray-600"
-                        }`}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
+        </Carousel>
       </CardContent>
     </Card>
   );
