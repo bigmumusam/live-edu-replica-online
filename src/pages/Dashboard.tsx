@@ -20,13 +20,7 @@ const Dashboard = () => {
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
   const [isInfoCollectionOpen, setIsInfoCollectionOpen] = useState(false);
 
-  // 检查是否需要显示信息收集弹窗
-  useEffect(() => {
-    const hasCollectedInfo = localStorage.getItem('infoCollected');
-    if (!hasCollectedInfo) {
-      setIsInfoCollectionOpen(true);
-    }
-  }, []);
+  // 移除自动弹出信息收集弹窗的逻辑
 
   const handleProfileSetupClose = (open: boolean) => {
     setIsProfileSetupOpen(open);
@@ -60,6 +54,10 @@ const Dashboard = () => {
     setIsMembershipModalOpen(true);
   };
 
+  const handleInfoCollection = () => {
+    setIsInfoCollectionOpen(true);
+  };
+
   return (
     <div className="min-h-screen gradient-bg flex">
       <Sidebar onMembershipClick={handleMembershipClick} />
@@ -72,7 +70,7 @@ const Dashboard = () => {
           <BannerCarousel />
           
           {/* 欢迎横幅 */}
-          <WelcomeBanner onBecomeTutor={handleBecomeTutor} />
+          <WelcomeBanner onBecomeTutor={handleBecomeTutor} onInfoCollection={handleInfoCollection} />
 
           {/* 我的课程 */}
           <div className="space-y-4">

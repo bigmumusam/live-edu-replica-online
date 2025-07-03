@@ -41,50 +41,11 @@ const HomePage = () => {
         </div>
       </nav>
 
-      {/* Hero Section with Carousel */}
+      {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              {/* Hero Images Carousel */}
-              <div className="relative h-64 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-blue-600/20 backdrop-blur-sm border border-green-500/30 rounded-xl">
-                  <div 
-                    className="flex h-full"
-                    style={{
-                      animation: 'slideShow 10s infinite'
-                    }}
-                  >
-                    <div 
-                      className="min-w-full h-full bg-cover bg-center relative"
-                      style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80')"
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <h3 className="text-2xl font-bold mb-2">个性化学习体验</h3>
-                          <p className="text-lg">量身定制的学习路径，助您高效掌握技能</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div 
-                      className="min-w-full h-full bg-cover bg-center relative"
-                      style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <h3 className="text-2xl font-bold mb-2">专业导师指导</h3>
-                          <p className="text-lg">一对一专业指导，快速提升学习效果</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="space-y-4">
                 <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
                   🎯 个性化学习体验
