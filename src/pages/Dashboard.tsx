@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { useLanguage } from "@/contexts/LanguageContext";
 import WelcomeBanner from "@/components/dashboard/WelcomeBanner";
 import BannerCarousel from "@/components/dashboard/BannerCarousel";
 import CourseFilters from "@/components/dashboard/CourseFilters";
@@ -16,6 +17,7 @@ import EventModal from "@/components/dashboard/EventModal";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [isBecomeTutorDialogOpen, setIsBecomeTutorDialogOpen] = useState(false);
   const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
@@ -81,7 +83,7 @@ const Dashboard = () => {
           {/* 我的课程 */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">我的课程</h3>
+              <h3 className="text-xl font-bold text-white">{t('course.myCourses')}</h3>
               <CourseFilters />
             </div>
             

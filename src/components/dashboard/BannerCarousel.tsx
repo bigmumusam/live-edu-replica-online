@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Trophy, BookOpen, Users, Gift, Calendar, Award } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BannerCarouselProps {
   onInfoCollection?: () => void;
@@ -11,72 +12,73 @@ interface BannerCarouselProps {
 
 const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useLanguage();
 
   const banners = [
     {
       id: 1,
-      title: "新学期特惠季",
-      subtitle: "所有课程享受8折优惠",
-      description: "为新学期做好准备，精选课程助你快速提升技能",
+      titleKey: "banner.newSemesterSale.title",
+      subtitleKey: "banner.newSemesterSale.subtitle",
+      descriptionKey: "banner.newSemesterSale.description",
       bgColor: "from-purple-600 to-pink-600",
       icon: <Trophy className="h-8 w-8" />,
-      cta: "立即查看",
-      tag: "限时优惠",
+      ctaKey: "banner.newSemesterSale.cta",
+      tagKey: "banner.newSemesterSale.tag",
       action: "view"
     },
     {
       id: 2,
-      title: "AI编程训练营",
-      subtitle: "零基础入门人工智能",
-      description: "跟随业界专家，掌握AI核心技术和实战项目",
+      titleKey: "banner.aiBootcamp.title",
+      subtitleKey: "banner.aiBootcamp.subtitle",
+      descriptionKey: "banner.aiBootcamp.description",
       bgColor: "from-blue-600 to-cyan-600",
       icon: <BookOpen className="h-8 w-8" />,
-      cta: "免费试学",
-      tag: "热门课程",
+      ctaKey: "banner.aiBootcamp.cta",
+      tagKey: "banner.aiBootcamp.tag",
       action: "trial"
     },
     {
       id: 3,
-      title: "学习成就挑战",
-      subtitle: "30天学习打卡活动",
-      description: "坚持学习30天，赢取丰厚奖品和证书",
+      titleKey: "banner.challenge.title",
+      subtitleKey: "banner.challenge.subtitle",
+      descriptionKey: "banner.challenge.description",
       bgColor: "from-green-600 to-teal-600",
       icon: <Award className="h-8 w-8" />,
-      cta: "参加挑战",
-      tag: "活动进行中",
+      ctaKey: "banner.challenge.cta",
+      tagKey: "banner.challenge.tag",
       action: "challenge"
     },
     {
       id: 4,
-      title: "填写资料领奖励",
-      subtitle: "完善个人信息获得积分",
-      description: "填写完整的学习资料，立即获得200积分奖励",
+      titleKey: "banner.fillInfo.title",
+      subtitleKey: "banner.fillInfo.subtitle",
+      descriptionKey: "banner.fillInfo.description",
       bgColor: "from-orange-600 to-red-600",
       icon: <Gift className="h-8 w-8" />,
-      cta: "立即填写",
-      tag: "奖励活动",
+      ctaKey: "banner.fillInfo.cta",
+      tagKey: "banner.fillInfo.tag",
       action: "info"
     },
     {
       id: 5,
-      title: "春季编程大讲座",
-      subtitle: "顶级专家分享最新技术",
-      description: "邀请业界顶尖专家，分享前沿技术和实战经验",
+      titleKey: "banner.lecture.title",
+      subtitleKey: "banner.lecture.subtitle",
+      descriptionKey: "banner.lecture.description",
       bgColor: "from-indigo-600 to-purple-600",
       icon: <Users className="h-8 w-8" />,
-      cta: "立即报名",
-      tag: "专家讲座",
+      ctaKey: "banner.lecture.cta",
+      tagKey: "banner.lecture.tag",
       action: "lecture"
     },
     {
       id: 6,
-      title: "春季编程挑战赛",
-      subtitle: "展现你的编程实力",
-      description: "参与编程竞赛，与全国高手同台竞技，赢取丰厚奖品",
+      titleKey: "banner.contest.title",
+      subtitleKey: "banner.contest.subtitle",
+      descriptionKey: "banner.contest.description",
       bgColor: "from-red-600 to-orange-600",
       icon: <Calendar className="h-8 w-8" />,
-      cta: "报名参赛",
-      tag: "竞赛活动",
+      ctaKey: "banner.contest.cta",
+      tagKey: "banner.contest.tag",
       action: "event"
     }
   ];
@@ -116,18 +118,18 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
                   <div className="grid lg:grid-cols-2 gap-8 items-center">
                     <div className="space-y-4">
                       <Badge className="bg-white/20 text-white border-white/30 w-fit">
-                        {banner.tag}
+                        {t(banner.tagKey)}
                       </Badge>
                       
                       <div className="space-y-2">
                         <h2 className="text-3xl lg:text-4xl font-bold">
-                          {banner.title}
+                          {t(banner.titleKey)}
                         </h2>
                         <p className="text-xl font-medium text-white/90">
-                          {banner.subtitle}
+                          {t(banner.subtitleKey)}
                         </p>
                         <p className="text-white/80 text-lg">
-                          {banner.description}
+                          {t(banner.descriptionKey)}
                         </p>
                       </div>
                       
@@ -137,11 +139,11 @@ const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselPro
                           className="bg-white/20 hover:bg-white/30 border-white/30 text-white"
                           onClick={() => handleBannerClick(banner.action)}
                         >
-                          {banner.cta}
+                          {t(banner.ctaKey)}
                         </Button>
                         <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
                           <Play className="mr-2 h-4 w-4" />
-                          了解详情
+                          {t('banner.learnMore')}
                         </Button>
                       </div>
                     </div>
