@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import HeroSection from "@/components/dashboard/HeroSection";
+import WelcomeBanner from "@/components/dashboard/WelcomeBanner";
 import CourseFilters from "@/components/dashboard/CourseFilters";
 import CourseCard from "@/components/dashboard/CourseCard";
 import UserInfoCard from "@/components/dashboard/UserInfoCard";
 import TodoCard from "@/components/dashboard/TodoCard";
+import HotRecommendations from "@/components/dashboard/HotRecommendations";
+import LimitedTimeOffers from "@/components/dashboard/LimitedTimeOffers";
 import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
 import MembershipModal from "@/components/dashboard/MembershipModal";
 import ProfileSetupModal from "@/components/dashboard/ProfileSetupModal";
@@ -68,10 +70,13 @@ const Dashboard = () => {
         <Header title="首页" />
         
         <main className="p-6 space-y-6">
-          <HeroSection />
+          {/* 欢迎横幅 */}
+          <WelcomeBanner />
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-3">
+            {/* 主要内容区域 */}
+            <div className="lg:col-span-3 space-y-6">
+              {/* 我的课程 */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-white">我的课程</h3>
@@ -89,28 +94,32 @@ const Dashboard = () => {
                   ))}
                 </div>
               </div>
+
+              {/* 推荐课程 */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-white">推荐课程</h3>
+                  <CourseFilters />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {latestCourses.map((course) => (
+                    <CourseCard 
+                      key={course.id}
+                      course={course}
+                      onClick={handleCourseClick}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
 
+            {/* 右侧边栏 */}
             <div className="lg:col-span-1 space-y-6 flex flex-col h-fit">
               <UserInfoCard onBecomeTutor={handleBecomeTutor} />
               <TodoCard />
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">最新课程</h3>
-              <CourseFilters />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {latestCourses.map((course) => (
-                <CourseCard 
-                  key={course.id}
-                  course={course}
-                  onClick={handleCourseClick}
-                />
-              ))}
+              <HotRecommendations />
+              <LimitedTimeOffers />
             </div>
           </div>
 
