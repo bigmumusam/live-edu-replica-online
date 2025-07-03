@@ -8,9 +8,10 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 interface BannerCarouselProps {
   onInfoCollection?: () => void;
+  onEventRegister?: () => void;
 }
 
-const BannerCarousel = ({ onInfoCollection }: BannerCarouselProps) => {
+const BannerCarousel = ({ onInfoCollection, onEventRegister }: BannerCarouselProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   const banners = [
@@ -57,6 +58,28 @@ const BannerCarousel = ({ onInfoCollection }: BannerCarouselProps) => {
       cta: "立即填写",
       tag: "奖励活动",
       action: "info"
+    },
+    {
+      id: 5,
+      title: "春季编程大讲座",
+      subtitle: "顶级专家分享最新技术",
+      description: "邀请业界顶尖专家，分享前沿技术和实战经验",
+      bgColor: "from-indigo-600 to-purple-600",
+      icon: <Users className="h-8 w-8" />,
+      cta: "立即报名",
+      tag: "专家讲座",
+      action: "lecture"
+    },
+    {
+      id: 6,
+      title: "春季编程挑战赛",
+      subtitle: "展现你的编程实力",
+      description: "参与编程竞赛，与全国高手同台竞技，赢取丰厚奖品",
+      bgColor: "from-red-600 to-orange-600",
+      icon: <Trophy className="h-8 w-8" />,
+      cta: "报名参赛",
+      tag: "竞赛活动",
+      action: "event"
     }
   ];
 
@@ -73,6 +96,8 @@ const BannerCarousel = ({ onInfoCollection }: BannerCarouselProps) => {
   const handleBannerClick = (action: string) => {
     if (action === "info" && onInfoCollection) {
       onInfoCollection();
+    } else if ((action === "lecture" || action === "event") && onEventRegister) {
+      onEventRegister();
     }
   };
 

@@ -12,6 +12,7 @@ import BecomeTutorModal from "@/components/dashboard/BecomeTutorModal";
 import MembershipModal from "@/components/dashboard/MembershipModal";
 import ProfileSetupModal from "@/components/dashboard/ProfileSetupModal";
 import InfoCollectionModal from "@/components/dashboard/InfoCollectionModal";
+import EventModal from "@/components/dashboard/EventModal";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
   const [isInfoCollectionOpen, setIsInfoCollectionOpen] = useState(false);
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
   // 移除自动弹出信息收集弹窗的逻辑
 
@@ -58,6 +60,10 @@ const Dashboard = () => {
     setIsInfoCollectionOpen(true);
   };
 
+  const handleEventRegister = () => {
+    setIsEventModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen gradient-bg flex">
       <Sidebar onMembershipClick={handleMembershipClick} />
@@ -67,7 +73,7 @@ const Dashboard = () => {
         
         <main className="p-6 space-y-6">
           {/* Banner轮播 */}
-          <BannerCarousel onInfoCollection={handleInfoCollection} />
+          <BannerCarousel onInfoCollection={handleInfoCollection} onEventRegister={handleEventRegister} />
           
           {/* 欢迎横幅 */}
           <WelcomeBanner onBecomeTutor={handleBecomeTutor} onInfoCollection={handleInfoCollection} />
@@ -128,6 +134,11 @@ const Dashboard = () => {
           <InfoCollectionModal
             isOpen={isInfoCollectionOpen}
             onOpenChange={setIsInfoCollectionOpen}
+          />
+          
+          <EventModal
+            isOpen={isEventModalOpen}
+            onOpenChange={setIsEventModalOpen}
           />
         </main>
       </div>
