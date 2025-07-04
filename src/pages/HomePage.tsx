@@ -24,19 +24,12 @@ const HomePage = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">🏠</span>
+                <span className="text-white font-bold text-sm">T</span>
               </div>
-              <span className="text-white font-semibold text-xl">Online Studies</span>
+              <span className="text-white font-semibold text-xl">Tutorloop</span>
             </div>
             
             <div className="flex items-center space-x-6">
-              <a href="#courses" className="text-slate-300 hover:text-white transition-colors">
-                {language === 'zh' ? '课程' : 'Courses'}
-              </a>
-              <a href="#about" className="text-slate-300 hover:text-white transition-colors">
-                {language === 'zh' ? '关于我们' : 'About Us'}
-              </a>
-              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -68,7 +61,7 @@ const HomePage = () => {
                 className="border-slate-600 text-slate-300 hover:bg-slate-700"
                 onClick={() => navigate("/register")}
               >
-                {language === 'zh' ? '注册' : 'Register'}
+                {t('register.submit')}
               </Button>
               
               <Dialog open={isLoginOpen} onOpenChange={(v) => {
@@ -77,7 +70,7 @@ const HomePage = () => {
               }}>
                 <DialogTrigger asChild>
                   <Button ref={loginTriggerRef} className="bg-green-600 hover:bg-green-700">
-                    {language === 'zh' ? '立即开始学习' : 'Start Learning'}
+                    {t('home.hero.startLearning')}
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-transparent border-0">
@@ -98,20 +91,17 @@ const HomePage = () => {
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
-                  🎯 {language === 'zh' ? '个性化学习体验' : 'Personalized Learning Experience'}
+                  🎯 {t('home.hero.badge')}
                 </Badge>
                 <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  {language === 'zh' ? '开启您的' : 'Start Your'}
+                  {t('home.hero.title.start')}
                   <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                    {language === 'zh' ? '在线学习' : 'Online Learning'}
+                    {t('home.hero.title.learning')}
                   </span>
-                  {language === 'zh' ? '之旅' : 'Journey'}
+                  {t('home.hero.title.journey')}
                 </h1>
                 <p className="text-xl text-slate-300 leading-relaxed">
-                  {language === 'zh' 
-                    ? '与全球50,000+学习者一起，通过我们的实战课程掌握核心技能，获得1对1指导和认证，让学习变得高效且有趣。'
-                    : 'Join 50,000+ learners worldwide, master core skills through our practical courses, get 1-on-1 guidance and certification, making learning efficient and fun.'
-                  }
+                  {t('home.hero.subtitle')}
                 </p>
               </div>
               
@@ -122,7 +112,7 @@ const HomePage = () => {
                 }}>
                   <DialogTrigger asChild>
                     <Button ref={loginTriggerRef} size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4">
-                      {language === 'zh' ? '免费开始学习' : 'Start Learning Free'}
+                      {t('home.hero.startLearning')}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </DialogTrigger>
@@ -135,22 +125,22 @@ const HomePage = () => {
                 
                 <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-slate-600 text-white hover:bg-slate-800">
                   <Play className="mr-2 h-5 w-5" />
-                  {language === 'zh' ? '观看介绍视频' : 'Watch Intro Video'}
+                  {t('home.hero.watchVideo')}
                 </Button>
               </div>
               
               <div className="flex items-center space-x-8 pt-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">50K+</div>
-                  <div className="text-sm text-slate-400">{language === 'zh' ? '活跃学员' : 'Active Students'}</div>
+                  <div className="text-sm text-slate-400">{t('home.stats.students')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">200+</div>
-                  <div className="text-sm text-slate-400">{language === 'zh' ? '精品课程' : 'Premium Courses'}</div>
+                  <div className="text-sm text-slate-400">{t('home.stats.courses')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">4.9</div>
-                  <div className="text-sm text-slate-400">{language === 'zh' ? '平均评分' : 'Average Rating'}</div>
+                  <div className="text-sm text-slate-400">{t('home.stats.rating')}</div>
                 </div>
               </div>
             </div>
@@ -206,61 +196,82 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Learning Paths */}
-      <section id="courses" className="py-20 bg-slate-800/50">
+      {/* Three Main Learning Types */}
+      <section id="learning-types" className="py-20 bg-slate-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl font-bold text-white">热门学习路径</h2>
+            <h2 className="text-4xl font-bold text-white">
+              {language === 'zh' ? '三大学习方式' : 'Three Learning Approaches'}
+            </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              根据行业需求精心设计的学习路径，从入门到精通，助您快速掌握核心技能
+              {language === 'zh' 
+                ? '多样化的学习方式，满足不同学习需求和偏好，让每一个学员都能找到最适合自己的学习路径'
+                : 'Diverse learning approaches to meet different learning needs and preferences, helping every student find their optimal learning path'
+              }
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "数学基础强化",
-                description: "代数、几何、微积分全面覆盖",
-                courses: "12门课程",
-                students: "15,234",
-                color: "from-red-500 to-pink-500",
-                icon: "📐"
-              },
-              {
-                title: "编程入门",
-                description: "Python、JavaScript零基础入门",
-                courses: "18门课程", 
-                students: "22,156",
+                title: t('home.clubCourses.title'),
+                subtitle: t('home.clubCourses.subtitle'),
+                icon: <Users className="h-8 w-8 text-white" />,
                 color: "from-blue-500 to-cyan-500",
-                icon: "💻"
+                features: [
+                  language === 'zh' ? '免费参与' : 'Free to join',
+                  language === 'zh' ? '小组学习' : 'Group learning',
+                  language === 'zh' ? '互助成长' : 'Mutual growth',
+                  language === 'zh' ? '社区支持' : 'Community support'
+                ]
               },
               {
-                title: "数据科学",
-                description: "统计学、机器学习实战应用",
-                courses: "15门课程",
-                students: "8,967",
+                title: t('home.oneOnOne.title'),
+                subtitle: t('home.oneOnOne.subtitle'),
+                icon: <CheckCircle className="h-8 w-8 text-white" />,
                 color: "from-green-500 to-teal-500",
-                icon: "📊"
+                features: [
+                  language === 'zh' ? '个性化指导' : 'Personalized guidance',
+                  language === 'zh' ? '专业导师' : 'Professional tutors',
+                  language === 'zh' ? '灵活时间' : 'Flexible schedule',
+                  language === 'zh' ? '快速提升' : 'Rapid improvement'
+                ]
+              },
+              {
+                title: t('home.lectures.title'),
+                subtitle: t('home.lectures.subtitle'),
+                icon: <Trophy className="h-8 w-8 text-white" />,
+                color: "from-purple-500 to-pink-500",
+                features: [
+                  language === 'zh' ? '行业专家' : 'Industry experts',
+                  language === 'zh' ? '前沿知识' : 'Cutting-edge knowledge',
+                  language === 'zh' ? '实时互动' : 'Live interaction',
+                  language === 'zh' ? '录播回看' : 'Recording available'
+                ]
               }
-            ].map((path, index) => (
+            ].map((type, index) => (
               <Card key={index} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-all duration-300 group cursor-pointer">
                 <CardContent className="p-6 space-y-4">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${path.color} rounded-2xl flex items-center justify-center text-2xl mb-4`}>
-                    {path.icon}
+                  <div className={`w-16 h-16 bg-gradient-to-r ${type.color} rounded-2xl flex items-center justify-center mb-4`}>
+                    {type.icon}
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2">{path.title}</h3>
-                    <p className="text-slate-400 mb-4">{path.description}</p>
+                    <h3 className="text-xl font-bold text-white mb-2">{type.title}</h3>
+                    <p className="text-slate-400 mb-4">{type.subtitle}</p>
                     
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-green-400">{path.courses}</span>
-                      <span className="text-slate-400">{path.students} 学员</span>
+                    <div className="space-y-2 mb-4">
+                      {type.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center space-x-2 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span className="text-slate-300">{feature}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   
                   <Button variant="ghost" className="w-full group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    开始学习
+                    {language === 'zh' ? '了解详情' : 'Learn More'}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
@@ -372,10 +383,10 @@ const HomePage = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-3xl p-12 space-y-8">
             <h2 className="text-4xl font-bold text-white">
-              准备好开始您的学习之旅了吗？
+              {t('home.cta.title')}
             </h2>
             <p className="text-xl text-green-100 max-w-2xl mx-auto">
-              加入我们的学习社区，与全球学员一起成长，掌握未来必备技能
+              {t('home.cta.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -385,7 +396,7 @@ const HomePage = () => {
               }}>
                 <DialogTrigger asChild>
                   <Button ref={loginTriggerRef} size="lg" className="bg-white text-green-600 hover:bg-slate-100 text-lg px-8 py-4">
-                    立即免费注册
+                    {t('home.cta.register')}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </DialogTrigger>
@@ -397,12 +408,12 @@ const HomePage = () => {
               </Dialog>
               
               <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white/10">
-                了解更多课程
+                {t('home.cta.learnMore')}
               </Button>
             </div>
             
             <p className="text-sm text-green-100">
-              🎁 新用户注册即送价值 ¥299 的精品课程
+              {t('home.cta.gift')}
             </p>
           </div>
         </div>

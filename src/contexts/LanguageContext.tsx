@@ -144,6 +144,31 @@ const translations = {
     'common.next': '下一步',
     'common.previous': '上一步',
     'common.finish': '完成',
+    
+    // Homepage
+    'home.hero.badge': '个性化学习体验',
+    'home.hero.title.start': '开启您的',
+    'home.hero.title.learning': '在线学习',
+    'home.hero.title.journey': '之旅',
+    'home.hero.subtitle': '与全球50,000+学习者一起，通过我们的实战课程掌握核心技能，获得1对1指导和认证，让学习变得高效且有趣。',
+    'home.hero.startLearning': '免费开始学习',
+    'home.hero.watchVideo': '观看介绍视频',
+    'home.stats.students': '活跃学员',
+    'home.stats.courses': '精品课程',
+    'home.stats.rating': '平均评分',
+    
+    'home.clubCourses.title': '俱乐部课程',
+    'home.clubCourses.subtitle': '加入学习俱乐部，与同学一起进步，享受免费的集体学习体验',
+    'home.oneOnOne.title': '1V1导师',
+    'home.oneOnOne.subtitle': '专业导师一对一指导，个性化学习方案，快速突破学习瓶颈',
+    'home.lectures.title': '专题讲座',
+    'home.lectures.subtitle': '行业专家分享前沿知识，拓宽视野，把握行业发展趋势',
+    
+    'home.cta.title': '准备好开始您的学习之旅了吗？',
+    'home.cta.subtitle': '加入我们的学习社区，与全球学员一起成长，掌握未来必备技能',
+    'home.cta.register': '立即免费注册',
+    'home.cta.learnMore': '了解更多课程',
+    'home.cta.gift': '新用户注册即送价值 ¥299 的精品课程',
   },
   en: {
     // Header
@@ -278,6 +303,31 @@ const translations = {
     'common.next': 'Next',
     'common.previous': 'Previous',
     'common.finish': 'Finish',
+    
+    // Homepage
+    'home.hero.badge': 'Personalized Learning Experience',
+    'home.hero.title.start': 'Start Your',
+    'home.hero.title.learning': 'Online Learning',
+    'home.hero.title.journey': 'Journey',
+    'home.hero.subtitle': 'Join 50,000+ learners worldwide, master core skills through our practical courses, get 1-on-1 guidance and certification, making learning efficient and fun.',
+    'home.hero.startLearning': 'Start Learning Free',
+    'home.hero.watchVideo': 'Watch Intro Video',
+    'home.stats.students': 'Active Students',
+    'home.stats.courses': 'Premium Courses',
+    'home.stats.rating': 'Average Rating',
+    
+    'home.clubCourses.title': 'Club Courses',
+    'home.clubCourses.subtitle': 'Join learning clubs, progress with classmates, enjoy free collaborative learning experiences',
+    'home.oneOnOne.title': '1V1 Tutors',
+    'home.oneOnOne.subtitle': 'Professional one-on-one tutoring, personalized learning plans, quickly breakthrough learning bottlenecks',
+    'home.lectures.title': 'Special Lectures',
+    'home.lectures.subtitle': 'Industry experts share cutting-edge knowledge, broaden horizons, grasp industry trends',
+    
+    'home.cta.title': 'Ready to Start Your Learning Journey?',
+    'home.cta.subtitle': 'Join our learning community, grow with global students, master essential future skills',
+    'home.cta.register': 'Register Free Now',
+    'home.cta.learnMore': 'Learn More Courses',
+    'home.cta.gift': '🎁 New users get premium courses worth ¥299 upon registration',
   }
 };
 
