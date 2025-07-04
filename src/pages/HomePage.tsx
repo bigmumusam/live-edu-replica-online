@@ -3,12 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Star, ArrowRight, BookOpen, Users, Trophy, CheckCircle } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Play, Star, ArrowRight, BookOpen, Users, Trophy, CheckCircle, Languages } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import LoginPage from "./LoginPage";
 
 const HomePage = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const loginTriggerRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -24,8 +29,46 @@ const HomePage = () => {
             </div>
             
             <div className="flex items-center space-x-6">
-              <a href="#courses" className="text-slate-300 hover:text-white transition-colors">课程</a>
-              <a href="#about" className="text-slate-300 hover:text-white transition-colors">关于我们</a>
+              <a href="#courses" className="text-slate-300 hover:text-white transition-colors">
+                {language === 'zh' ? '课程' : 'Courses'}
+              </a>
+              <a href="#about" className="text-slate-300 hover:text-white transition-colors">
+                {language === 'zh' ? '关于我们' : 'About Us'}
+              </a>
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-slate-300 hover:text-white hover:bg-slate-700/50"
+                  >
+                    <Languages className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-slate-800 border-slate-700">
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage('zh')}
+                    className={`text-slate-300 hover:text-white hover:bg-slate-700 ${language === 'zh' ? 'bg-slate-700 text-white' : ''}`}
+                  >
+                    中文
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage('en')}
+                    className={`text-slate-300 hover:text-white hover:bg-slate-700 ${language === 'en' ? 'bg-slate-700 text-white' : ''}`}
+                  >
+                    English
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
+              <Button 
+                variant="outline" 
+                className="border-slate-600 text-slate-300 hover:bg-slate-700"
+                onClick={() => navigate("/register")}
+              >
+                {language === 'zh' ? '注册' : 'Register'}
+              </Button>
               
               <Dialog open={isLoginOpen} onOpenChange={(v) => {
                 setIsLoginOpen(v);
@@ -33,7 +76,7 @@ const HomePage = () => {
               }}>
                 <DialogTrigger asChild>
                   <Button ref={loginTriggerRef} className="bg-green-600 hover:bg-green-700">
-                    立即开始学习
+                    {language === 'zh' ? '立即开始学习' : 'Start Learning'}
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-transparent border-0">
@@ -54,18 +97,20 @@ const HomePage = () => {
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
-                  🎯 个性化学习体验
+                  🎯 {language === 'zh' ? '个性化学习体验' : 'Personalized Learning Experience'}
                 </Badge>
                 <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  开启您的
+                  {language === 'zh' ? '开启您的' : 'Start Your'}
                   <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                    在线学习
+                    {language === 'zh' ? '在线学习' : 'Online Learning'}
                   </span>
-                  之旅
+                  {language === 'zh' ? '之旅' : 'Journey'}
                 </h1>
                 <p className="text-xl text-slate-300 leading-relaxed">
-                  与全球50,000+学习者一起，通过我们的实战课程掌握核心技能，
-                  获得1对1指导和认证，让学习变得高效且有趣。
+                  {language === 'zh' 
+                    ? '与全球50,000+学习者一起，通过我们的实战课程掌握核心技能，获得1对1指导和认证，让学习变得高效且有趣。'
+                    : 'Join 50,000+ learners worldwide, master core skills through our practical courses, get 1-on-1 guidance and certification, making learning efficient and fun.'
+                  }
                 </p>
               </div>
               
@@ -76,7 +121,7 @@ const HomePage = () => {
                 }}>
                   <DialogTrigger asChild>
                     <Button ref={loginTriggerRef} size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4">
-                      免费开始学习
+                      {language === 'zh' ? '免费开始学习' : 'Start Learning Free'}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </DialogTrigger>
@@ -89,22 +134,22 @@ const HomePage = () => {
                 
                 <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-slate-600 text-white hover:bg-slate-800">
                   <Play className="mr-2 h-5 w-5" />
-                  观看介绍视频
+                  {language === 'zh' ? '观看介绍视频' : 'Watch Intro Video'}
                 </Button>
               </div>
               
               <div className="flex items-center space-x-8 pt-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">50K+</div>
-                  <div className="text-sm text-slate-400">活跃学员</div>
+                  <div className="text-sm text-slate-400">{language === 'zh' ? '活跃学员' : 'Active Students'}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">200+</div>
-                  <div className="text-sm text-slate-400">精品课程</div>
+                  <div className="text-sm text-slate-400">{language === 'zh' ? '精品课程' : 'Premium Courses'}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-white">4.9</div>
-                  <div className="text-sm text-slate-400">平均评分</div>
+                  <div className="text-sm text-slate-400">{language === 'zh' ? '平均评分' : 'Average Rating'}</div>
                 </div>
               </div>
             </div>
