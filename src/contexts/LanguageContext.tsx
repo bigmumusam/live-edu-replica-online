@@ -16,24 +16,27 @@ const translations = {
     'header.home': '首页',
     'header.search.placeholder': '请搜索',
     'header.logout': '退出登录',
+    'header.my': '我的',
     
     // Sidebar
     'sidebar.home': '首页',
-    'sidebar.courses': '我的课程',
-    'sidebar.forum': '论坛',
+    'sidebar.courses': '课程/课堂',
+    'sidebar.forum': '话题中心',
     'sidebar.livestream': '直播',
     'sidebar.personal': '个人中心',
     'sidebar.membership': '会员中心',
     'sidebar.admin': '管理后台',
-    'sidebar.upgrade': '升级会员',
+    'sidebar.upgrade': '开会员 低至 ¥198',
     
     // Welcome Banner
     'welcome.greeting': '早上好，小明！',
     'welcome.subtitle': '今天是学习的好日子，继续保持您的学习节奏',
     'welcome.becomeTutor': '成为讲师',
     'welcome.fillInfo': '填写资料得奖励',
-    'welcome.weeklyGoal': '本周目标：学习时长 8.5/12h',
-    'welcome.studyPoints': '学习积分：',
+    'welcome.weeklyGoal': '本周目标',
+    'welcome.studyTime': '学习时长 8.5/12h',
+    'welcome.studyPoints': '学习积分',
+    'welcome.pointsValue': '2,340',
     'welcome.weeklyIncrease': '本周 +120',
     'welcome.checkinDays': '连续打卡',
     'welcome.days': '天',
@@ -85,12 +88,43 @@ const translations = {
     
     // Course Section
     'course.myCourses': '我的课程',
+    'course.clubCourses': '俱乐部课程',
+    'course.oneOnOneTutor': '1V1导师',
+    'course.specialLectures': '专题讲座',
     'course.liveNow': '直播中',
     'course.upcoming': '即将开始',
     'course.inProgress': '进行中',
     'course.free': '免费',
     'course.participants': '人参与',
     'course.online': '人在线',
+    
+    // Registration
+    'register.title': '注册账户',
+    'register.subtitle': '加入Tutorloop在线学习平台',
+    'register.email': '邮箱',
+    'register.school': '学校',
+    'register.grade': '年级',
+    'register.age': '年龄',
+    'register.phone': '手机号',
+    'register.address': '邮寄地址',
+    'register.submit': '注册',
+    'register.login': '已有账户？立即登录',
+    
+    // Personal Info Modal
+    'profile.title': '个人信息',
+    'profile.name': '姓名',
+    'profile.email': '邮箱',
+    'profile.phone': '手机号',
+    'profile.school': '学校',
+    'profile.grade': '年级',
+    'profile.address': '地址',
+    'profile.edit': '编辑资料',
+    'profile.close': '关闭',
+    
+    // Footer
+    'footer.progress': 'PROGRESS',
+    'footer.follow': 'FOLLOW',
+    'footer.contact': 'CONTACT',
     
     // Buttons
     'button.viewDetails': '查看详情',
@@ -116,24 +150,27 @@ const translations = {
     'header.home': 'Home',
     'header.search.placeholder': 'Please search',
     'header.logout': 'Logout',
+    'header.my': 'My',
     
     // Sidebar
     'sidebar.home': 'Home',
-    'sidebar.courses': 'My Courses',
-    'sidebar.forum': 'Forum',
+    'sidebar.courses': 'Courses/Classes',
+    'sidebar.forum': 'Discussion Center',
     'sidebar.livestream': 'Live Stream',
     'sidebar.personal': 'Personal Center',
     'sidebar.membership': 'Membership',
     'sidebar.admin': 'Admin Dashboard',
-    'sidebar.upgrade': 'Upgrade Membership',
+    'sidebar.upgrade': 'Upgrade from ¥198',
     
     // Welcome Banner
     'welcome.greeting': 'Good morning, Xiao Ming!',
     'welcome.subtitle': 'Today is a great day for learning, keep up your study pace',
     'welcome.becomeTutor': 'Become Tutor',
     'welcome.fillInfo': 'Complete Profile for Rewards',
-    'welcome.weeklyGoal': 'Weekly Goal: Study Time 8.5/12h',
-    'welcome.studyPoints': 'Study Points:',
+    'welcome.weeklyGoal': 'Weekly Goal',
+    'welcome.studyTime': 'Study Time 8.5/12h',
+    'welcome.studyPoints': 'Study Points',
+    'welcome.pointsValue': '2,340',
     'welcome.weeklyIncrease': 'This week +120',
     'welcome.checkinDays': 'Consecutive Days',
     'welcome.days': 'days',
@@ -185,12 +222,43 @@ const translations = {
     
     // Course Section
     'course.myCourses': 'My Courses',
+    'course.clubCourses': 'Club Courses',
+    'course.oneOnOneTutor': '1V1 Tutor',
+    'course.specialLectures': 'Special Lectures',
     'course.liveNow': 'Live Now',
     'course.upcoming': 'Coming Soon',
     'course.inProgress': 'In Progress',
     'course.free': 'Free',
     'course.participants': ' participants',
     'course.online': ' online',
+    
+    // Registration
+    'register.title': 'Create Account',
+    'register.subtitle': 'Join Tutorloop Online Learning Platform',
+    'register.email': 'Email',
+    'register.school': 'School',
+    'register.grade': 'Grade',
+    'register.age': 'Age',
+    'register.phone': 'Phone',
+    'register.address': 'Mailing Address',
+    'register.submit': 'Register',
+    'register.login': 'Already have an account? Login',
+    
+    // Personal Info Modal
+    'profile.title': 'Personal Information',
+    'profile.name': 'Name',
+    'profile.email': 'Email',
+    'profile.phone': 'Phone',
+    'profile.school': 'School',
+    'profile.grade': 'Grade',
+    'profile.address': 'Address',
+    'profile.edit': 'Edit Profile',
+    'profile.close': 'Close',
+    
+    // Footer
+    'footer.progress': 'PROGRESS',
+    'footer.follow': 'FOLLOW',
+    'footer.contact': 'CONTACT',
     
     // Buttons
     'button.viewDetails': 'View Details',

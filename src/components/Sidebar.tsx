@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Home, BookOpen, MessageSquare, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SidebarProps {
   className?: string;
@@ -12,12 +13,13 @@ interface SidebarProps {
 const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const menuItems = [
-    { icon: Home, label: "首页", path: "/dashboard" },
-    { icon: BookOpen, label: "课程/课堂", path: "/courses" },
-    { icon: MessageSquare, label: "话题中心", path: "/forum" },
-    { icon: User, label: "个人中心", path: "/personal" },
+    { icon: Home, label: t('sidebar.home'), path: "/dashboard" },
+    { icon: BookOpen, label: t('sidebar.courses'), path: "/courses" },
+    { icon: MessageSquare, label: t('sidebar.forum'), path: "/forum" },
+    { icon: User, label: t('sidebar.personal'), path: "/personal" },
   ];
 
   const handleMembershipClick = () => {
@@ -62,7 +64,7 @@ const Sidebar = ({ className, onMembershipClick }: SidebarProps) => {
           onClick={handleMembershipClick}
         >
           <span className="mr-2">👑</span>
-          开会员 低至 ¥198
+          {t('sidebar.upgrade')}
         </Button>
       </div>
     </div>

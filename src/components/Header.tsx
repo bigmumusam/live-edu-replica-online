@@ -10,9 +10,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 interface HeaderProps {
   title?: string;
   showSearch?: boolean;
+  onMyClick?: () => void;
 }
 
-const Header = ({ title, showSearch = true }: HeaderProps) => {
+const Header = ({ title, showSearch = true, onMyClick }: HeaderProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
@@ -72,6 +73,15 @@ const Header = ({ title, showSearch = true }: HeaderProps) => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-slate-300 hover:text-white hover:bg-slate-700/50"
+            onClick={onMyClick}
+          >
+            {t('header.my')}
+          </Button>
           
           <Avatar className="h-8 w-8">
             <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="用户头像" />
