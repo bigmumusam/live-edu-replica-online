@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Eye, EyeOff } from "lucide-react";
 
-const LoginPage = () => {
+interface LoginPageProps {
+  idPrefix?: string;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     role: "",
@@ -86,7 +89,7 @@ const LoginPage = () => {
             <CardContent className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="role" className="text-slate-300">角色</Label>
+                  <Label htmlFor={`${idPrefix}-role`} className="text-slate-300">角色</Label>
                   <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
                     <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
                       <SelectValue placeholder="请选择角色" />
@@ -99,9 +102,9 @@ const LoginPage = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="mobile" className="text-slate-300">手机号</Label>
+                  <Label htmlFor={`${idPrefix}-mobile`} className="text-slate-300">手机号</Label>
                   <Input
-                    id="mobile"
+                    id={`${idPrefix}-mobile`}
                     placeholder="请输入手机号"
                     value={formData.mobile}
                     onChange={(e) => setFormData({...formData, mobile: e.target.value})}
@@ -111,10 +114,10 @@ const LoginPage = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-slate-300">验证码</Label>
+                  <Label htmlFor={`${idPrefix}-verifyCode`} className="text-slate-300">验证码</Label>
                   <div className="relative">
                     <Input
-                      id="password"
+                      id={`${idPrefix}-verifyCode`}
                       type={showPassword ? "text" : "password"}
                       placeholder="请输入验证码"
                       value={formData.password}

@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { showToast } from "@/components/shared/Toast";
 
 const MembershipPage = () => {
@@ -175,6 +175,8 @@ const MembershipPage = () => {
       {/* Payment Modal */}
       <Dialog open={showPayment} onOpenChange={setShowPayment}>
         <DialogContent className="max-w-md bg-slate-800 border-slate-700 text-white">
+          <DialogTitle className="sr-only">支付订单</DialogTitle>
+          <DialogDescription className="sr-only">请确认支付信息。</DialogDescription>
           <div className="text-center space-y-6">
             <h3 className="text-lg font-bold">支付订单</h3>
             

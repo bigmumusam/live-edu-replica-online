@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Play, Star, ArrowRight, BookOpen, Users, Trophy, CheckCircle } from "lucide-react";
@@ -8,6 +8,7 @@ import LoginPage from "./LoginPage";
 
 const HomePage = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const loginTriggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -26,14 +27,19 @@ const HomePage = () => {
               <a href="#courses" className="text-slate-300 hover:text-white transition-colors">课程</a>
               <a href="#about" className="text-slate-300 hover:text-white transition-colors">关于我们</a>
               
-              <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+              <Dialog open={isLoginOpen} onOpenChange={(v) => {
+                setIsLoginOpen(v);
+                if (!v) setTimeout(() => loginTriggerRef.current?.focus(), 0);
+              }}>
                 <DialogTrigger asChild>
-                  <Button className="bg-green-600 hover:bg-green-700">
+                  <Button ref={loginTriggerRef} className="bg-green-600 hover:bg-green-700">
                     立即开始学习
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-transparent border-0">
-                  <LoginPage />
+                  <DialogTitle className="sr-only">登录</DialogTitle>
+                  <DialogDescription className="sr-only">请输入登录信息。</DialogDescription>
+                  <LoginPage idPrefix="login-dialog-1" />
                 </DialogContent>
               </Dialog>
             </div>
@@ -64,15 +70,20 @@ const HomePage = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+                <Dialog open={isLoginOpen} onOpenChange={(v) => {
+                  setIsLoginOpen(v);
+                  if (!v) setTimeout(() => loginTriggerRef.current?.focus(), 0);
+                }}>
                   <DialogTrigger asChild>
-                    <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4">
+                    <Button ref={loginTriggerRef} size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4">
                       免费开始学习
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-transparent border-0">
-                    <LoginPage />
+                    <DialogTitle className="sr-only">登录</DialogTitle>
+                    <DialogDescription className="sr-only">请输入登录信息。</DialogDescription>
+                    <LoginPage idPrefix="login-dialog-2" />
                   </DialogContent>
                 </Dialog>
                 
@@ -322,15 +333,20 @@ const HomePage = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+              <Dialog open={isLoginOpen} onOpenChange={(v) => {
+                setIsLoginOpen(v);
+                if (!v) setTimeout(() => loginTriggerRef.current?.focus(), 0);
+              }}>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="bg-white text-green-600 hover:bg-slate-100 text-lg px-8 py-4">
+                  <Button ref={loginTriggerRef} size="lg" className="bg-white text-green-600 hover:bg-slate-100 text-lg px-8 py-4">
                     立即免费注册
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-transparent border-0">
-                  <LoginPage />
+                  <DialogTitle className="sr-only">登录</DialogTitle>
+                  <DialogDescription className="sr-only">请输入登录信息。</DialogDescription>
+                  <LoginPage idPrefix="login-dialog-3" />
                 </DialogContent>
               </Dialog>
               
