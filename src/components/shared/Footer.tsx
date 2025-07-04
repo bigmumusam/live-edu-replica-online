@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Linkedin, Instagram } from "lucide-react";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -20,7 +21,7 @@ const Footer = () => {
 
   const communityLinks = [
     { name: 'Blog', url: '#' },
-    { name: 'Schoolhouse Stories', url: '#' },
+    { name: 'Tutorloop Stories', url: '#' },
   ];
 
   const resourceLinks = [
@@ -29,10 +30,11 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'LINKEDIN', url: '#' },
-    { name: 'INSTAGRAM', url: '#' },
-    { name: 'TIKTOK', url: '#' },
-    { name: 'TECHCRUNCH', url: '#' },
+    { name: 'Instagram', icon: Instagram, url: '#' },
+    { name: 'LinkedIn', icon: Linkedin, url: '#' },
+    { name: 'TikTok', icon: null, url: '#' },
+    { name: 'YouTube', icon: null, url: '#' },
+    { name: 'Facebook', icon: null, url: '#' },
   ];
 
   const contactEmails = [
@@ -109,7 +111,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Contact Section */}
           <div className="space-y-4">
             <h3 className="text-white font-bold text-lg">CONTACT</h3>
@@ -125,26 +127,26 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          {/* Follow Section */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-lg">FOLLOW</h3>
-            <div className="space-y-2">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  className="block text-blue-100 hover:text-white transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-blue-500 text-center">
-          <p className="text-blue-100">&copy; 2024 Schoolhouse. All rights reserved.</p>
+        {/* Social Media Icons */}
+        <div className="flex justify-center space-x-6 pt-8 border-t border-blue-500">
+          {socialLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              className="text-blue-100 hover:text-white transition-colors"
+              aria-label={link.name}
+            >
+              {link.icon ? (
+                <link.icon size={24} />
+              ) : (
+                <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center text-xs font-bold text-blue-600">
+                  {link.name.charAt(0)}
+                </div>
+              )}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
