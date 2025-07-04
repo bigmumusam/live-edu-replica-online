@@ -8,6 +8,7 @@ import { Play, Star, ArrowRight, BookOpen, Users, Trophy, CheckCircle, Languages
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LoginPage from "./LoginPage";
+import Footer from "@/components/shared/Footer";
 
 const HomePage = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -407,58 +408,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">🏠</span>
-                </div>
-                <span className="text-white font-semibold">Online Studies</span>
-              </div>
-              <p className="text-slate-400">
-                专业的在线教育平台，为您提供优质的学习体验。
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">热门课程</h4>
-              <div className="space-y-2 text-slate-400">
-                <div>数学基础</div>
-                <div>编程入门</div>
-                <div>数据科学</div>
-                <div>机器学习</div>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">帮助中心</h4>
-              <div className="space-y-2 text-slate-400">
-                <div>常见问题</div>
-                <div>联系客服</div>
-                <div>学习指南</div>
-                <div>技术支持</div>
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">关注我们</h4>
-              <div className="space-y-2 text-slate-400">
-                <div>微信公众号</div>
-                <div>新浪微博</div>
-                <div>QQ群</div>
-                <div>客服电话：400-123-4567</div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
-            <p>&copy; 2024 Online Studies. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

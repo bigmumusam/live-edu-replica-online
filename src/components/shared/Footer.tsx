@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Linkedin, Instagram } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Youtube, Facebook } from "lucide-react";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -24,17 +24,20 @@ const Footer = () => {
     { name: 'Tutorloop Stories', url: '#' },
   ];
 
-  const resourceLinks = [
-    { name: 'Brand Resources', url: '#' },
-    { name: 'Help Desk', url: '#' },
+  const legalLinks = [
+    { name: 'Terms of Service', url: '#' },
+    { name: 'Terms & Conditions', url: '#' },
+    { name: 'Privacy Policy', url: '#' },
+    { name: 'Trust & Safety', url: '#' },
+    { name: 'Press', url: '#' },
   ];
 
   const socialLinks = [
     { name: 'Instagram', icon: Instagram, url: '#' },
+    { name: 'Twitter', icon: Twitter, url: '#' },
+    { name: 'Facebook', icon: Facebook, url: '#' },
+    { name: 'YouTube', icon: Youtube, url: '#' },
     { name: 'LinkedIn', icon: Linkedin, url: '#' },
-    { name: 'TikTok', icon: null, url: '#' },
-    { name: 'YouTube', icon: null, url: '#' },
-    { name: 'Facebook', icon: null, url: '#' },
   ];
 
   const contactEmails = [
@@ -43,7 +46,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-blue-600 py-8 mt-12">
+    <footer className="bg-slate-900 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* About Section */}
@@ -54,7 +57,7 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.url}
-                  className="block text-blue-100 hover:text-white transition-colors"
+                  className="block text-slate-400 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
@@ -70,7 +73,7 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.url}
-                  className="block text-blue-100 hover:text-white transition-colors"
+                  className="block text-slate-400 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
@@ -86,7 +89,7 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.url}
-                  className="block text-blue-100 hover:text-white transition-colors"
+                  className="block text-slate-400 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
@@ -94,24 +97,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Resources Section */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-lg">RESOURCES</h3>
-            <div className="space-y-2">
-              {resourceLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  className="block text-blue-100 hover:text-white transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Contact Section */}
           <div className="space-y-4">
             <h3 className="text-white font-bold text-lg">CONTACT</h3>
@@ -120,7 +105,7 @@ const Footer = () => {
                 <a
                   key={email}
                   href={`mailto:${email}`}
-                  className="block text-blue-100 hover:text-white transition-colors text-sm"
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   {email}
                 </a>
@@ -129,24 +114,41 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Media Icons */}
-        <div className="flex justify-center space-x-6 pt-8 border-t border-blue-500">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              className="text-blue-100 hover:text-white transition-colors"
-              aria-label={link.name}
-            >
-              {link.icon ? (
-                <link.icon size={24} />
-              ) : (
-                <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center text-xs font-bold text-blue-600">
-                  {link.name.charAt(0)}
-                </div>
-              )}
-            </a>
-          ))}
+        {/* Bottom Section */}
+        <div className="border-t border-slate-700 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            {/* Left: Copyright */}
+            <div className="text-slate-400">
+              © Tutorloop
+            </div>
+
+            {/* Center: Legal Links */}
+            <div className="flex flex-wrap justify-center space-x-6">
+              {legalLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Right: Social Media Icons */}
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="text-slate-400 hover:text-white transition-colors"
+                  aria-label={link.name}
+                >
+                  <link.icon size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>
