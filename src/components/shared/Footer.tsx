@@ -3,6 +3,31 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Footer = () => {
   const { t } = useLanguage();
 
+  const aboutLinks = [
+    { name: 'About Us', url: '#' },
+    { name: 'Partnerships', url: '#' },
+    { name: 'Roadmap', url: '#' },
+    { name: 'Careers', url: '#' },
+    { name: 'PROGRESS', url: '#' },
+  ];
+
+  const tutoringLinks = [
+    { name: 'Peer Tutoring Benefits', url: '#' },
+    { name: 'Get Certified', url: '#' },
+    { name: 'Become a Tutor', url: '#' },
+    { name: 'Session Safety Measures', url: '#' },
+  ];
+
+  const communityLinks = [
+    { name: 'Blog', url: '#' },
+    { name: 'Schoolhouse Stories', url: '#' },
+  ];
+
+  const resourceLinks = [
+    { name: 'Brand Resources', url: '#' },
+    { name: 'Help Desk', url: '#' },
+  ];
+
   const socialLinks = [
     { name: 'LINKEDIN', url: '#' },
     { name: 'INSTAGRAM', url: '#' },
@@ -16,32 +41,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-900 py-8 mt-12">
+    <footer className="bg-blue-600 py-8 mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Progress Section */}
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-white font-bold text-lg">{t('footer.progress')}</h3>
-            <div className="space-y-2 text-slate-400">
-              <div className="flex justify-between">
-                <span>学习进度</span>
-                <span>75%</span>
-              </div>
-              <div className="w-full bg-slate-700 rounded-full h-2">
-                <div className="bg-green-600 h-2 rounded-full" style={{ width: '75%' }}></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Follow Section */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-lg">{t('footer.follow')}</h3>
+            <h3 className="text-white font-bold text-lg">ABOUT</h3>
             <div className="space-y-2">
-              {socialLinks.map((link) => (
+              {aboutLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
-                  className="block text-slate-400 hover:text-green-400 transition-colors"
+                  className="block text-blue-100 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
@@ -49,25 +60,91 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Contact Section */}
+          {/* Tutoring Section */}
           <div className="space-y-4">
-            <h3 className="text-white font-bold text-lg">{t('footer.contact')}</h3>
+            <h3 className="text-white font-bold text-lg">TUTORING</h3>
             <div className="space-y-2">
-              {contactEmails.map((email) => (
+              {tutoringLinks.map((link) => (
                 <a
-                  key={email}
-                  href={`mailto:${email}`}
-                  className="block text-slate-400 hover:text-green-400 transition-colors text-sm"
+                  key={link.name}
+                  href={link.url}
+                  className="block text-blue-100 hover:text-white transition-colors"
                 >
-                  {email}
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Community Section */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold text-lg">COMMUNITY</h3>
+            <div className="space-y-2">
+              {communityLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="block text-blue-100 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Resources Section */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold text-lg">RESOURCES</h3>
+            <div className="space-y-2">
+              {resourceLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="block text-blue-100 hover:text-white transition-colors"
+                >
+                  {link.name}
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-slate-700 text-center">
-          <p className="text-slate-400">&copy; 2024 Online Studies. All rights reserved.</p>
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Contact Section */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold text-lg">CONTACT</h3>
+            <div className="space-y-2">
+              {contactEmails.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="block text-blue-100 hover:text-white transition-colors text-sm"
+                >
+                  {email}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Follow Section */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold text-lg">FOLLOW</h3>
+            <div className="space-y-2">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="block text-blue-100 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-blue-500 text-center">
+          <p className="text-blue-100">&copy; 2024 Schoolhouse. All rights reserved.</p>
         </div>
       </div>
     </footer>
