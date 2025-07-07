@@ -10,6 +10,7 @@ import CreateTopicModal from "@/components/forum/CreateTopicModal";
 import CommentsModal from "@/components/forum/CommentsModal";
 import { useState } from "react";
 import { showToast } from "@/components/shared/Toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ForumPage = () => {
   const [showMembershipModal, setShowMembershipModal] = useState(false);
@@ -20,6 +21,7 @@ const ForumPage = () => {
   const [joinedClubs, setJoinedClubs] = useState<string[]>([]);
   const [showComments, setShowComments] = useState(false);
   const [selectedDiscussion, setSelectedDiscussion] = useState<any>(null);
+  const { t } = useLanguage();
 
   const allDiscussions = [
     {
@@ -146,7 +148,7 @@ const ForumPage = () => {
       <Sidebar onMembershipClick={() => setShowMembershipModal(true)} />
       
       <div className="flex-1">
-        <Header title="话题中心" />
+        <Header title={t('forum.topicCenter')} />
         
         <main className="p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -157,13 +159,13 @@ const ForumPage = () => {
                   <div className="flex items-center justify-between">
                     <TabsList className="bg-slate-800/50 border-slate-700">
                       <TabsTrigger value="all" className="text-slate-300 data-[state=active]:text-green-400">
-                        全部 (38)
+                        {t('forum.all')} (38)
                       </TabsTrigger>
                       <TabsTrigger value="latest" className="text-slate-300 data-[state=active]:text-green-400">
-                        最新
+                        {t('forum.latest')}
                       </TabsTrigger>
                       <TabsTrigger value="hot" className="text-slate-300 data-[state=active]:text-green-400">
-                        最热
+                        {t('forum.hot')}
                       </TabsTrigger>
                     </TabsList>
                     
@@ -172,7 +174,7 @@ const ForumPage = () => {
                       onClick={() => setShowCreateTopic(true)}
                     >
                       <Plus className="h-4 w-4 mr-2" />
-                      发起话题讨论
+                      {t('forum.createTopic')}
                     </Button>
                   </div>
 

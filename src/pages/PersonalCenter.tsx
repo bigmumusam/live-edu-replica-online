@@ -19,6 +19,7 @@ const PersonalCenter = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [favoriteTab, setFavoriteTab] = useState("收藏");
+  const { t } = useLanguage();
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "Brad Traversy", students: "2581人报名", price: "¥998", status: "取消收藏", color: "bg-red-500" },
     { id: 2, title: "计算机工程", instructor: "InsideCodeMedia", students: "3579人参与", price: "¥1288", status: "已结束", color: "bg-yellow-500" },
@@ -48,7 +49,7 @@ const enrolledCourses = [
       <Sidebar />
       
       <div className="flex-1">
-        <Header title="个人中心" />
+        <Header title={t('sidebar.personal')} />
         
         <main className="p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -56,41 +57,41 @@ const enrolledCourses = [
             <div className="lg:col-span-3">
               <Tabs defaultValue="courses" className="w-full">
                 <TabsList className="grid w-full grid-cols-6 bg-slate-800/50 mb-6">
-                  <TabsTrigger value="courses" className="text-slate-300 data-[state=active]:text-green-400 data-[state=active]:border-b-2 data-[state=active]:border-green-400">我的课程</TabsTrigger>
-                  <TabsTrigger value="discussions" className="text-slate-300 data-[state=active]:text-green-400">参与的讨论</TabsTrigger>
-                  <TabsTrigger value="favorites" className="text-slate-300 data-[state=active]:text-green-400">我的收藏</TabsTrigger>
-                  <TabsTrigger value="points" className="text-slate-300 data-[state=active]:text-green-400">我的积分</TabsTrigger>
-                  <TabsTrigger value="following" className="text-slate-300 data-[state=active]:text-green-400">我的关注</TabsTrigger>
-                  <TabsTrigger value="teaching" className="text-slate-300 data-[state=active]:text-green-400">我的课时</TabsTrigger>
+                  <TabsTrigger value="courses" className="text-slate-300 data-[state=active]:text-green-400 data-[state=active]:border-b-2 data-[state=active]:border-green-400">{t('personal.myCourses')}</TabsTrigger>
+                  <TabsTrigger value="discussions" className="text-slate-300 data-[state=active]:text-green-400">{t('personal.discussions')}</TabsTrigger>
+                  <TabsTrigger value="favorites" className="text-slate-300 data-[state=active]:text-green-400">{t('personal.favorites')}</TabsTrigger>
+                  <TabsTrigger value="points" className="text-slate-300 data-[state=active]:text-green-400">{t('personal.points')}</TabsTrigger>
+                  <TabsTrigger value="following" className="text-slate-300 data-[state=active]:text-green-400">{t('personal.following')}</TabsTrigger>
+                  <TabsTrigger value="teaching" className="text-slate-300 data-[state=active]:text-green-400">{t('personal.teaching')}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="courses" className="space-y-6">
                   <div className="flex items-center justify-end">
                     <div className="flex items-center space-x-4">
-                      <span className="text-slate-400">状态：</span>
+                      <span className="text-slate-400">{t('personal.status')}：</span>
                       <Select defaultValue="all">
                         <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">全部</SelectItem>
-                          <SelectItem value="not-started">未开始</SelectItem>
-                          <SelectItem value="in-progress">进行中</SelectItem>
-                          <SelectItem value="completed">已完成</SelectItem>
+                          <SelectItem value="all">{t('personal.allStatus')}</SelectItem>
+                          <SelectItem value="not-started">{t('personal.notStarted')}</SelectItem>
+                          <SelectItem value="in-progress">{t('personal.inProgress')}</SelectItem>
+                          <SelectItem value="completed">{t('personal.completed')}</SelectItem>
                         </SelectContent>
                       </Select>
                       
-                      <span className="text-slate-400">分类：</span>
+                      <span className="text-slate-400">{t('personal.category')}：</span>
                       <Select defaultValue="all-category">
                         <SelectTrigger className="w-32 bg-slate-800/50 border-slate-600 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all-category">全部</SelectItem>
-                          <SelectItem value="algebra">代数</SelectItem>
-                          <SelectItem value="computer">计算机</SelectItem>
-                          <SelectItem value="statistics">统计学</SelectItem>
-                          <SelectItem value="programming">代码程序</SelectItem>
+                          <SelectItem value="all-category">{t('personal.allCategory')}</SelectItem>
+                          <SelectItem value="algebra">{t('personal.algebra')}</SelectItem>
+                          <SelectItem value="computer">{t('personal.computer')}</SelectItem>
+                          <SelectItem value="statistics">{t('personal.statistics')}</SelectItem>
+                          <SelectItem value="programming">{t('personal.programming')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

@@ -7,10 +7,12 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { showToast } from "@/components/shared/Toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MembershipPage = () => {
   const [showPayment, setShowPayment] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const { t, language } = useLanguage();
 
   const freeFeatures = [
     "最多同时参加3个俱乐部",
@@ -80,13 +82,13 @@ const MembershipPage = () => {
       <Sidebar />
       
       <div className="flex-1">
-        <Header title="开会员" />
+        <Header title={t('membership.title')} />
         
         <main className="p-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-white mb-4">
-                订阅Tourloop,解锁更多权益
+                {t('membership.subtitle')}
               </h1>
             </div>
 
