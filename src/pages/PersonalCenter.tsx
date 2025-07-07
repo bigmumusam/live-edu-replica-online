@@ -12,6 +12,7 @@ import PointsTab from "@/components/personal/PointsTab";
 import TeachingTab from "@/components/personal/TeachingTab";
 import UserInfoModal from "@/components/personal/UserInfoModal";
 import EditProfileModal from "@/components/personal/EditProfileModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PersonalCenter = () => {
   const [showUserInfo, setShowUserInfo] = useState(false);

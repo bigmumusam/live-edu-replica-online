@@ -8,9 +8,11 @@ import CourseFilters from "@/components/dashboard/CourseFilters";
 import CourseCardActions from "@/components/shared/CourseCardActions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CoursePage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const courses = [
     { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "2581人报名", rating: 4.8, price: "¥998", status: "即将开始", color: "bg-red-500" },
@@ -57,7 +59,7 @@ const CoursePage = () => {
         <main className="p-6 space-y-8">
           {/* Page Header */}
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-white">全部课程</h2>
+            <h2 className="text-2xl font-bold text-white">{t('course.allCourses')}</h2>
             <CourseFilters />
           </div>
 
@@ -112,7 +114,7 @@ const CoursePage = () => {
 
           {/* Live Streams Section */}
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-white mb-6">全部直播</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">{t('course.allLiveStreams')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {liveStreams.map((stream) => (
                 <Card key={stream.id} className="bg-slate-800/50 border-slate-700 hover:border-green-500 transition-colors cursor-pointer overflow-hidden relative group" onClick={() => navigate(`/livestream/${stream.id}`)}>
