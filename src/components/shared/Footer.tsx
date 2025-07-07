@@ -1,86 +1,108 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Linkedin, Instagram, Twitter, Youtube } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Youtube, Facebook } from "lucide-react";
 
 const Footer = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+
+  const footerSections = [
+    {
+      title: 'ABOUT',
+      links: [
+        { name: language === 'zh' ? '关于我们' : 'About Us', url: '#' },
+        { name: language === 'zh' ? '合作伙伴' : 'Partnerships', url: '#' },
+        { name: language === 'zh' ? '路线图' : 'Roadmap', url: '#' },
+        { name: language === 'zh' ? '职业机会' : 'Careers', url: '#' },
+        { name: language === 'zh' ? '学习进展' : 'PROGRESS', url: '#' },
+      ]
+    },
+    {
+      title: 'TUTORING',
+      links: [
+        { name: language === 'zh' ? '同伴辅导优势' : 'Peer Tutoring Benefits', url: '#' },
+        { name: language === 'zh' ? '获得认证' : 'Get Certified', url: '#' },
+        { name: language === 'zh' ? '成为导师' : 'Become a Tutor', url: '#' },
+        { name: language === 'zh' ? '会话安全措施' : 'Session Safety Measures', url: '#' },
+      ]
+    },
+    {
+      title: 'COMMUNITY',
+      links: [
+        { name: language === 'zh' ? '博客' : 'Blog', url: '#' },
+        { name: language === 'zh' ? 'Tutorloop 故事' : 'Tutorloop Stories', url: '#' },
+      ]
+    },
+    {
+      title: 'CONTACT',
+      links: [
+        { name: 'VIENNA@MABLAB.TECH', url: 'mailto:vienna@mablab.tech' },
+        { name: 'KYE@MABLAB.TECH', url: 'mailto:kye@mablab.tech' },
+      ]
+    }
+  ];
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: Linkedin, url: '#' },
     { name: 'Instagram', icon: Instagram, url: '#' },
-    { name: 'TikTok', icon: Twitter, url: '#' }, // Using Twitter icon as placeholder for TikTok
-    { name: 'TechCrunch', icon: Youtube, url: '#' }, // Using Youtube icon as placeholder for TechCrunch
+    { name: 'Twitter', icon: Twitter, url: '#' },
+    { name: 'Facebook', icon: Facebook, url: '#' },
+    { name: 'YouTube', icon: Youtube, url: '#' },
+    { name: 'LinkedIn', icon: Linkedin, url: '#' },
+  ];
+
+  const legalLinks = [
+    { name: language === 'zh' ? '服务条款' : 'Terms of Service', url: '#' },
+    { name: language === 'zh' ? '条款与条件' : 'Terms & Conditions', url: '#' },
+    { name: language === 'zh' ? '隐私政策' : 'Privacy Policy', url: '#' },
+    { name: language === 'zh' ? '信任与安全' : 'Trust & Safety', url: '#' },
+    { name: language === 'zh' ? '媒体报道' : 'Press', url: '#' },
   ];
 
   return (
     <footer className="bg-slate-900 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4">{t('footer.progress.new')}</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {language === 'zh' 
-                  ? '追踪您的学习进度，设定目标，见证每一步成长。我们提供详细的学习分析和个性化建议。'
-                  : 'Track your learning progress, set goals, and witness every step of growth. We provide detailed learning analytics and personalized recommendations.'
-                }
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4">{t('footer.contact.new')}</h4>
-              <div className="space-y-2 text-sm">
-                <p className="text-slate-400">{t('footer.email')}</p>
-                <p className="text-green-400">tutorloop@gmail.com</p>
-                <p className="text-slate-400">
-                  {language === 'zh' ? '学习支持' : 'Learning Support'}
-                </p>
-                <p className="text-green-400">support@tutorloop.com</p>
+          {/* Main Footer Sections */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {footerSections.map((section) => (
+              <div key={section.title}>
+                <h4 className="text-lg font-semibold text-white mb-6">{section.title}</h4>
+                <div className="space-y-3">
+                  {section.links.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      className="block text-slate-400 hover:text-green-400 transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Brand Section */}
-          <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">T</span>
-              </div>
-              <span className="text-white font-semibold text-lg">Tutorloop</span>
-            </div>
-            <p className="text-slate-400 text-sm max-w-md">
-              {language === 'zh' 
-                ? '专注于个性化在线学习体验，连接全球学习者与优质教育资源，让学习变得更加高效和有趣。'
-                : 'Focused on personalized online learning experiences, connecting global learners with quality educational resources to make learning more efficient and enjoyable.'
-              }
-            </p>
-            
-            {/* Legal Links */}
-            <div className="flex flex-wrap gap-6 text-sm">
-              <a href="#" className="text-slate-400 hover:text-green-400 transition-colors">
-                {t('footer.terms')}
-              </a>
-              <a href="#" className="text-slate-400 hover:text-green-400 transition-colors">
-                {t('footer.conditions')}
-              </a>
-              <a href="#" className="text-slate-400 hover:text-green-400 transition-colors">
-                {t('footer.privacy')}
-              </a>
-              <a href="#" className="text-slate-400 hover:text-green-400 transition-colors">
-                {t('footer.safety')}
-              </a>
-            </div>
-          </div>
-
-          {/* Bottom Section with Social Media Icons */}
+          {/* Bottom Section */}
           <div className="border-t border-slate-700 pt-8">
-            <div className="flex flex-col items-center space-y-4">
-              {/* Copyright */}
-              <div className="text-slate-400 text-sm">
-                © 2024 Tutorloop. All rights reserved.
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+              {/* Copyright and Brand */}
+              <div className="flex items-center space-x-2">
+                <span className="text-slate-400 text-sm">© Tutorloop</span>
+              </div>
+
+              {/* Legal Links */}
+              <div className="flex flex-wrap justify-center gap-6 text-sm">
+                {legalLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    className="text-slate-400 hover:text-green-400 transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
               </div>
 
               {/* Social Media Icons */}
-              <div className="flex space-x-6">
+              <div className="flex space-x-4">
                 {socialLinks.map((link) => (
                   <a
                     key={link.name}
@@ -88,7 +110,7 @@ const Footer = () => {
                     className="text-slate-400 hover:text-green-400 transition-colors"
                     aria-label={link.name}
                   >
-                    <link.icon size={24} />
+                    <link.icon size={20} />
                   </a>
                 ))}
               </div>
