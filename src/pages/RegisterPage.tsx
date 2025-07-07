@@ -92,7 +92,7 @@ const RegisterPage: React.FC = () => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="example@email.com"
+                    placeholder={t('register.emailPlaceholder')}
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -104,7 +104,7 @@ const RegisterPage: React.FC = () => {
                   <Label htmlFor="school" className="text-slate-300">{t('register.school')}</Label>
                   <Input
                     id="school"
-                    placeholder="学校名称"
+                    placeholder={t('register.schoolPlaceholder')}
                     value={formData.school}
                     onChange={(e) => setFormData({...formData, school: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -117,7 +117,7 @@ const RegisterPage: React.FC = () => {
                     <Label htmlFor="grade" className="text-slate-300">{t('register.grade')}</Label>
                     <Input
                       id="grade"
-                      placeholder="年级"
+                      placeholder={t('register.gradePlaceholder')}
                       value={formData.grade}
                       onChange={(e) => setFormData({...formData, grade: e.target.value})}
                       className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -128,7 +128,7 @@ const RegisterPage: React.FC = () => {
                     <Label htmlFor="age" className="text-slate-300">{t('register.age')}</Label>
                     <Input
                       id="age"
-                      placeholder="年龄"
+                      placeholder={t('register.agePlaceholder')}
                       value={formData.age}
                       onChange={(e) => setFormData({...formData, age: e.target.value})}
                       className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -141,7 +141,7 @@ const RegisterPage: React.FC = () => {
                   <Label htmlFor="phone" className="text-slate-300">{t('register.phone')}</Label>
                   <Input
                     id="phone"
-                    placeholder="手机号码"
+                    placeholder={t('register.phonePlaceholder')}
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -153,7 +153,7 @@ const RegisterPage: React.FC = () => {
                   <Label htmlFor="address" className="text-slate-300">{t('register.address')}</Label>
                   <Input
                     id="address"
-                    placeholder="邮寄地址"
+                    placeholder={t('register.addressPlaceholder')}
                     value={formData.address}
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"

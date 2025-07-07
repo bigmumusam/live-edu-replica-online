@@ -281,99 +281,72 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
+      {/* Success Stories - Carousel */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl font-bold text-white">学员成功故事</h2>
-            <p className="text-xl text-slate-300">看看我们的学员如何通过学习改变人生</p>
+            <h2 className="text-4xl font-bold text-white">{t('home.studentStories.title')}</h2>
+            <p className="text-xl text-slate-300">{t('home.studentStories.subtitle')}</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "李小明",
-                role: "从零基础到数据分析师",
-                content: "通过3个月的学习，我成功转行成为数据分析师，薪资提升了60%。",
-                avatar: "👨‍💻",
-                company: "阿里巴巴"
-              },
-              {
-                name: "张小花",
-                role: "高中生考入清华",
-                content: "数学成绩从60分提升到145分，最终考入清华大学计算机系。",
-                avatar: "👩‍🎓",
-                company: "清华大学"
-              },
-              {
-                name: "王小强",
-                role: "创业者技能提升",
-                content: "学会了编程和数据分析，为我的创业项目提供了技术支持。",
-                avatar: "👨‍💼",
-                company: "自主创业"
-              }
-            ].map((story, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-xl">
-                      {story.avatar}
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold">{story.name}</h4>
-                      <p className="text-slate-400 text-sm">{story.role}</p>
-                    </div>
-                  </div>
-                  
-                  <blockquote className="text-slate-300 italic">
-                    "{story.content}"
-                  </blockquote>
-                  
-                  <div className="flex items-center space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                    <span className="text-slate-400 text-sm ml-2">{story.company}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-20 bg-slate-800/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <CheckCircle className="h-8 w-8 text-green-400" />,
-                title: "1对1指导",
-                description: "专业导师全程陪伴"
-              },
-              {
-                icon: <Trophy className="h-8 w-8 text-yellow-400" />,
-                title: "权威认证",
-                description: "完成即获行业认可证书"
-              },
-              {
-                icon: <Users className="h-8 w-8 text-blue-400" />,
-                title: "学习社区",
-                description: "与同学互助学习进步"
-              },
-              {
-                icon: <BookOpen className="h-8 w-8 text-purple-400" />,
-                title: "实战项目",
-                description: "真实项目提升实战能力"
-              }
-            ].map((feature, index) => (
-              <div key={index} className="text-center space-y-4">
-                <div className="flex justify-center">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
-                <p className="text-slate-400">{feature.description}</p>
-              </div>
-            ))}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll">
+              {/* Create 20 student stories for carousel */}
+              {Array.from({ length: 20 }, (_, index) => {
+                const storyIndex = index % 3;
+                const stories = [
+                  {
+                    name: t('home.studentStories.student1.name'),
+                    role: t('home.studentStories.student1.role'),
+                    content: t('home.studentStories.student1.content'),
+                    avatar: "👨‍💻",
+                    company: t('home.studentStories.student1.company')
+                  },
+                  {
+                    name: t('home.studentStories.student2.name'),
+                    role: t('home.studentStories.student2.role'),
+                    content: t('home.studentStories.student2.content'),
+                    avatar: "👩‍🎓",
+                    company: t('home.studentStories.student2.company')
+                  },
+                  {
+                    name: t('home.studentStories.student3.name'),
+                    role: t('home.studentStories.student3.role'),
+                    content: t('home.studentStories.student3.content'),
+                    avatar: "👨‍💼",
+                    company: t('home.studentStories.student3.company')
+                  }
+                ];
+                const story = stories[storyIndex];
+                
+                return (
+                  <Card key={index} className="bg-slate-800/50 border-slate-700 mx-4 flex-shrink-0 w-80">
+                    <CardContent className="p-6 space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-xl">
+                          {story.avatar}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">{story.name}</h4>
+                          <p className="text-slate-400 text-sm">{story.role}</p>
+                        </div>
+                      </div>
+                      
+                      <blockquote className="text-slate-300 italic">
+                        "{story.content}"
+                      </blockquote>
+                      
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                        <span className="text-slate-400 text-sm ml-2">{story.company}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

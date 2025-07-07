@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Users, Clock, TrendingUp } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HotRecommendations = () => {
+  const { t } = useLanguage();
   const recommendations = [
     {
       id: 1,
@@ -53,10 +55,10 @@ const HotRecommendations = () => {
         <div className="flex items-center justify-between">
           <CardTitle className="text-white flex items-center">
             <TrendingUp className="mr-2 h-5 w-5 text-orange-500" />
-            热门推荐
+            {t('dashboard.hotRecommendations.title')}
           </CardTitle>
           <Button variant="ghost" size="sm" className="text-green-400 hover:text-green-300">
-            查看全部
+            {t('button.viewDetails')}
           </Button>
         </div>
       </CardHeader>

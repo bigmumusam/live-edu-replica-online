@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Star, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const LimitedTimeOffers = () => {
+  const { t } = useLanguage();
   const offers = [
     {
       id: 1,
@@ -53,10 +55,10 @@ const LimitedTimeOffers = () => {
         <div className="flex items-center justify-between">
           <CardTitle className="text-white flex items-center">
             <Clock className="mr-2 h-5 w-5 text-red-500" />
-            限时优惠
+            {t('dashboard.limitedOffers.title')}
           </CardTitle>
           <Button variant="ghost" size="sm" className="text-green-400 hover:text-green-300">
-            查看全部
+            {t('button.viewDetails')}
           </Button>
         </div>
       </CardHeader>

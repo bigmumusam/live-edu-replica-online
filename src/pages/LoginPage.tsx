@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Eye, EyeOff } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LoginPageProps {
   idPrefix?: string;
@@ -19,6 +20,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
     password: ""
   });
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
         <div className="hidden lg:flex flex-1 items-center justify-center">
           <div className="text-center space-y-8">
             <h1 className="text-4xl font-bold text-white mb-8">
-              欢迎登录Tutorloop在线学习平台
+              {t('login.title')}
             </h1>
             <div className="relative">
               <div className="bg-gradient-to-br from-green-400 to-blue-500 rounded-3xl p-8 shadow-2xl">
@@ -89,23 +91,23 @@ const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
             <CardContent className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor={`${idPrefix}-role`} className="text-slate-300">角色</Label>
+                  <Label htmlFor={`${idPrefix}-role`} className="text-slate-300">{t('login.role')}</Label>
                   <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
                     <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
-                      <SelectValue placeholder="请选择角色" />
+                      <SelectValue placeholder={t('login.selectRole')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="student">学生</SelectItem>
-                      <SelectItem value="parent">家长</SelectItem>
+                      <SelectItem value="student">{t('login.student')}</SelectItem>
+                      <SelectItem value="parent">{t('login.parent')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor={`${idPrefix}-mobile`} className="text-slate-300">手机号</Label>
+                  <Label htmlFor={`${idPrefix}-mobile`} className="text-slate-300">{t('login.mobile')}</Label>
                   <Input
                     id={`${idPrefix}-mobile`}
-                    placeholder="请输入手机号"
+                    placeholder={t('login.mobilePlaceholder')}
                     value={formData.mobile}
                     onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                     className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -114,12 +116,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor={`${idPrefix}-verifyCode`} className="text-slate-300">验证码</Label>
+                  <Label htmlFor={`${idPrefix}-verifyCode`} className="text-slate-300">{t('login.verifyCode')}</Label>
                   <div className="relative">
                     <Input
                       id={`${idPrefix}-verifyCode`}
                       type={showPassword ? "text" : "password"}
-                      placeholder="请输入验证码"
+                      placeholder={t('login.verifyCodePlaceholder')}
                       value={formData.password}
                       onChange={(e) => setFormData({...formData, password: e.target.value})}
                       className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 pr-10"
@@ -145,7 +147,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ idPrefix = "login" }) => {
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 transition-colors"
                 >
-                  立即登录
+                  {t('login.submit')}
                 </Button>
               </form>
             </CardContent>
