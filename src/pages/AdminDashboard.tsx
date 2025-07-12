@@ -143,13 +143,13 @@ const AdminDashboardContent = () => {
 
   const getStatusBadge = (status: string) => {
     if (status === t('users.active') || status === t('courses.inProgress')) {
-      return <Badge className="bg-green-500/20 text-green-400 border-green-500/30">{status}</Badge>;
+      return <Badge className="bg-green-100 text-green-600 border-green-200">{status}</Badge>;
     } else if (status === t('users.inactive') || status === t('courses.upcoming')) {
-      return <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30">{status}</Badge>;
+      return <Badge className="bg-orange-100 text-orange-600 border-orange-200">{status}</Badge>;
     } else if (status === t('courses.completed')) {
-      return <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">{status}</Badge>;
+      return <Badge className="bg-blue-100 text-blue-600 border-blue-200">{status}</Badge>;
     }
-    return <Badge className="bg-gray-500/20 text-gray-400 border-gray-500/30">{status}</Badge>;
+    return <Badge className="bg-slate-100 text-slate-600 border-slate-200">{status}</Badge>;
   };
 
   const menuItems = [
@@ -163,13 +163,13 @@ const AdminDashboardContent = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 text-slate-800">
       {/* Tech Grid Background */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(0,255,255,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,255,0.3) 1px, transparent 1px)
+            linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px'
         }} />
@@ -177,19 +177,19 @@ const AdminDashboardContent = () => {
 
       <div className="flex">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-gray-900/50 backdrop-blur-xl border-r border-cyan-500/20 min-h-screen transition-all duration-300 fixed left-0 top-0 z-40`}>
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white/80 backdrop-blur-xl border-r border-blue-200 min-h-screen transition-all duration-300 fixed left-0 top-0 z-40 shadow-lg`}>
           {/* Logo */}
-          <div className="p-6 border-b border-cyan-500/20">
+          <div className="p-6 border-b border-blue-200">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/25">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/25">
                 <div className="w-6 h-6 border-2 border-white rounded flex items-center justify-center">
                   <div className="w-2 h-2 bg-white rounded-sm"></div>
                 </div>
               </div>
               {!sidebarCollapsed && (
                 <div>
-                  <h1 className="font-bold text-white">Admin Panel</h1>
-                  <p className="text-xs text-cyan-400">v2.0</p>
+                  <h1 className="font-bold text-slate-800">Admin Panel</h1>
+                  <p className="text-xs text-blue-600">v2.0</p>
                 </div>
               )}
             </div>
@@ -201,12 +201,15 @@ const AdminDashboardContent = () => {
               <Button
                 key={item.id}
                 variant={activeTab === item.id ? "default" : "ghost"}
-                className={`w-full justify-start text-left ${
+                className={`w-full justify-start text-left transition-all duration-200 ${
                   activeTab === item.id 
-                    ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' 
-                    : 'text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10'
+                    ? 'bg-blue-500 text-white shadow-md hover:bg-blue-600' 
+                    : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50'
                 } ${sidebarCollapsed ? 'px-3' : ''}`}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  console.log(`Switching to tab: ${item.id}`);
+                  setActiveTab(item.id);
+                }}
               >
                 <item.icon className="h-4 w-4" />
                 {!sidebarCollapsed && <span className="ml-3">{item.label}</span>}
@@ -218,8 +221,11 @@ const AdminDashboardContent = () => {
           <div className="absolute bottom-4 left-4 right-4">
             <Button
               variant="ghost"
-              onClick={handleLogout}
-              className="w-full justify-start text-red-400 hover:text-red-300 hover:bg-red-500/10"
+              onClick={() => {
+                console.log('Logout button clicked');
+                handleLogout();
+              }}
+              className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors"
             >
               <LogOut className="h-4 w-4" />
               {!sidebarCollapsed && <span className="ml-3">{t('nav.logout')}</span>}
@@ -230,19 +236,22 @@ const AdminDashboardContent = () => {
         {/* Main Content */}
         <div className={`flex-1 ${sidebarCollapsed ? 'ml-16' : 'ml-64'} transition-all duration-300`}>
           {/* Top Header */}
-          <header className="bg-gray-900/30 backdrop-blur-xl border-b border-cyan-500/20 px-6 py-4 sticky top-0 z-30">
+          <header className="bg-white/80 backdrop-blur-xl border-b border-blue-200 px-6 py-4 sticky top-0 z-30 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                  className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
+                  onClick={() => {
+                    console.log('Sidebar toggle clicked');
+                    setSidebarCollapsed(!sidebarCollapsed);
+                  }}
+                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                 >
                   <Menu className="h-4 w-4" />
                 </Button>
                 <div>
-                  <h1 className="text-xl font-bold text-white">
+                  <h1 className="text-xl font-bold text-slate-800">
                     {activeTab === 'dashboard' && t('dashboard.title')}
                     {activeTab === 'users' && t('users.title')}
                     {activeTab === 'courses' && t('courses.title')}
@@ -250,7 +259,7 @@ const AdminDashboardContent = () => {
                     {activeTab === 'activities' && t('activities.title')}
                     {activeTab === 'analytics' && t('analytics.title')}
                   </h1>
-                  <p className="text-cyan-400 text-sm">
+                  <p className="text-blue-600 text-sm">
                     {activeTab === 'dashboard' && t('dashboard.subtitle')}
                     {activeTab === 'users' && t('users.subtitle')}
                     {activeTab === 'courses' && t('courses.subtitle')}
@@ -263,28 +272,35 @@ const AdminDashboardContent = () => {
               
               <div className="flex items-center space-x-4">
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="w-32 bg-gray-800/50 border-cyan-500/30 text-cyan-400">
+                  <SelectTrigger className="w-32 bg-white border-blue-200 text-blue-600">
                     <Globe className="h-4 w-4 mr-2" />
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-cyan-500/30">
-                    <SelectItem value="zh" className="text-cyan-400">中文</SelectItem>
-                    <SelectItem value="en" className="text-cyan-400">English</SelectItem>
+                  <SelectContent className="bg-white border-blue-200">
+                    <SelectItem value="zh" className="text-blue-600">中文</SelectItem>
+                    <SelectItem value="en" className="text-blue-600">English</SelectItem>
                   </SelectContent>
                 </Select>
                 
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-cyan-400" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-600" />
                   <Input
                     placeholder={t('common.search')}
-                    className="pl-10 w-80 bg-gray-800/50 border-cyan-500/30 text-white placeholder:text-gray-400 focus:border-cyan-400"
+                    className="pl-10 w-80 bg-white border-blue-200 text-slate-800 placeholder:text-slate-400 focus:border-blue-400"
                   />
                 </div>
                 
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="relative bg-gray-800/50 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                  className="relative bg-white border-blue-200 text-blue-600 hover:bg-blue-50"
+                  onClick={() => {
+                    console.log('Notification button clicked');
+                    toast({
+                      title: language === 'zh' ? '通知' : 'Notifications',
+                      description: language === 'zh' ? '您有3条新通知' : 'You have 3 new notifications',
+                    });
+                  }}
                 >
                   <Bell className="h-4 w-4" />
                   <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full text-xs"></span>
@@ -303,14 +319,14 @@ const AdminDashboardContent = () => {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {stats.map((stat, index) => (
-                    <Card key={index} className={`bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 hover:border-cyan-500/30 transition-all duration-300`}>
+                    <Card key={index} className="bg-white/80 backdrop-blur-xl border border-blue-200 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-gray-400 text-sm">{stat.title}</p>
+                            <p className="text-slate-600 text-sm">{stat.title}</p>
                             <div className="flex items-center space-x-2 mt-1">
-                              <p className="text-2xl font-bold text-white">{stat.value}</p>
-                              <span className="text-xs text-green-400 bg-green-500/20 px-2 py-1 rounded-full border border-green-500/30">
+                              <p className="text-2xl font-bold text-slate-800">{stat.value}</p>
+                              <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded-full border border-green-200">
                                 {stat.change}
                               </span>
                             </div>
@@ -326,79 +342,106 @@ const AdminDashboardContent = () => {
 
                 {/* Quick Actions */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <Card className="bg-gray-900/50 backdrop-blur-xl border border-gray-700/50">
+                  <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center">
-                        <Activity className="h-5 w-5 mr-2 text-cyan-400" />
+                      <CardTitle className="text-slate-800 flex items-center">
+                        <Activity className="h-5 w-5 mr-2 text-blue-600" />
                         {language === 'zh' ? '快速操作' : 'Quick Actions'}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <Button className="w-full justify-start bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 border border-cyan-500/30">
+                      <Button 
+                        className="w-full justify-start bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200"
+                        onClick={() => {
+                          console.log('Add User button clicked');
+                          toast({
+                            title: t('users.addUser'),
+                            description: language === 'zh' ? '添加用户功能已触发' : 'Add user function triggered',
+                          });
+                        }}
+                      >
                         <Plus className="h-4 w-4 mr-2" />
                         {t('users.addUser')}
                       </Button>
-                      <Button className="w-full justify-start bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30">
+                      <Button 
+                        className="w-full justify-start bg-green-50 hover:bg-green-100 text-green-600 border border-green-200"
+                        onClick={() => {
+                          console.log('Add Course button clicked');
+                          toast({
+                            title: t('courses.addCourse'),
+                            description: language === 'zh' ? '添加课程功能已触发' : 'Add course function triggered',
+                          });
+                        }}
+                      >
                         <Plus className="h-4 w-4 mr-2" />
                         {t('courses.addCourse')}
                       </Button>
-                      <Button className="w-full justify-start bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-500/30">
+                      <Button 
+                        className="w-full justify-start bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200"
+                        onClick={() => {
+                          console.log('Refresh button clicked');
+                          toast({
+                            title: t('common.refresh'),
+                            description: language === 'zh' ? '数据刷新中...' : 'Refreshing data...',
+                          });
+                        }}
+                      >
                         <RefreshCw className="h-4 w-4 mr-2" />
                         {t('common.refresh')}
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gray-900/50 backdrop-blur-xl border border-gray-700/50">
+                  <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center">
-                        <TrendingUp className="h-5 w-5 mr-2 text-green-400" />
+                      <CardTitle className="text-slate-800 flex items-center">
+                        <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
                         {language === 'zh' ? '系统状态' : 'System Status'}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-400">{language === 'zh' ? '服务器状态' : 'Server Status'}</span>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                        <span className="text-slate-600">{language === 'zh' ? '服务器状态' : 'Server Status'}</span>
+                        <Badge className="bg-green-100 text-green-600 border-green-200">
                           {language === 'zh' ? '正常' : 'Online'}
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-400">{language === 'zh' ? '数据库' : 'Database'}</span>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                        <span className="text-slate-600">{language === 'zh' ? '数据库' : 'Database'}</span>
+                        <Badge className="bg-green-100 text-green-600 border-green-200">
                           {language === 'zh' ? '连接正常' : 'Connected'}
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-400">{language === 'zh' ? 'CPU使用率' : 'CPU Usage'}</span>
-                        <span className="text-cyan-400">23%</span>
+                        <span className="text-slate-600">{language === 'zh' ? 'CPU使用率' : 'CPU Usage'}</span>
+                        <span className="text-blue-600">23%</span>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gray-900/50 backdrop-blur-xl border border-gray-700/50">
+                  <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center">
-                        <Calendar className="h-5 w-5 mr-2 text-purple-400" />
+                      <CardTitle className="text-slate-800 flex items-center">
+                        <Calendar className="h-5 w-5 mr-2 text-purple-600" />
                         {language === 'zh' ? '最近活动' : 'Recent Activity'}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm">
                       <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-gray-400">
+                        <span className="text-slate-600">
                           {language === 'zh' ? '用户 陈俊杰 登录系统' : 'User Chen Junjie logged in'}
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-gray-400">
+                        <span className="text-slate-600">
                           {language === 'zh' ? '新课程发布' : 'New course published'}
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                        <span className="text-gray-400">
+                        <span className="text-slate-600">
                           {language === 'zh' ? '系统备份完成' : 'System backup completed'}
                         </span>
                       </div>
@@ -410,16 +453,37 @@ const AdminDashboardContent = () => {
 
             {/* Users Tab */}
             {activeTab === "users" && (
-              <Card className="bg-gray-900/50 backdrop-blur-xl border border-gray-700/50">
+              <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-white">{t('users.title')}</CardTitle>
+                    <CardTitle className="text-slate-800">{t('users.title')}</CardTitle>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="bg-gray-800/50 border-cyan-500/30 text-cyan-400">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-white border-blue-200 text-blue-600 hover:bg-blue-50"
+                        onClick={() => {
+                          console.log('Filter button clicked');
+                          toast({
+                            title: t('common.filter'),
+                            description: language === 'zh' ? '筛选功能已触发' : 'Filter function triggered',
+                          });
+                        }}
+                      >
                         <Filter className="h-4 w-4 mr-2" />
                         {t('common.filter')}
                       </Button>
-                      <Button size="sm" className="bg-cyan-500 hover:bg-cyan-600">
+                      <Button 
+                        size="sm" 
+                        className="bg-blue-500 hover:bg-blue-600 text-white"
+                        onClick={() => {
+                          console.log('Add User button clicked');
+                          toast({
+                            title: t('users.addUser'),
+                            description: language === 'zh' ? '添加用户对话框将打开' : 'Add user dialog will open',
+                          });
+                        }}
+                      >
                         <Plus className="h-4 w-4 mr-2" />
                         {t('users.addUser')}
                       </Button>
@@ -429,44 +493,44 @@ const AdminDashboardContent = () => {
                 <CardContent>
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-gray-700">
-                        <TableHead className="text-gray-400">{t('users.name')}</TableHead>
-                        <TableHead className="text-gray-400">{t('users.role')}</TableHead>
-                        <TableHead className="text-gray-400">{t('users.status')}</TableHead>
-                        <TableHead className="text-gray-400">{t('users.lastLogin')}</TableHead>
-                        <TableHead className="text-gray-400">{t('users.actions')}</TableHead>
+                      <TableRow className="border-blue-200">
+                        <TableHead className="text-slate-600">{t('users.name')}</TableHead>
+                        <TableHead className="text-slate-600">{t('users.role')}</TableHead>
+                        <TableHead className="text-slate-600">{t('users.status')}</TableHead>
+                        <TableHead className="text-slate-600">{t('users.lastLogin')}</TableHead>
+                        <TableHead className="text-slate-600">{t('users.actions')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {users.map((user) => (
-                        <TableRow key={user.id} className="border-gray-700 hover:bg-gray-800/50">
+                        <TableRow key={user.id} className="border-blue-200 hover:bg-blue-50">
                           <TableCell>
                             <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
                                 {user.name.charAt(0)}
                               </div>
                               <div>
-                                <div className="font-medium text-white">{user.name}</div>
-                                <div className="text-sm text-gray-400">{user.email}</div>
+                                <div className="font-medium text-slate-800">{user.name}</div>
+                                <div className="text-sm text-slate-600">{user.email}</div>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>
-                            <Badge variant="outline" className="text-cyan-400 border-cyan-500/30">{user.role}</Badge>
+                            <Badge variant="outline" className="text-blue-600 border-blue-200">{user.role}</Badge>
                           </TableCell>
                           <TableCell>
                             {getStatusBadge(user.status)}
                           </TableCell>
-                          <TableCell className="text-gray-400">{user.lastLogin}</TableCell>
+                          <TableCell className="text-slate-600">{user.lastLogin}</TableCell>
                           <TableCell>
                             <div className="flex space-x-2">
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-cyan-400">
+                              <Button size="sm" variant="outline" className="bg-white border-slate-200 text-slate-600 hover:text-blue-600">
                                 <Eye className="h-3 w-3" />
                               </Button>
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-cyan-400">
+                              <Button size="sm" variant="outline" className="bg-white border-slate-200 text-slate-600 hover:text-blue-600">
                                 <Edit className="h-3 w-3" />
                               </Button>
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-red-400">
+                              <Button size="sm" variant="outline" className="bg-white border-slate-200 text-slate-600 hover:text-red-600">
                                 <Trash2 className="h-3 w-3" />
                               </Button>
                             </div>
@@ -481,16 +545,34 @@ const AdminDashboardContent = () => {
 
             {/* Courses Tab */}
             {activeTab === "courses" && (
-              <Card className="bg-gray-900/50 backdrop-blur-xl border border-gray-700/50">
+              <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
                 <CardHeader>
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-white">{t('courses.title')}</CardTitle>
+                    <CardTitle className="text-slate-800">{t('courses.title')}</CardTitle>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="bg-gray-800/50 border-cyan-500/30 text-cyan-400">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-white border-blue-200 text-blue-600 hover:bg-blue-50"
+                        onClick={() => {
+                          console.log('Export button clicked');
+                          toast({
+                            title: t('common.export'),
+                            description: language === 'zh' ? '导出功能已触发' : 'Export function triggered',
+                          });
+                        }}
+                      >
                         <Download className="h-4 w-4 mr-2" />
                         {t('common.export')}
                       </Button>
-                      <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                      <Button 
+                        size="sm" 
+                        className="bg-green-500 hover:bg-green-600 text-white"
+                        onClick={() => {
+                          console.log('Add Course button clicked');
+                          setActiveTab('courses'); // Test tab switching
+                        }}
+                      >
                         <Plus className="h-4 w-4 mr-2" />
                         {t('courses.addCourse')}
                       </Button>
@@ -500,36 +582,61 @@ const AdminDashboardContent = () => {
                 <CardContent>
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-gray-700">
-                        <TableHead className="text-gray-400">{t('courses.courseName')}</TableHead>
-                        <TableHead className="text-gray-400">{t('courses.instructor')}</TableHead>
-                        <TableHead className="text-gray-400">{t('courses.students')}</TableHead>
-                        <TableHead className="text-gray-400">{t('courses.status')}</TableHead>
-                        <TableHead className="text-gray-400">{t('courses.price')}</TableHead>
-                        <TableHead className="text-gray-400">{t('courses.actions')}</TableHead>
+                      <TableRow className="border-blue-200">
+                        <TableHead className="text-slate-600">{t('courses.courseName')}</TableHead>
+                        <TableHead className="text-slate-600">{t('courses.instructor')}</TableHead>
+                        <TableHead className="text-slate-600">{t('courses.students')}</TableHead>
+                        <TableHead className="text-slate-600">{t('courses.status')}</TableHead>
+                        <TableHead className="text-slate-600">{t('courses.price')}</TableHead>
+                        <TableHead className="text-slate-600">{t('courses.actions')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {courses.map((course) => (
-                        <TableRow key={course.id} className="border-gray-700 hover:bg-gray-800/50">
+                        <TableRow key={course.id} className="border-blue-200 hover:bg-blue-50">
                           <TableCell>
-                            <div className="font-medium text-white">{course.title}</div>
+                            <div className="font-medium text-slate-800">{course.title}</div>
                           </TableCell>
-                          <TableCell className="text-gray-400">{course.instructor}</TableCell>
-                          <TableCell className="text-gray-400">{course.students}</TableCell>
+                          <TableCell className="text-slate-600">{course.instructor}</TableCell>
+                          <TableCell className="text-slate-600">{course.students}</TableCell>
                           <TableCell>
                             {getStatusBadge(course.status)}
                           </TableCell>
-                          <TableCell className="text-gray-400">¥{course.price}</TableCell>
+                          <TableCell className="text-slate-600">¥{course.price}</TableCell>
                           <TableCell>
                             <div className="flex space-x-2">
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-cyan-400">
+                              <Button 
+                                size="sm" 
+                                variant="outline" 
+                                className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                                onClick={() => {
+                                  console.log(`View course ${course.id} clicked`);
+                                  toast({
+                                    title: t('common.view'),
+                                    description: `${language === 'zh' ? '查看课程' : 'View course'}: ${course.title}`,
+                                  });
+                                }}
+                              >
                                 <Eye className="h-3 w-3" />
                               </Button>
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-cyan-400">
+                              <Button 
+                                size="sm" 
+                                variant="outline" 
+                                className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                                onClick={() => {
+                                  console.log(`Edit course ${course.id} clicked`);
+                                }}
+                              >
                                 <Edit className="h-3 w-3" />
                               </Button>
-                              <Button size="sm" variant="outline" className="bg-gray-800/50 border-gray-600 text-gray-400 hover:text-red-400">
+                              <Button 
+                                size="sm" 
+                                variant="outline" 
+                                className="bg-white border-slate-200 text-slate-600 hover:text-red-600"
+                                onClick={() => {
+                                  console.log(`Delete course ${course.id} clicked`);
+                                }}
+                              >
                                 <Trash2 className="h-3 w-3" />
                               </Button>
                             </div>
