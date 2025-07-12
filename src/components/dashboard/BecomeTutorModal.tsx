@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Circle } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BecomeTutorModalProps {
   isOpen: boolean;
@@ -16,24 +17,25 @@ interface BecomeTutorModalProps {
 }
 
 const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
+  const { t, language } = useLanguage();
   const currentExp = 80;
   const maxExp = 300;
   const expProgress = (currentExp / maxExp) * 100;
 
   const tasks = [
-    { id: 1, name: "任务一", detail: "上线满15分钟", exp: 5, completed: true, note: "一天一次，不叠加" },
-    { id: 2, name: "任务二", detail: "完整上完一节课", exp: 15, completed: true, note: "每个俱乐部限一周一次" },
-    { id: 3, name: "任务三", detail: "完整参加一次讲座", exp: 20, completed: false, note: "次数不限" },
-    { id: 4, name: "任务四", detail: "完整参加一次VIP专属讲座", exp: 15, completed: false, note: "一周仅限一次" }
+    { id: 1, name: t('becomeTutor.task1.name'), detail: t('becomeTutor.task1.detail'), exp: 5, completed: true, note: t('becomeTutor.task1.note') },
+    { id: 2, name: t('becomeTutor.task2.name'), detail: t('becomeTutor.task2.detail'), exp: 15, completed: true, note: t('becomeTutor.task2.note') },
+    { id: 3, name: t('becomeTutor.task3.name'), detail: t('becomeTutor.task3.detail'), exp: 20, completed: false, note: t('becomeTutor.task3.note') },
+    { id: 4, name: t('becomeTutor.task4.name'), detail: t('becomeTutor.task4.detail'), exp: 15, completed: false, note: t('becomeTutor.task4.note') }
   ];
 
   const taskHistory = [
-    { taskName: "上线满15分钟", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+5", date: "06/29 19:10:36" },
-    { taskName: "上线满15分钟", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+5", date: "06/28 18:20:19" },
-    { taskName: "完整上完一节课", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+15", date: "06/28 18:20:19" },
-    { taskName: "完整参加一次讲座", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+20", date: "06/28 18:20:19" },
-    { taskName: "完整参加一次讲座", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+20", date: "06/28 18:20:19" },
-    { taskName: "完整上完一节课", courseName: "代数课程", instructor: "Luke", duration: "30mins", exp: "+15", date: "06/27 18:20:19" }
+    { taskName: t('becomeTutor.task1.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+5', date: '06/29 19:10:36' },
+    { taskName: t('becomeTutor.task1.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+5', date: '06/28 18:20:19' },
+    { taskName: t('becomeTutor.task2.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+15', date: '06/28 18:20:19' },
+    { taskName: t('becomeTutor.task3.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+20', date: '06/28 18:20:19' },
+    { taskName: t('becomeTutor.task3.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+20', date: '06/28 18:20:19' },
+    { taskName: t('becomeTutor.task2.detail'), courseName: '代数课程', instructor: 'Luke', duration: '30mins', exp: '+15', date: '06/27 18:20:19' }
   ];
 
   const handleTaskAction = (taskId: number) => {
@@ -50,7 +52,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
               {/* 经验值显示 */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-white font-medium">当前经验值</span>
+                  <span className="text-white font-medium">{t('becomeTutor.currentExp')}</span>
                   <span className="text-green-400 font-bold">{currentExp}/300</span>
                 </div>
                 <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
@@ -60,7 +62,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
                   ></div>
                 </div>
                 <p className="text-slate-400 text-sm mt-2">
-                  加满：积满300经验值可以申请成为小老师哦
+                  {t('becomeTutor.expProgress')}
                 </p>
               </div>
 
@@ -76,8 +78,8 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
                             <span className="text-slate-300">{task.detail}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <span className="text-green-400 font-bold">经验值 +{task.exp}</span>
-                            <span className="text-slate-400 text-sm">（{task.note}）</span>
+                            <span className="text-green-400 font-bold">{t('becomeTutor.expValue').replace('{exp}', String(task.exp))}</span>
+                            <span className="text-slate-400 text-sm">{t('becomeTutor.expNote').replace('{note}', task.note)}</span>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -89,7 +91,7 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
                               className="bg-green-600 hover:bg-green-700 text-white"
                               onClick={() => handleTaskAction(task.id)}
                             >
-                              去完成
+                              {t('becomeTutor.completeTask')}
                             </Button>
                           )}
                         </div>
@@ -102,16 +104,16 @@ const BecomeTutorModal = ({ isOpen, onOpenChange }: BecomeTutorModalProps) => {
 
             {/* 右侧：任务记录 */}
             <div className="flex flex-col min-h-[500px]">
-              <h3 className="text-white font-bold text-lg mb-4">任务记录</h3>
+              <h3 className="text-white font-bold text-lg mb-4">{t('becomeTutor.taskRecord')}</h3>
               <div className="bg-slate-700/30 rounded-lg overflow-hidden">
                 {/* 表头 */}
                 <div className="grid grid-cols-6 gap-2 p-3 bg-slate-700/50 text-slate-300 text-sm border-b border-slate-600">
-                  <div>任务名称</div>
-                  <div>主题名称</div>
-                  <div>授课老师</div>
-                  <div>上课时长</div>
-                  <div>经验值</div>
-                  <div>日期</div>
+                  <div>{t('becomeTutor.taskName')}</div>
+                  <div>{t('becomeTutor.courseName')}</div>
+                  <div>{t('becomeTutor.instructor')}</div>
+                  <div>{t('becomeTutor.duration')}</div>
+                  <div>{t('becomeTutor.experience')}</div>
+                  <div>{t('becomeTutor.date')}</div>
                 </div>
                 
                 {/* 记录列表 */}

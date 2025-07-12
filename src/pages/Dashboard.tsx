@@ -19,7 +19,7 @@ import EventModal from "@/components/dashboard/EventModal";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isBecomeTutorDialogOpen, setIsBecomeTutorDialogOpen] = useState(false);
   const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
@@ -37,21 +37,102 @@ const Dashboard = () => {
   };
 
   const clubCourses = [
-    { id: 1, title: "编程俱乐部", instructor: "李老师", students: "156人参与", rating: 4.8, price: "免费", status: "进行中", color: "bg-purple-500" },
-    { id: 2, title: "数学建模俱乐部", instructor: "王教授", students: "89人参与", rating: 4.9, price: "免费", status: "即将开始", color: "bg-blue-500" },
-    { id: 3, title: "英语角俱乐部", instructor: "张老师", students: "203人参与", rating: 4.7, price: "免费", status: "进行中", color: "bg-green-500" }
+    { 
+      id: 1, 
+      title: language === 'zh' ? "编程俱乐部" : "Programming Club", 
+      instructor: language === 'zh' ? "李老师" : "Mr. Li", 
+      students: language === 'zh' ? "156人参与" : "156 joined", 
+      rating: 4.8, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-purple-500" 
+    },
+    { 
+      id: 2, 
+      title: language === 'zh' ? "数学建模俱乐部" : "Math Modeling Club", 
+      instructor: language === 'zh' ? "王教授" : "Prof. Wang", 
+      students: language === 'zh' ? "89人参与" : "89 joined", 
+      rating: 4.9, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "即将开始" : "Coming Soon", 
+      color: "bg-blue-500" 
+    },
+    { 
+      id: 3, 
+      title: language === 'zh' ? "英语角俱乐部" : "English Corner Club", 
+      instructor: language === 'zh' ? "张老师" : "Ms. Zhang", 
+      students: language === 'zh' ? "203人参与" : "203 joined", 
+      rating: 4.7, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-green-500" 
+    }
   ];
 
   const tutorCourses = [
-    { id: 4, title: "数学1V1辅导", instructor: "刘老师", students: "个人定制", rating: 4.9, price: "¥299/小时", status: "可预约", color: "bg-orange-500" },
-    { id: 5, title: "英语1V1辅导", instructor: "陈老师", students: "个人定制", rating: 4.8, price: "¥199/小时", status: "可预约", color: "bg-cyan-500" },
-    { id: 6, title: "编程1V1辅导", instructor: "赵老师", students: "个人定制", rating: 4.9, price: "¥399/小时", status: "可预约", color: "bg-pink-500" }
+    { 
+      id: 4, 
+      title: language === 'zh' ? "数学1V1辅导" : "Math 1V1 Tutoring", 
+      instructor: language === 'zh' ? "刘老师" : "Mr. Liu", 
+      students: language === 'zh' ? "个人定制" : "Personalized", 
+      rating: 4.9, 
+      price: language === 'zh' ? "¥299/小时" : "¥299/hour", 
+      status: language === 'zh' ? "可预约" : "Available", 
+      color: "bg-orange-500" 
+    },
+    { 
+      id: 5, 
+      title: language === 'zh' ? "英语1V1辅导" : "English 1V1 Tutoring", 
+      instructor: language === 'zh' ? "陈老师" : "Ms. Chen", 
+      students: language === 'zh' ? "个人定制" : "Personalized", 
+      rating: 4.8, 
+      price: language === 'zh' ? "¥199/小时" : "¥199/hour", 
+      status: language === 'zh' ? "可预约" : "Available", 
+      color: "bg-cyan-500" 
+    },
+    { 
+      id: 6, 
+      title: language === 'zh' ? "编程1V1辅导" : "Programming 1V1 Tutoring", 
+      instructor: language === 'zh' ? "赵老师" : "Mr. Zhao", 
+      students: language === 'zh' ? "个人定制" : "Personalized", 
+      rating: 4.9, 
+      price: language === 'zh' ? "¥399/小时" : "¥399/hour", 
+      status: language === 'zh' ? "可预约" : "Available", 
+      color: "bg-pink-500" 
+    }
   ];
 
   const lectureCourses = [
-    { id: 7, title: "AI前沿技术讲座", instructor: "业界专家", students: "500人参与", rating: 4.9, price: "免费", status: "即将开始", color: "bg-indigo-500" },
-    { id: 8, title: "职业规划讲座", instructor: "职场导师", students: "300人参与", rating: 4.8, price: "免费", status: "报名中", color: "bg-teal-500" },
-    { id: 9, title: "创业经验分享", instructor: "创业导师", students: "200人参与", rating: 4.7, price: "免费", status: "报名中", color: "bg-red-500" }
+    { 
+      id: 7, 
+      title: language === 'zh' ? "AI前沿技术讲座" : "AI Frontier Technology Lecture", 
+      instructor: language === 'zh' ? "业界专家" : "Industry Expert", 
+      students: language === 'zh' ? "500人参与" : "500 joined", 
+      rating: 4.9, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "即将开始" : "Coming Soon", 
+      color: "bg-indigo-500" 
+    },
+    { 
+      id: 8, 
+      title: language === 'zh' ? "职业规划讲座" : "Career Planning Lecture", 
+      instructor: language === 'zh' ? "职场导师" : "Career Mentor", 
+      students: language === 'zh' ? "300人参与" : "300 joined", 
+      rating: 4.8, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "报名中" : "Enrolling", 
+      color: "bg-teal-500" 
+    },
+    { 
+      id: 9, 
+      title: language === 'zh' ? "创业经验分享" : "Entrepreneurship Experience Sharing", 
+      instructor: language === 'zh' ? "创业导师" : "Startup Mentor", 
+      students: language === 'zh' ? "200人参与" : "200 joined", 
+      rating: 4.7, 
+      price: language === 'zh' ? "免费" : "Free", 
+      status: language === 'zh' ? "报名中" : "Enrolling", 
+      color: "bg-red-500" 
+    }
   ];
 
 

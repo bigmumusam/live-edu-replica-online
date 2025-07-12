@@ -11,17 +11,14 @@ const Footer = () => {
         { name: language === 'zh' ? '关于我们' : 'About Us', url: '#' },
         { name: language === 'zh' ? '合作伙伴' : 'Partnerships', url: '#' },
         { name: language === 'zh' ? '路线图' : 'Roadmap', url: '#' },
-        { name: language === 'zh' ? '职业机会' : 'Careers', url: '#' },
-        { name: language === 'zh' ? '学习进展' : 'PROGRESS', url: '#' },
+        { name: language === 'zh' ? '学习进展' : 'Progress', url: '#' },
       ]
     },
     {
       title: 'TUTORING',
       links: [
         { name: language === 'zh' ? '同伴辅导优势' : 'Peer Tutoring Benefits', url: '#' },
-        { name: language === 'zh' ? '获得认证' : 'Get Certified', url: '#' },
         { name: language === 'zh' ? '成为导师' : 'Become a Tutor', url: '#' },
-        { name: language === 'zh' ? '会话安全措施' : 'Session Safety Measures', url: '#' },
       ]
     },
     {
@@ -34,8 +31,8 @@ const Footer = () => {
     {
       title: 'CONTACT',
       links: [
-        { name: 'VIENNA@MABLAB.TECH', url: 'mailto:vienna@mablab.tech' },
-        { name: 'KYE@MABLAB.TECH', url: 'mailto:kye@mablab.tech' },
+        { name: 'tutorloop@tutorloop.com', url: 'mailto:tutorloop@tutorloop.com' },
+        { name: 'tutorloop@gmail.com', url: 'mailto:tutorloop@gmail.com' },
       ]
     }
   ];

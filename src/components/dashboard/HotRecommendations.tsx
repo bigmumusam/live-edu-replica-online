@@ -6,44 +6,44 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const HotRecommendations = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const recommendations = [
     {
       id: 1,
-      title: "Python数据分析入门",
-      instructor: "张教授",
+      title: language === 'zh' ? "Python数据分析入门" : "Python Data Analysis Introduction",
+      instructor: language === 'zh' ? "张教授" : "Prof. Zhang",
       rating: 4.9,
       students: "12,456",
-      duration: "8周",
+      duration: language === 'zh' ? "8周" : "8 weeks",
       price: "¥899",
       originalPrice: "¥1299",
-      tags: ["热门", "新课"],
+      tags: language === 'zh' ? ["热门", "新课"] : ["Hot", "New"],
       image: "🐍",
       color: "from-blue-500 to-cyan-500"
     },
     {
       id: 2,
-      title: "高等数学核心概念",
-      instructor: "李博士",
+      title: language === 'zh' ? "高等数学核心概念" : "Advanced Mathematics Core Concepts",
+      instructor: language === 'zh' ? "李博士" : "Dr. Li",
       rating: 4.8,
       students: "8,234",
-      duration: "12周",
+      duration: language === 'zh' ? "12周" : "12 weeks",
       price: "¥1199",
       originalPrice: "¥1599",
-      tags: ["精品", "认证"],
+      tags: language === 'zh' ? ["精品", "认证"] : ["Premium", "Certified"],
       image: "📐",
       color: "from-green-500 to-teal-500"
     },
     {
       id: 3,
-      title: "机器学习实战项目",
-      instructor: "王工程师",
+      title: language === 'zh' ? "机器学习实战项目" : "Machine Learning Practical Projects",
+      instructor: language === 'zh' ? "王工程师" : "Engineer Wang",
       rating: 4.9,
       students: "5,678",
-      duration: "10周",
+      duration: language === 'zh' ? "10周" : "10 weeks",
       price: "¥1499",
       originalPrice: "¥1999",
-      tags: ["实战", "高级"],
+      tags: language === 'zh' ? ["实战", "高级"] : ["Practical", "Advanced"],
       image: "🤖",
       color: "from-purple-500 to-pink-500"
     }

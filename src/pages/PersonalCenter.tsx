@@ -44,6 +44,24 @@ const enrolledCourses = [
     { id: 4, name: "Melissa Stevens", grade: "高一学生", topics: "参与3 话题", followers: "932 关注者", avatar: "bg-purple-500" }
   ];
 
+  const subjectToKey = (subject: string) => {
+    switch(subject) {
+      case '代数': return 'algebra';
+      case '计算机': return 'computer';
+      case '统计学': return 'statistics';
+      case '代码程序': return 'programming';
+      default: return subject;
+    }
+  };
+  const statusToKey = (status: string) => {
+    switch(status) {
+      case '进行中': return 'inProgress';
+      case '已完成': return 'completed';
+      case '未开始': return 'notStarted';
+      default: return status;
+    }
+  };
+
   return (
     <div className="min-h-screen gradient-bg flex">
       <Sidebar />
@@ -108,8 +126,8 @@ const enrolledCourses = [
                             <div className="flex-1">
                               <div className="flex items-center space-x-4 mb-2">
                                 <h3 className="text-white font-medium">{course.title}</h3>
-                                <Badge variant="secondary">{course.subject}</Badge>
-                                <Badge className={`${course.statusColor} text-white`}>{course.status}</Badge>
+                                <Badge variant="secondary">{t(`personal.${subjectToKey(course.subject)}`)}</Badge>
+                                <Badge className={`${course.statusColor} text-white`}>{t(`personal.${statusToKey(course.status)}`)}</Badge>
                               </div>
                               <div className="flex items-center space-x-2 mb-2">
                                 <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
@@ -244,16 +262,16 @@ const enrolledCourses = [
                   </div>
                   
                   <div className="text-center space-y-1">
-                    <div className="text-slate-400 text-sm">成就</div>
-                    <div className="text-green-400 font-semibold">完成全部</div>
+                    <div className="text-slate-400 text-sm">{t('personal.achievement')}</div>
+                    <div className="text-green-400 font-semibold">{t('personal.completedAll')}</div>
                   </div>
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-green-400">700 积分</span>
+                      <span className="text-green-400">700 {t('points.points')}</span>
                       <div className="flex items-center space-x-1">
                         <div className="w-4 h-4 bg-yellow-400 rounded-full"></div>
-                        <span className="text-slate-400">学习达人</span>
+                        <span className="text-slate-400">{t('personal.studyExpert')}</span>
                       </div>
                     </div>
                     <div className="flex items-center justify-between text-sm">
@@ -274,7 +292,7 @@ const enrolledCourses = [
                     className="w-full bg-green-600 hover:bg-green-700"
                     onClick={() => setShowEditProfile(true)}
                   >
-                    编辑
+                    {t('personal.edit')}
                   </Button>
                 </CardContent>
               </Card>
@@ -282,7 +300,7 @@ const enrolledCourses = [
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-white text-lg">用户信息</CardTitle>
+                    <CardTitle className="text-white text-lg">{t('personal.userInfo')}</CardTitle>
                     <Button variant="ghost" size="sm">
                       <Plus className="h-4 w-4 text-green-400" />
                     </Button>
@@ -290,20 +308,20 @@ const enrolledCourses = [
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <h4 className="text-white font-medium text-lg">教育</h4>
+                    <h4 className="text-white font-medium text-lg">{t('personal.education')}</h4>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-300 text-sm">B.Sc - Informatics Engineering</span>
-                      <span className="text-green-400 text-sm">新增</span>
+                      <span className="text-green-400 text-sm">{t('personal.addNew')}</span>
                     </div>
                     <div className="text-slate-300 text-sm">University of London United Kingdom 2018</div>
                   </div>
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-white font-medium text-lg">证书</h4>
-                      <span className="text-green-400 text-sm">新增</span>
+                      <h4 className="text-white font-medium text-lg">{t('personal.certificates')}</h4>
+                      <span className="text-green-400 text-sm">{t('personal.addNew')}</span>
                     </div>
-                    <div className="text-slate-300 text-sm">承荣证书</div>
+                    <div className="text-slate-300 text-sm">{t('personal.honorCertificate')}</div>
                   </div>
                 </CardContent>
               </Card>

@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import CourseCardActions from "../shared/CourseCardActions";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Course {
   id: number;
@@ -21,6 +22,21 @@ interface CourseCardProps {
 }
 
 const CourseCard = ({ course, onClick }: CourseCardProps) => {
+  const { t, language } = useLanguage();
+
+  // 国际化课程描述示例
+  let description = '';
+  if (course.title === '代数2学习实验室' || course.title === 'Algebra 2 Learning Lab') {
+    description = t('course.algebra2Description');
+  } else if (course.title === '计算机工程' || course.title === 'Computer Engineering') {
+    description = t('course.computerDescription');
+  } else if (course.title === '生物学' || course.title === 'Biology') {
+    description = t('course.biologyDescription');
+  } else if (course.title === '数据统计' || course.title === 'Data Statistics') {
+    description = t('course.statisticsDescription');
+  } else {
+    description = t('course.description');
+  }
 
   return (
     <Card 
@@ -45,7 +61,7 @@ const CourseCard = ({ course, onClick }: CourseCardProps) => {
         <h4 className="text-white font-medium mb-3 text-sm leading-relaxed">{course.title}</h4>
         
         <p className="text-slate-400 text-xs mb-4 line-clamp-3 flex-1">
-          探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度。
+          {description}
         </p>
         
         <div className="space-y-3 mt-auto">
@@ -59,7 +75,7 @@ const CourseCard = ({ course, onClick }: CourseCardProps) => {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className={`h-3 w-3 ${i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-slate-600'}`} />
               ))}
-              <span className="text-slate-400 text-xs ml-1">难度系数</span>
+              <span className="text-slate-400 text-xs ml-1">{t('courseCard.difficultyLevel')}</span>
             </div>
             <span className="text-green-400 font-bold text-sm">{course.price}</span>
           </div>

@@ -6,12 +6,12 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const LimitedTimeOffers = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const offers = [
     {
       id: 1,
-      title: "Python数据分析特训",
-      instructor: "李博士",
+      title: language === 'zh' ? "Python数据分析特训" : "Python Data Analysis Training",
+      instructor: language === 'zh' ? "李博士" : "Dr. Li",
       rating: 4.9,
       students: "2,156",
       discountPrice: "¥699",
@@ -23,8 +23,8 @@ const LimitedTimeOffers = () => {
     },
     {
       id: 2,
-      title: "机器学习实战营",
-      instructor: "张教授",
+      title: language === 'zh' ? "机器学习实战营" : "Machine Learning Bootcamp",
+      instructor: language === 'zh' ? "张教授" : "Prof. Zhang",
       rating: 4.8,
       students: "1,678",
       discountPrice: "¥899",
@@ -36,8 +36,8 @@ const LimitedTimeOffers = () => {
     },
     {
       id: 3,
-      title: "Web全栈开发",
-      instructor: "王工程师",
+      title: language === 'zh' ? "Web全栈开发" : "Web Full-Stack Development",
+      instructor: language === 'zh' ? "王工程师" : "Engineer Wang",
       rating: 4.7,
       students: "3,245",
       discountPrice: "¥1199",

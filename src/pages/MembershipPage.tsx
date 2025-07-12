@@ -15,53 +15,53 @@ const MembershipPage = () => {
   const { t, language } = useLanguage();
 
   const freeFeatures = [
-    "最多同时参加3个俱乐部",
-    "1V1 辅导老师一周次约30分钟",
-    "大学生/行业内人士讲座一年2次"
+    language === 'zh' ? "最多同时参加3个俱乐部" : "Join up to 3 clubs simultaneously",
+    language === 'zh' ? "1V1 辅导老师一周次约30分钟" : "1V1 tutor sessions once a week for 30 minutes",
+    language === 'zh' ? "大学生/行业内人士讲座一年2次" : "University student/industry professional lectures 2 times per year"
   ];
 
   const plans = [
     {
       id: "monthly",
-      name: "收费版",
+      name: language === 'zh' ? "收费版" : "Paid Version",
       price: "198",
-      period: "每月",
-      originalPrice: "包月",
+      period: language === 'zh' ? "每月" : "Monthly",
+      originalPrice: language === 'zh' ? "包月" : "Monthly Plan",
       features: [
-        "同时参加俱乐部的个数没有限制",
-        "1V1 辅导老师一周6次约90分钟",
-        "大学生/行业内人士讲座一年不限次",
-        "积分收集效率 +1.1倍",
-        "附赠250积分"
+        language === 'zh' ? "同时参加俱乐部的个数没有限制" : "No limit on number of clubs to join",
+        language === 'zh' ? "1V1 辅导老师一周6次约90分钟" : "1V1 tutor sessions 6 times per week for 90 minutes",
+        language === 'zh' ? "大学生/行业内人士讲座一年不限次" : "University student/industry professional lectures unlimited times per year",
+        language === 'zh' ? "积分收集效率 +1.1倍" : "Points collection efficiency +1.1x",
+        language === 'zh' ? "附赠250积分" : "Bonus 250 points"
       ]
     },
     {
       id: "quarterly",
-      name: "收费版",
+      name: language === 'zh' ? "收费版" : "Paid Version",
       price: "488",
-      period: "每季",
-      originalPrice: "包季",
+      period: language === 'zh' ? "每季" : "Quarterly",
+      originalPrice: language === 'zh' ? "包季" : "Quarterly Plan",
       popular: true,
       features: [
-        "同时参加俱乐部的个数没有限制",
-        "1V1 辅导老师一周6次约90分钟",
-        "大学生/行业内人士讲座一年不限次",
-        "积分收集效率 +1.1倍",
-        "附赠250积分"
+        language === 'zh' ? "同时参加俱乐部的个数没有限制" : "No limit on number of clubs to join",
+        language === 'zh' ? "1V1 辅导老师一周6次约90分钟" : "1V1 tutor sessions 6 times per week for 90 minutes",
+        language === 'zh' ? "大学生/行业内人士讲座一年不限次" : "University student/industry professional lectures unlimited times per year",
+        language === 'zh' ? "积分收集效率 +1.1倍" : "Points collection efficiency +1.1x",
+        language === 'zh' ? "附赠250积分" : "Bonus 250 points"
       ]
     },
     {
       id: "yearly",
-      name: "收费版",
+      name: language === 'zh' ? "收费版" : "Paid Version",
       price: "1288",
-      period: "每年",
-      originalPrice: "包年",
+      period: language === 'zh' ? "每年" : "Yearly",
+      originalPrice: language === 'zh' ? "包年" : "Yearly Plan",
       features: [
-        "同时参加俱乐部的个数没有限制",
-        "1V1 辅导老师一周6次约90分钟",
-        "大学生/行业内人士讲座一年不限次",
-        "积分收集效率 +1.2倍",
-        "附赠500积分"
+        language === 'zh' ? "同时参加俱乐部的个数没有限制" : "No limit on number of clubs to join",
+        language === 'zh' ? "1V1 辅导老师一周6次约90分钟" : "1V1 tutor sessions 6 times per week for 90 minutes",
+        language === 'zh' ? "大学生/行业内人士讲座一年不限次" : "University student/industry professional lectures unlimited times per year",
+        language === 'zh' ? "积分收集效率 +1.2倍" : "Points collection efficiency +1.2x",
+        language === 'zh' ? "附赠500积分" : "Bonus 500 points"
       ]
     }
   ];
@@ -74,7 +74,7 @@ const MembershipPage = () => {
   const handlePaymentComplete = () => {
     setShowPayment(false);
     setSelectedPlan("");
-    showToast.success("开通会员成功！");
+    showToast.success(t('membership.successMessage'));
   };
 
   return (
@@ -96,10 +96,10 @@ const MembershipPage = () => {
             <div className="mb-8">
               <Card className="bg-slate-800/50 border-slate-700 max-w-md mx-auto">
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-white mb-2">免费</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">{t('membership.free')}</h3>
                   <div className="mb-4">
                     <span className="text-4xl font-bold text-green-400">¥0</span>
-                    <span className="text-slate-400 ml-2">永久</span>
+                    <span className="text-slate-400 ml-2">{t('membership.forever')}</span>
                   </div>
                   <div className="space-y-3 text-left mb-6">
                     {freeFeatures.map((feature, index) => (
@@ -114,7 +114,7 @@ const MembershipPage = () => {
                     className="w-full border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
                     disabled
                   >
-                    当前套餐
+                    {t('membership.currentPlan')}
                   </Button>
                 </CardContent>
               </Card>
@@ -131,7 +131,7 @@ const MembershipPage = () => {
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <Badge className="bg-green-600 text-white">推荐</Badge>
+                      <Badge className="bg-green-600 text-white">{t('membership.recommended')}</Badge>
                     </div>
                   )}
                   
@@ -147,7 +147,7 @@ const MembershipPage = () => {
                         <span className="text-slate-400">{plan.period} ({plan.originalPrice})</span>
                       </div>
                       <div className="text-slate-500 text-sm mt-1">
-                        包月可随时取消
+                        {t('membership.canCancel')}
                       </div>
                     </div>
 
@@ -155,7 +155,7 @@ const MembershipPage = () => {
                       className="w-full bg-green-600 hover:bg-green-700 mb-6"
                       onClick={() => handlePlanSelect(plan.id)}
                     >
-                      立即订购
+                      {t('membership.orderNow')}
                     </Button>
 
                     <div className="space-y-3 text-left">
@@ -180,7 +180,7 @@ const MembershipPage = () => {
           <DialogTitle className="sr-only">支付订单</DialogTitle>
           <DialogDescription className="sr-only">请确认支付信息。</DialogDescription>
           <div className="text-center space-y-6">
-            <h3 className="text-lg font-bold">支付订单</h3>
+            <h3 className="text-lg font-bold">{t('membership.paymentTitle')}</h3>
             
             <div className="bg-slate-700/50 p-4 rounded-lg">
               <h4 className="text-white font-medium mb-2">
@@ -197,12 +197,12 @@ const MembershipPage = () => {
             <div className="bg-white p-4 rounded-lg">
               <div className="w-32 h-32 bg-gray-200 mx-auto mb-2 flex items-center justify-center">
                 <div className="text-xs text-gray-600 text-center">
-                  二维码
+                  {t('membership.qrCode')}
                   <br />
-                  扫码支付
+                  {t('membership.scanToPay')}
                 </div>
               </div>
-              <p className="text-gray-600 text-sm">请使用微信或支付宝扫码支付</p>
+              <p className="text-gray-600 text-sm">{t('membership.paymentDesc')}</p>
             </div>
 
             <div className="flex space-x-3">
@@ -211,13 +211,13 @@ const MembershipPage = () => {
                 className="flex-1 border-slate-600 text-slate-300"
                 onClick={() => setShowPayment(false)}
               >
-                取消支付
+                {t('membership.cancelPayment')}
               </Button>
               <Button 
                 className="flex-1 bg-green-600 hover:bg-green-700"
                 onClick={handlePaymentComplete}
               >
-                支付完成
+                {t('membership.paymentComplete')}
               </Button>
             </div>
           </div>

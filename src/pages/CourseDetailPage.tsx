@@ -20,21 +20,23 @@ import {
 } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CourseDetailPage = () => {
+  const { t, language } = useLanguage();
   const lessons = [
-    { id: 1, title: "01预习", duration: "20分钟", completed: false, current: false },
-    { id: 2, title: "代数基础", duration: "20分钟", completed: true, current: false },
-    { id: 3, title: "2.介绍", duration: "20分钟", completed: true, current: true },
-    { id: 4, title: "预习02", duration: "20分钟", completed: false, current: false },
-    { id: 5, title: "预习03", duration: "15分钟", completed: false, current: false },
-    { id: 6, title: "预习04", duration: "24分钟", completed: false, current: false },
-    { id: 7, title: "预习05", duration: "18分钟", completed: false, current: false }
+    { id: 1, title: language === 'zh' ? "01预习" : "01 Preview", duration: language === 'zh' ? "20分钟" : "20 min", completed: false, current: false },
+    { id: 2, title: language === 'zh' ? "代数基础" : "Algebra Basics", duration: language === 'zh' ? "20分钟" : "20 min", completed: true, current: false },
+    { id: 3, title: language === 'zh' ? "2.介绍" : "2. Introduction", duration: language === 'zh' ? "20分钟" : "20 min", completed: true, current: true },
+    { id: 4, title: language === 'zh' ? "预习02" : "Preview 02", duration: language === 'zh' ? "20分钟" : "20 min", completed: false, current: false },
+    { id: 5, title: language === 'zh' ? "预习03" : "Preview 03", duration: language === 'zh' ? "15分钟" : "15 min", completed: false, current: false },
+    { id: 6, title: language === 'zh' ? "预习04" : "Preview 04", duration: language === 'zh' ? "24分钟" : "24 min", completed: false, current: false },
+    { id: 7, title: language === 'zh' ? "预习05" : "Preview 05", duration: language === 'zh' ? "18分钟" : "18 min", completed: false, current: false }
   ];
 
   const sections = [
-    { title: "第一部分: 代数基础", lessons: lessons.slice(0, 3) },
-    { title: "第二部分: 代数第一章", lessons: lessons.slice(3) }
+    { title: language === 'zh' ? "第一部分: 代数基础" : "Part 1: Algebra Basics", lessons: lessons.slice(0, 3) },
+    { title: language === 'zh' ? "第二部分: 代数第一章" : "Part 2: Chapter 1 of Algebra", lessons: lessons.slice(3) }
   ];
 
   return (
@@ -42,7 +44,7 @@ const CourseDetailPage = () => {
       <Sidebar />
       
       <div className="flex-1">
-        <Header title="课程详情" />
+        <Header title={t('courseDetail.title')} />
         
         <main className="p-6 space-y-6">
           {/* Video Player */}
@@ -58,11 +60,11 @@ const CourseDetailPage = () => {
                         </div>
                       </div>
                       <div className="text-white space-y-2">
-                        <h3 className="text-2xl font-bold">探索代数 2 学习实验室</h3>
-                        <p className="text-lg">概念难懂？依靠同伴辅导来提升学习进度</p>
+                        <h3 className="text-2xl font-bold">{language === 'zh' ? '探索代数 2 学习实验室' : 'Algebra 2 Learning Lab'}</h3>
+                        <p className="text-lg">{language === 'zh' ? '概念难懂？依靠同伴辅导来提升学习进度' : 'Difficult concepts? Rely on peer tutoring to improve your learning progress.'}</p>
                         <div className="bg-orange-500 text-white px-4 py-2 rounded inline-block">
-                          <span className="font-medium">Gerald Gibson</span>
-                          <div className="text-sm">探索代数 2 学习实验室</div>
+                          <span className="font-medium">{language === 'zh' ? 'Gerald Gibson' : 'Gerald Gibson'}</span>
+                          <div className="text-sm">{language === 'zh' ? '探索代数 2 学习实验室' : 'Algebra 2 Learning Lab'}</div>
                         </div>
                       </div>
                     </div>
@@ -111,55 +113,53 @@ const CourseDetailPage = () => {
               <Card className="bg-slate-800/50 border-slate-700 mt-6">
                 <Tabs defaultValue="overview" className="w-full">
                   <TabsList className="grid w-full grid-cols-5 bg-slate-700/50">
-                    <TabsTrigger value="overview" className="text-slate-300 data-[state=active]:text-green-400">简介</TabsTrigger>
-                    <TabsTrigger value="qa" className="text-slate-300 data-[state=active]:text-green-400">问答</TabsTrigger>
-                    <TabsTrigger value="reviews" className="text-slate-300 data-[state=active]:text-green-400">课程评价</TabsTrigger>
-                    <TabsTrigger value="assignments" className="text-slate-300 data-[state=active]:text-green-400">作业</TabsTrigger>
-                    <TabsTrigger value="downloads" className="text-slate-300 data-[state=active]:text-green-400">课件下载</TabsTrigger>
+                    <TabsTrigger value="overview" className="text-slate-300 data-[state=active]:text-green-400">{t('courseDetail.tab.overview')}</TabsTrigger>
+                    <TabsTrigger value="qa" className="text-slate-300 data-[state=active]:text-green-400">{t('courseDetail.tab.qa')}</TabsTrigger>
+                    <TabsTrigger value="reviews" className="text-slate-300 data-[state=active]:text-green-400">{t('courseDetail.tab.reviews')}</TabsTrigger>
+                    <TabsTrigger value="assignments" className="text-slate-300 data-[state=active]:text-green-400">{t('courseDetail.tab.assignments')}</TabsTrigger>
+                    <TabsTrigger value="downloads" className="text-slate-300 data-[state=active]:text-green-400">{t('courseDetail.tab.downloads')}</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="overview" className="p-6">
                     <div className="space-y-6">
-                      <h3 className="text-xl font-bold text-white">课程介绍</h3>
+                      <h3 className="text-xl font-bold text-white">{t('courseDetail.introTitle')}</h3>
                       <p className="text-slate-300 leading-relaxed">
-                        Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor. 
-                        Pellentesque non dignissim neque. Ut porta viverra est, ut dignissim elit elementum ut. Nunc vel rhoncus nibh, ut tincidunt 
-                        turpis. Integer ac enim pellentesque, adipiscing metus id, pharetra odio. Donec bibendum nunc sit amet tortor scelerisque 
-                        luctus et sit amet mauris. Suspendisse felis sem, condimentum ullamcorper est sit amet, molestie mollis nulla. Etiam lorem orci, 
-                        consequat ac magna quis, facilisis vehicula neque.
+                        {language === 'zh'
+                          ? 'Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor. Pellentesque non dignissim neque. Ut porta viverra est, ut dignissim elit elementum ut. Nunc vel rhoncus nibh, ut tincidunt turpis. Integer ac enim pellentesque, adipiscing metus id, pharetra odio. Donec bibendum nunc sit amet tortor scelerisque luctus et sit amet mauris. Suspendisse felis sem, condimentum ullamcorper est sit amet, molestie mollis nulla. Etiam lorem orci, consequat ac magna quis, facilisis vehicula neque.'
+                          : 'Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor. Pellentesque non dignissim neque. Ut porta viverra est, ut dignissim elit elementum ut. Nunc vel rhoncus nibh, ut tincidunt turpis. Integer ac enim pellentesque, adipiscing metus id, pharetra odio. Donec bibendum nunc sit amet tortor scelerisque luctus et sit amet mauris. Suspendisse felis sem, condimentum ullamcorper est sit amet, molestie mollis nulla. Etiam lorem orci, consequat ac magna quis, facilisis vehicula neque.'}
                       </p>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
-                          <h4 className="text-lg font-semibold text-white">课程信息</h4>
+                          <h4 className="text-lg font-semibold text-white">{t('courseDetail.infoTitle')}</h4>
                           <div className="space-y-2 text-slate-300">
                             <div className="flex justify-between">
-                              <span>上课时间:</span>
-                              <span>每周二、四 19:00-20:30</span>
+                              <span>{t('courseDetail.info.time')}</span>
+                              <span>{language === 'zh' ? '每周二、四 19:00-20:30' : 'Tue & Thu 19:00-20:30'}</span>
                             </div>
                             <div className="flex justify-between">
-                              <span>授课方式:</span>
-                              <span>直播+课件</span>
+                              <span>{t('courseDetail.info.method')}</span>
+                              <span>{language === 'zh' ? '直播+课件' : 'Live + Materials'}</span>
                             </div>
                             <div className="flex justify-between">
-                              <span>课程时长:</span>
-                              <span>20课时</span>
+                              <span>{t('courseDetail.info.duration')}</span>
+                              <span>{language === 'zh' ? '20课时' : '20 lessons'}</span>
                             </div>
                             <div className="flex justify-between">
-                              <span>适合年级:</span>
-                              <span>高一、高二</span>
+                              <span>{t('courseDetail.info.grade')}</span>
+                              <span>{language === 'zh' ? '高一、高二' : 'Grade 10, 11'}</span>
                             </div>
                           </div>
                         </div>
                         
                         <div className="space-y-3">
-                          <h4 className="text-lg font-semibold text-white">你将学习到</h4>
+                          <h4 className="text-lg font-semibold text-white">{t('courseDetail.learnTitle')}</h4>
                           <ul className="text-slate-300 space-y-1">
-                            <li>• Setting up the environment</li>
-                            <li>• Understanding HTML Programming</li>
-                            <li>• 代数基础概念与运算</li>
-                            <li>• 方程式求解技巧</li>
-                            <li>• 实际问题应用</li>
+                            <li>• {language === 'zh' ? '环境搭建' : 'Setting up the environment'}</li>
+                            <li>• {language === 'zh' ? '理解HTML编程' : 'Understanding HTML Programming'}</li>
+                            <li>• {language === 'zh' ? '代数基础概念与运算' : 'Algebra basics and operations'}</li>
+                            <li>• {language === 'zh' ? '方程式求解技巧' : 'Equation solving skills'}</li>
+                            <li>• {language === 'zh' ? '实际问题应用' : 'Practical problem applications'}</li>
                           </ul>
                         </div>
                       </div>
@@ -205,7 +205,7 @@ const CourseDetailPage = () => {
                       <div className="flex items-center justify-between">
                         <h3 className="text-xl font-bold text-white">问答</h3>
                         <Button className="bg-green-600 hover:bg-green-700 text-white">
-                          提问
+                          {t('courseDetail.qa.askButton')}
                         </Button>
                       </div>
                       
@@ -222,7 +222,7 @@ const CourseDetailPage = () => {
                                 <span className="text-slate-400 text-sm">2024-01-15 14:30</span>
                               </div>
                               <p className="text-slate-300 mb-3">
-                                老师，在解二次方程时，什么情况下使用求根公式比较好？什么时候用配方法更合适？
+                                {language === 'zh' ? '老师，在解二次方程时，什么情况下使用求根公式比较好？什么时候用配方法更合适？' : 'Teacher, when is it better to use the quadratic formula and when is it more suitable to use the method of completing the square?'}
                               </p>
                               
                               <div className="flex items-start space-x-3 mt-4 pl-4 border-l-2 border-green-500">
@@ -235,9 +235,7 @@ const CourseDetailPage = () => {
                                     <span className="text-slate-400 text-sm">2024-01-15 15:45</span>
                                   </div>
                                   <p className="text-slate-300">
-                                    很好的问题！一般来说，当二次项系数为1且常数项较小时，配方法更直观。
-                                    当系数复杂或需要精确计算时，求根公式更可靠。建议先尝试因式分解，
-                                    如果不能分解再考虑其他方法。
+                                    {language === 'zh' ? '很好的问题！一般来说，当二次项系数为1且常数项较小时，配方法更直观。当系数复杂或需要精确计算时，求根公式更可靠。建议先尝试因式分解，如果不能分解再考虑其他方法。' : 'Great question! In general, when the coefficient of the quadratic term is 1 and the constant term is small, the method of completing the square is more intuitive. When the coefficient is complex or requires precise calculation, the quadratic formula is more reliable. It is recommended to first try factoring, and if it cannot be factored, consider other methods.'}
                                   </p>
                                 </div>
                               </div>
@@ -256,7 +254,7 @@ const CourseDetailPage = () => {
                                 <span className="text-slate-400 text-sm">2024-01-14 16:20</span>
                               </div>
                               <p className="text-slate-300">
-                                请问代数中的消元法有哪些常用技巧？
+                                {language === 'zh' ? '请问代数中的消元法有哪些常用技巧？' : 'What are some common techniques for elimination in algebra?'}
                               </p>
                             </div>
                           </div>
@@ -277,7 +275,7 @@ const CourseDetailPage = () => {
                             <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
                           </div>
                           <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
-                            开始答题 📝
+                            {t('courseDetail.assignments.startButton')} 📝
                           </Button>
                         </div>
                         <div className="bg-slate-700/50 p-4 rounded-lg flex items-center justify-between">
@@ -288,7 +286,7 @@ const CourseDetailPage = () => {
                             <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
                           </div>
                           <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
-                            开始答题 📝
+                            {t('courseDetail.assignments.startButton')} 📝
                           </Button>
                         </div>
                         <div className="bg-slate-700/50 p-4 rounded-lg flex items-center justify-between">
@@ -299,7 +297,7 @@ const CourseDetailPage = () => {
                             <span className="text-white">长春外国语学校第一学期高一物理期末试卷及答案</span>
                           </div>
                           <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2">
-                            开始答题 📝
+                            {t('courseDetail.assignments.startButton')} 📝
                           </Button>
                         </div>
                       </div>
@@ -315,7 +313,7 @@ const CourseDetailPage = () => {
                         </div>
                         <h4 className="text-white text-lg mb-2">第一学期高一物理第三章课件</h4>
                         <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2">
-                          下载
+                          {t('courseDetail.downloads.downloadButton')}
                         </Button>
                       </div>
                     </div>
@@ -329,7 +327,7 @@ const CourseDetailPage = () => {
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-white">学习进度：13/39</CardTitle>
+                    <CardTitle className="text-white">{t('courseDetail.progressTitle')}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">

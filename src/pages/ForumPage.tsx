@@ -21,7 +21,7 @@ const ForumPage = () => {
   const [joinedClubs, setJoinedClubs] = useState<string[]>([]);
   const [showComments, setShowComments] = useState(false);
   const [selectedDiscussion, setSelectedDiscussion] = useState<any>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const allDiscussions = [
     {
@@ -108,13 +108,13 @@ const ForumPage = () => {
   const discussions = getFilteredDiscussions();
 
   const categories = [
-    { name: "代数", count: 383, color: "bg-purple-500", id: "代数" },
-    { name: "几何学", count: 684, color: "bg-orange-500", id: "几何学" },
+    { name: language === 'zh' ? "代数" : "Algebra", count: 383, color: "bg-purple-500", id: "代数" },
+    { name: language === 'zh' ? "几何学" : "Geometry", count: 684, color: "bg-orange-500", id: "几何学" },
     { name: "SAT", count: 197, color: "bg-red-500", id: "SAT" },
-    { name: "生物学", count: 661, color: "bg-green-500", id: "生物学" },
-    { name: "物理学", count: 845, color: "bg-blue-500", id: "物理学" },
-    { name: "统计数据", count: 198, color: "bg-purple-600", id: "统计数据" },
-    { name: "微积分实验室", count: 282, color: "bg-orange-600", id: "微积分实验室" }
+    { name: language === 'zh' ? "生物学" : "Biology", count: 661, color: "bg-green-500", id: "生物学" },
+    { name: language === 'zh' ? "物理学" : "Physics", count: 845, color: "bg-blue-500", id: "物理学" },
+    { name: language === 'zh' ? "统计数据" : "Statistics", count: 198, color: "bg-purple-600", id: "统计数据" },
+    { name: language === 'zh' ? "微积分实验室" : "Calculus Lab", count: 282, color: "bg-orange-600", id: "微积分实验室" }
   ];
 
   const handleCategoryClick = (categoryId: string) => {
@@ -271,12 +271,12 @@ const ForumPage = () => {
               {/* Discussion Categories */}
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4">
-                  <h3 className="text-white font-medium mb-4">专区俱乐部</h3>
+                  <h3 className="text-white font-medium mb-4">{t('forum.specialClubs')}</h3>
                   <Button 
                     className={`w-full mb-4 ${selectedCategory === "all" ? "bg-green-600 hover:bg-green-700" : "bg-slate-600 hover:bg-slate-700"} text-white`}
                     onClick={() => handleCategoryClick("all")}
                   >
-                    全部讨论
+                    {t('forum.allDiscussions')}
                   </Button>
                   <div className="space-y-2">
                     {categories.map((category) => (
@@ -324,7 +324,7 @@ const ForumPage = () => {
               {/* Hot Tags */}
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-4">
-                  <h3 className="text-white font-medium mb-4">热门标签</h3>
+                  <h3 className="text-white font-medium mb-4">{t('forum.hotTags')}</h3>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
                       <Badge 

@@ -2,8 +2,11 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CourseFilters = () => {
+  const { t, language } = useLanguage();
+
   return (
     <div className="flex items-center space-x-2">
       <Select defaultValue="all">
@@ -11,10 +14,10 @@ const CourseFilters = () => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">全部难易度</SelectItem>
-          <SelectItem value="g1-5">G1-5</SelectItem>
-          <SelectItem value="g6-8">G6-8</SelectItem>
-          <SelectItem value="g9-12">G9-12</SelectItem>
+          <SelectItem value="all">{t('courseFilters.allDifficulty')}</SelectItem>
+          <SelectItem value="g1-5">{t('courseFilters.g1to5')}</SelectItem>
+          <SelectItem value="g6-8">{t('courseFilters.g6to8')}</SelectItem>
+          <SelectItem value="g9-12">{t('courseFilters.g9to12')}</SelectItem>
         </SelectContent>
       </Select>
       <Select defaultValue="all-subject">
@@ -22,12 +25,12 @@ const CourseFilters = () => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all-subject">全部课程类别</SelectItem>
-          <SelectItem value="english">英语</SelectItem>
-          <SelectItem value="math">数学</SelectItem>
-          <SelectItem value="science">科学</SelectItem>
-          <SelectItem value="economics">经济</SelectItem>
-          <SelectItem value="humanities">人文</SelectItem>
+          <SelectItem value="all-subject">{t('courseFilters.allSubject')}</SelectItem>
+          <SelectItem value="english">{t('courseFilters.english')}</SelectItem>
+          <SelectItem value="math">{t('courseFilters.math')}</SelectItem>
+          <SelectItem value="science">{t('courseFilters.science')}</SelectItem>
+          <SelectItem value="economics">{t('courseFilters.economics')}</SelectItem>
+          <SelectItem value="humanities">{t('courseFilters.humanities')}</SelectItem>
         </SelectContent>
       </Select>
       <Select defaultValue="all-time">
@@ -35,10 +38,10 @@ const CourseFilters = () => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all-time">课程时间段</SelectItem>
-          <SelectItem value="morning">7:00-9:00</SelectItem>
-          <SelectItem value="afternoon">16:00-19:00</SelectItem>
-          <SelectItem value="evening">19:00-22:00</SelectItem>
+          <SelectItem value="all-time">{t('courseFilters.allTime')}</SelectItem>
+          <SelectItem value="morning">{t('courseFilters.morning')}</SelectItem>
+          <SelectItem value="afternoon">{t('courseFilters.afternoon')}</SelectItem>
+          <SelectItem value="evening">{t('courseFilters.evening')}</SelectItem>
         </SelectContent>
       </Select>
       <Select defaultValue="all-language">
@@ -46,15 +49,15 @@ const CourseFilters = () => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all-language">授课语言</SelectItem>
-          <SelectItem value="english">英语</SelectItem>
-          <SelectItem value="chinese">中文</SelectItem>
-          <SelectItem value="french">法语</SelectItem>
-          <SelectItem value="german">德语</SelectItem>
-          <SelectItem value="spanish">西班牙语</SelectItem>
-          <SelectItem value="italian">意大利语</SelectItem>
-          <SelectItem value="japanese">日语</SelectItem>
-          <SelectItem value="korean">韩语</SelectItem>
+          <SelectItem value="all-language">{t('courseFilters.allLanguage')}</SelectItem>
+          <SelectItem value="english">{t('courseFilters.english')}</SelectItem>
+          <SelectItem value="chinese">{t('courseFilters.chinese')}</SelectItem>
+          <SelectItem value="french">{t('courseFilters.french')}</SelectItem>
+          <SelectItem value="german">{t('courseFilters.german')}</SelectItem>
+          <SelectItem value="spanish">{t('courseFilters.spanish')}</SelectItem>
+          <SelectItem value="italian">{t('courseFilters.italian')}</SelectItem>
+          <SelectItem value="japanese">{t('courseFilters.japanese')}</SelectItem>
+          <SelectItem value="korean">{t('courseFilters.korean')}</SelectItem>
         </SelectContent>
       </Select>
       <div className="flex items-center space-x-2 ml-4">

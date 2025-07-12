@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { showToast } from "@/components/shared/Toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface InfoCollectionModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface InfoCollectionModalProps {
 }
 
 const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps) => {
+  const { t, language } = useLanguage();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -31,13 +33,46 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
   });
 
   const subjects = [
-    "数学", "物理", "化学", "生物", "语文", "英语", 
-    "历史", "地理", "政治", "计算机", "艺术", "体育"
+    { zh: "数学", en: "Mathematics" },
+    { zh: "物理", en: "Physics" },
+    { zh: "化学", en: "Chemistry" },
+    { zh: "生物", en: "Biology" },
+    { zh: "语文", en: "Chinese" },
+    { zh: "英语", en: "English" },
+    { zh: "历史", en: "History" },
+    { zh: "地理", en: "Geography" },
+    { zh: "政治", en: "Politics" },
+    { zh: "计算机", en: "Computer Science" },
+    { zh: "艺术", en: "Art" },
+    { zh: "体育", en: "Physical Education" }
   ];
 
   const expectations = [
-    "提高学习成绩", "培养学习兴趣", "准备升学考试", 
-    "扩展知识面", "提升思维能力", "结交学习伙伴"
+    { zh: "提高学习成绩", en: "Improve Academic Performance" },
+    { zh: "培养学习兴趣", en: "Cultivate Learning Interest" },
+    { zh: "准备升学考试", en: "Prepare for Entrance Exams" },
+    { zh: "扩展知识面", en: "Expand Knowledge Base" },
+    { zh: "提升思维能力", en: "Enhance Thinking Skills" },
+    { zh: "结交学习伙伴", en: "Make Learning Friends" }
+  ];
+
+  const studyTimeOptions = [
+    { zh: "1-2小时", en: "1-2 hours" },
+    { zh: "2-4小时", en: "2-4 hours" },
+    { zh: "4小时以上", en: "4+ hours" }
+  ];
+
+  const formatOptions = [
+    { zh: "直播课程", en: "Live Classes" },
+    { zh: "录播视频", en: "Recorded Videos" },
+    { zh: "图文教程", en: "Text & Image Tutorials" },
+    { zh: "互动讨论", en: "Interactive Discussions" }
+  ];
+
+  const experienceOptions = [
+    { zh: "完全没有", en: "None" },
+    { zh: "有一些", en: "Some" },
+    { zh: "比较丰富", en: "Rich" }
   ];
 
   const handleSubjectChange = (subject: string, checked: boolean) => {
@@ -59,7 +94,7 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
   };
 
   const handleNext = () => {
-    showToast.success("信息收集完成，欢迎加入学习平台！");
+    showToast.success(t('infoCollection.success'));
     localStorage.setItem('infoCollected', 'true');
     onOpenChange(false);
   };
@@ -74,46 +109,46 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
       <DialogContent className="max-w-2xl bg-slate-900 border-slate-700">
         <div className="space-y-6">
           <div className="text-center mb-6">
-            <h3 className="text-lg font-medium text-white mb-2">为了更好的体验tourloop，请完善您在平台的个人信息</h3>
+            <h3 className="text-lg font-medium text-white mb-2">{t('infoCollection.title')}</h3>
           </div>
           
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-slate-300">姓名</Label>
+              <Label htmlFor="name" className="text-slate-300">{t('infoCollection.name')}</Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 className="bg-slate-800/50 border-slate-600 text-white"
-                placeholder="Randy Walsh"
+                placeholder={language === 'zh' ? "请输入您的姓名" : "Enter your name"}
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-300">邮箱</Label>
+              <Label htmlFor="email" className="text-slate-300">{t('infoCollection.email')}</Label>
               <Input
                 id="email"
                 type="email"
                 value={formData.email || ""}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 className="bg-slate-800/50 border-slate-600 text-white"
-                placeholder="randywalsh@agency.com"
+                placeholder={language === 'zh' ? "请输入您的邮箱" : "Enter your email"}
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="phone" className="text-slate-300">手机号</Label>
+              <Label htmlFor="phone" className="text-slate-300">{t('infoCollection.phone')}</Label>
               <Input
                 id="phone"
                 value={formData.phone || ""}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                 className="bg-slate-800/50 border-slate-600 text-white"
-                placeholder="请输入"
+                placeholder={language === 'zh' ? "请输入手机号" : "Enter phone number"}
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="school" className="text-slate-300">学校</Label>
+              <Label htmlFor="school" className="text-slate-300">{t('infoCollection.school')}</Label>
               <div className="flex items-center space-x-2">
                 <div className="w-6 h-4 bg-red-500 rounded-sm flex items-center justify-center">
                   <span className="text-white text-xs">🇬🇧</span>
@@ -123,30 +158,30 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
                   value={formData.school}
                   onChange={(e) => setFormData(prev => ({ ...prev, school: e.target.value }))}
                   className="bg-slate-800/50 border-slate-600 text-white flex-1"
-                  placeholder="London United Kingdom"
+                  placeholder={language === 'zh' ? "请输入学校名称" : "Enter school name"}
                 />
               </div>
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="grade" className="text-slate-300">年级</Label>
+              <Label htmlFor="grade" className="text-slate-300">{t('infoCollection.grade')}</Label>
               <Input
                 id="grade"
                 value={formData.grade}
                 onChange={(e) => setFormData(prev => ({ ...prev, grade: e.target.value }))}
                 className="bg-slate-800/50 border-slate-600 text-white"
-                placeholder="RandyWalsh_76"
+                placeholder={language === 'zh' ? "请输入年级" : "Enter grade"}
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="address" className="text-slate-300">邮寄地址</Label>
+              <Label htmlFor="address" className="text-slate-300">{t('infoCollection.address')}</Label>
               <Input
                 id="address"
                 value={formData.address || ""}
                 onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
                 className="bg-slate-800/50 border-slate-600 text-white"
-                placeholder="RandyWalsh_76"
+                placeholder={language === 'zh' ? "请输入邮寄地址" : "Enter mailing address"}
               />
             </div>
           </div>
@@ -154,23 +189,23 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
           {step === 2 && (
             <div className="space-y-4">
               <div className="text-center mb-6">
-                <h3 className="text-lg font-medium text-white mb-2">学习偏好</h3>
-                <p className="text-slate-400">告诉我们您的学习兴趣和习惯</p>
+                <h3 className="text-lg font-medium text-white mb-2">{t('infoCollection.studyPreferences')}</h3>
+                <p className="text-slate-400">{t('infoCollection.studyPreferencesDesc')}</p>
               </div>
               
               <div className="space-y-4">
                 <div>
-                  <Label className="text-slate-300 mb-3 block">感兴趣的学科 (可多选)</Label>
+                  <Label className="text-slate-300 mb-3 block">{t('infoCollection.subjects')}</Label>
                   <div className="grid grid-cols-3 gap-3">
                     {subjects.map((subject) => (
-                      <div key={subject} className="flex items-center space-x-2">
+                      <div key={subject.zh} className="flex items-center space-x-2">
                         <Checkbox
-                          id={subject}
-                          checked={formData.subjects.includes(subject)}
-                          onCheckedChange={(checked) => handleSubjectChange(subject, checked as boolean)}
+                          id={subject.zh}
+                          checked={formData.subjects.includes(language === 'zh' ? subject.zh : subject.en)}
+                          onCheckedChange={(checked) => handleSubjectChange(language === 'zh' ? subject.zh : subject.en, checked as boolean)}
                         />
-                        <Label htmlFor={subject} className="text-slate-300 text-sm">
-                          {subject}
+                        <Label htmlFor={subject.zh} className="text-slate-300 text-sm">
+                          {language === 'zh' ? subject.zh : subject.en}
                         </Label>
                       </div>
                     ))}
@@ -178,48 +213,36 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
                 </div>
                 
                 <div className="space-y-3">
-                  <Label className="text-slate-300">每天可用于学习的时间</Label>
+                  <Label className="text-slate-300">{t('infoCollection.studyTime')}</Label>
                   <RadioGroup
                     value={formData.studyTime}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, studyTime: value }))}
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="1-2小时" id="time1" />
-                      <Label htmlFor="time1" className="text-slate-300">1-2小时</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="2-4小时" id="time2" />
-                      <Label htmlFor="time2" className="text-slate-300">2-4小时</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="4小时以上" id="time3" />
-                      <Label htmlFor="time3" className="text-slate-300">4小时以上</Label>
-                    </div>
+                    {studyTimeOptions.map((option, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <RadioGroupItem value={language === 'zh' ? option.zh : option.en} id={`time${index + 1}`} />
+                        <Label htmlFor={`time${index + 1}`} className="text-slate-300">
+                          {language === 'zh' ? option.zh : option.en}
+                        </Label>
+                      </div>
+                    ))}
                   </RadioGroup>
                 </div>
                 
                 <div className="space-y-3">
-                  <Label className="text-slate-300">偏好的学习方式</Label>
+                  <Label className="text-slate-300">{t('infoCollection.preferredFormat')}</Label>
                   <RadioGroup
                     value={formData.preferredFormat}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, preferredFormat: value }))}
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="直播课程" id="format1" />
-                      <Label htmlFor="format1" className="text-slate-300">直播课程</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="录播视频" id="format2" />
-                      <Label htmlFor="format2" className="text-slate-300">录播视频</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="图文教程" id="format3" />
-                      <Label htmlFor="format3" className="text-slate-300">图文教程</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="互动讨论" id="format4" />
-                      <Label htmlFor="format4" className="text-slate-300">互动讨论</Label>
-                    </div>
+                    {formatOptions.map((option, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <RadioGroupItem value={language === 'zh' ? option.zh : option.en} id={`format${index + 1}`} />
+                        <Label htmlFor={`format${index + 1}`} className="text-slate-300">
+                          {language === 'zh' ? option.zh : option.en}
+                        </Label>
+                      </div>
+                    ))}
                   </RadioGroup>
                 </div>
               </div>
@@ -229,23 +252,23 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
           {step === 3 && (
             <div className="space-y-4">
               <div className="text-center mb-6">
-                <h3 className="text-lg font-medium text-white mb-2">学习目标</h3>
-                <p className="text-slate-400">最后，告诉我们您的学习期望</p>
+                <h3 className="text-lg font-medium text-white mb-2">{t('infoCollection.studyGoals')}</h3>
+                <p className="text-slate-400">{t('infoCollection.studyGoalsDesc')}</p>
               </div>
               
               <div className="space-y-4">
                 <div>
-                  <Label className="text-slate-300 mb-3 block">您希望通过平台获得什么 (可多选)</Label>
+                  <Label className="text-slate-300 mb-3 block">{t('infoCollection.expectations')}</Label>
                   <div className="grid grid-cols-2 gap-3">
                     {expectations.map((expectation) => (
-                      <div key={expectation} className="flex items-center space-x-2">
+                      <div key={expectation.zh} className="flex items-center space-x-2">
                         <Checkbox
-                          id={expectation}
-                          checked={formData.expectations.includes(expectation)}
-                          onCheckedChange={(checked) => handleExpectationChange(expectation, checked as boolean)}
+                          id={expectation.zh}
+                          checked={formData.expectations.includes(language === 'zh' ? expectation.zh : expectation.en)}
+                          onCheckedChange={(checked) => handleExpectationChange(language === 'zh' ? expectation.zh : expectation.en, checked as boolean)}
                         />
-                        <Label htmlFor={expectation} className="text-slate-300 text-sm">
-                          {expectation}
+                        <Label htmlFor={expectation.zh} className="text-slate-300 text-sm">
+                          {language === 'zh' ? expectation.zh : expectation.en}
                         </Label>
                       </div>
                     ))}
@@ -253,23 +276,19 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
                 </div>
                 
                 <div className="space-y-3">
-                  <Label className="text-slate-300">在线学习经验</Label>
+                  <Label className="text-slate-300">{t('infoCollection.experience')}</Label>
                   <RadioGroup
                     value={formData.experience}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, experience: value }))}
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="完全没有" id="exp1" />
-                      <Label htmlFor="exp1" className="text-slate-300">完全没有</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="有一些" id="exp2" />
-                      <Label htmlFor="exp2" className="text-slate-300">有一些</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="比较丰富" id="exp3" />
-                      <Label htmlFor="exp3" className="text-slate-300">比较丰富</Label>
-                    </div>
+                    {experienceOptions.map((option, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <RadioGroupItem value={language === 'zh' ? option.zh : option.en} id={`exp${index + 1}`} />
+                        <Label htmlFor={`exp${index + 1}`} className="text-slate-300">
+                          {language === 'zh' ? option.zh : option.en}
+                        </Label>
+                      </div>
+                    ))}
                   </RadioGroup>
                 </div>
               </div>
@@ -283,7 +302,7 @@ const InfoCollectionModal = ({ isOpen, onOpenChange }: InfoCollectionModalProps)
             onClick={handleNext}
             className="bg-green-600 hover:bg-green-700 text-white px-8"
           >
-            确认提交
+            {t('infoCollection.submit')}
           </Button>
         </div>
       </DialogContent>

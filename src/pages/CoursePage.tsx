@@ -12,39 +12,137 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const CoursePage = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const courses = [
-    { id: 1, title: "代数2学习实验室", instructor: "JuanD MeGon", students: "2581人报名", rating: 4.8, price: "¥998", status: "即将开始", color: "bg-red-500" },
-    { id: 2, title: "计算机工程", instructor: "John", students: "3579人参与", rating: 4.9, price: "¥1288", status: "已结束", color: "bg-yellow-500" },
-    { id: 3, title: "生物学", instructor: "JuanD MeGon", students: "3579人参与", rating: 4.7, price: "¥1288", status: "进行中", color: "bg-red-500" },
-    { id: 4, title: "数据统计", instructor: "Debra Liver", students: "3579人参与", rating: 4.8, price: "¥1288", status: "进行中", color: "bg-blue-500" },
-    { id: 5, title: "生物学", instructor: "JuanD MeGon", students: "3579人参与", rating: 4.7, price: "¥998", status: "进行中", color: "bg-blue-500" },
-    { id: 6, title: "计算机工程", instructor: "Janice Carroll", students: "3579人参与", rating: 4.9, price: "¥998", status: "已结束", color: "bg-yellow-500" },
-    { id: 7, title: "生物学", instructor: "JuanD MeGon", students: "3579人参与", rating: 4.7, price: "¥998", status: "进行中", color: "bg-red-500" },
-    { id: 8, title: "计算机工程", instructor: "Janice Carroll", students: "3579人参与", rating: 4.9, price: "¥998", status: "已结束", color: "bg-yellow-500" }
+    { 
+      id: 1, 
+      title: language === 'zh' ? "代数2学习实验室" : "Algebra 2 Learning Lab", 
+      instructor: "JuanD MeGon", 
+      students: language === 'zh' ? "2581人报名" : "2581 enrolled", 
+      rating: 4.8, 
+      price: "¥998", 
+      status: language === 'zh' ? "即将开始" : "Coming Soon", 
+      color: "bg-red-500",
+      description: language === 'zh' ? "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度" : "Exploring Algebra 2 concepts difficult to understand? Rely on peer tutoring to improve learning progress"
+    },
+    { 
+      id: 2, 
+      title: language === 'zh' ? "计算机工程" : "Computer Engineering", 
+      instructor: "John", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.9, 
+      price: "¥1288", 
+      status: language === 'zh' ? "已结束" : "Ended", 
+      color: "bg-yellow-500",
+      description: "Learn Php Codeigniter and understand working with MVC and HMVC from zero to hero"
+    },
+    { 
+      id: 3, 
+      title: language === 'zh' ? "生物学" : "Biology", 
+      instructor: "JuanD MeGon", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.7, 
+      price: "¥1288", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-red-500",
+      description: "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
+    },
+    { 
+      id: 4, 
+      title: language === 'zh' ? "数据统计" : "Data Statistics", 
+      instructor: "Debra Liver", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.8, 
+      price: "¥1288", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-blue-500",
+      description: "Dive in and learn React 16.8 from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js"
+    },
+    { 
+      id: 5, 
+      title: language === 'zh' ? "生物学" : "Biology", 
+      instructor: "JuanD MeGon", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.7, 
+      price: "¥998", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-blue-500",
+      description: "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
+    },
+    { 
+      id: 6, 
+      title: language === 'zh' ? "计算机工程" : "Computer Engineering", 
+      instructor: "Janice Carroll", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.9, 
+      price: "¥998", 
+      status: language === 'zh' ? "已结束" : "Ended", 
+      color: "bg-yellow-500",
+      description: "Learn Php Codeigniter and understand working with MVC and HMVC from zero to hero"
+    },
+    { 
+      id: 7, 
+      title: language === 'zh' ? "生物学" : "Biology", 
+      instructor: "JuanD MeGon", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.7, 
+      price: "¥998", 
+      status: language === 'zh' ? "进行中" : "In Progress", 
+      color: "bg-red-500",
+      description: "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills"
+    },
+    { 
+      id: 8, 
+      title: language === 'zh' ? "计算机工程" : "Computer Engineering", 
+      instructor: "Janice Carroll", 
+      students: language === 'zh' ? "3579人参与" : "3579 joined", 
+      rating: 4.9, 
+      price: "¥998", 
+      status: language === 'zh' ? "已结束" : "Ended", 
+      color: "bg-yellow-500",
+      description: "Learn Php Codeigniter and understand working with MVC and HMVC from zero to hero"
+    }
   ];
 
   const liveStreams = [
-    { id: 1, title: "Learn sketch from scratch to build web design", instructor: "Janice Carroll", color: "bg-gradient-to-r from-pink-400 to-orange-400", letter: "B" },
-    { id: 2, title: "Learn design principles for modern web applications", instructor: "Brad Traversy", color: "bg-gradient-to-r from-purple-400 to-pink-400", letter: "🔥" },
-    { id: 3, title: "Advanced React patterns and best practices", instructor: "Sara Perkins", color: "bg-gradient-to-r from-blue-400 to-purple-400", letter: "📊" }
+    { 
+      id: 1, 
+      title: "Learn sketch from scratch to build web design", 
+      instructor: "Janice Carroll", 
+      color: "bg-gradient-to-r from-pink-400 to-orange-400", 
+      letter: "B" 
+    },
+    { 
+      id: 2, 
+      title: "Learn design principles for modern web applications", 
+      instructor: "Brad Traversy", 
+      color: "bg-gradient-to-r from-purple-400 to-pink-400", 
+      letter: "🔥" 
+    },
+    { 
+      id: 3, 
+      title: "Advanced React patterns and best practices", 
+      instructor: "Sara Perkins", 
+      color: "bg-gradient-to-r from-blue-400 to-purple-400", 
+      letter: "📊" 
+    }
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "即将开始": return "bg-orange-500";
-      case "进行中": return "bg-blue-500";
-      case "已结束": return "bg-gray-500";
+      case t('course.upcoming'): return "bg-orange-500";
+      case t('course.inProgress'): return "bg-blue-500";
+      case t('course.ended'): return "bg-gray-500";
       default: return "bg-gray-500";
     }
   };
 
   const getStatusBadgeStyle = (status: string) => {
     switch (status) {
-      case "即将开始": return "bg-orange-500 text-white";
-      case "进行中": return "bg-blue-500 text-white";
-      case "已结束": return "bg-green-500 text-white";
+      case t('course.upcoming'): return "bg-orange-500 text-white";
+      case t('course.inProgress'): return "bg-blue-500 text-white";
+      case t('course.ended'): return "bg-green-500 text-white";
       default: return "bg-gray-500 text-white";
     }
   };
@@ -54,7 +152,7 @@ const CoursePage = () => {
       <Sidebar />
       
       <div className="flex-1">
-        <Header title="课程" />
+        <Header title={t('sidebar.courses')} />
         
         <main className="p-6 space-y-8">
           {/* Page Header */}
@@ -84,10 +182,7 @@ const CoursePage = () => {
                   <h3 className="text-white text-base font-medium mb-3 line-clamp-2">{course.title}</h3>
                   
                   <p className="text-slate-400 text-sm mb-4 line-clamp-3">
-                    {course.title === "计算机工程" ? "Learn Php Codeigniter and understand working with MVC and HMVC from zero to hero" :
-                     course.title === "生物学" ? "Build a RESTful API for a market system using Laravel and dominates the challenging RESTful skills" :
-                     course.title === "数据统计" ? "Dive in and learn React 16.8 from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js" :
-                     "探索代数 2 学习实验室概念难懂？依靠同伴辅导来提升学习进度"}
+                    {course.description}
                   </p>
                   
                   <div className="space-y-3">

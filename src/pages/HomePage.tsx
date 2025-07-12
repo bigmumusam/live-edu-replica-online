@@ -155,14 +155,16 @@ const HomePage = () => {
                         <BookOpen className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-white font-semibold">代数2学习实验室</h3>
-                        <p className="text-slate-400 text-sm">2581人参与 • 4.8★</p>
+                        <h3 className="text-white font-semibold">{language === 'zh' ? '代数2学习实验室' : 'Algebra 2 Learning Lab'}</h3>
+                        <p className="text-slate-400 text-sm">
+                          {language === 'zh' ? '2581人参与' : '2,581 joined'} • 4.8★
+                        </p>
                       </div>
                     </div>
                     
                     <div className="bg-slate-800 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-white text-sm">学习进度</span>
+                        <span className="text-white text-sm">{language === 'zh' ? '学习进度' : 'Progress'}</span>
                         <span className="text-green-400 text-sm">75%</span>
                       </div>
                       <div className="w-full bg-slate-700 rounded-full h-2">
@@ -171,8 +173,8 @@ const HomePage = () => {
                     </div>
                     
                     <div className="flex space-x-2">
-                      <Badge className="bg-blue-600">实战项目</Badge>
-                      <Badge className="bg-purple-600">认证课程</Badge>
+                        <Badge className="bg-blue-600">{language === 'zh' ? '实战项目' : 'Project-based'}</Badge>
+                        <Badge className="bg-purple-600">{language === 'zh' ? '认证课程' : 'Certified'}</Badge>
                     </div>
                   </div>
                 </div>
@@ -182,14 +184,14 @@ const HomePage = () => {
               <div className="absolute -top-4 -right-4 bg-white rounded-lg p-3 shadow-lg animate-pulse">
                 <div className="flex items-center space-x-2">
                   <Trophy className="h-5 w-5 text-yellow-500" />
-                  <span className="text-sm font-medium">今日完成</span>
+                  <span className="text-sm font-medium">{language === 'zh' ? '今日完成' : 'Completed Today'}</span>
                 </div>
               </div>
               
               <div className="absolute -bottom-4 -left-4 bg-green-500 rounded-lg p-3 shadow-lg">
                 <div className="flex items-center space-x-2">
                   <Users className="h-5 w-5 text-white" />
-                  <span className="text-white text-sm font-medium">实时互动</span>
+                  <span className="text-white text-sm font-medium">{language === 'zh' ? '实时互动' : 'Live Interaction'}</span>
                 </div>
               </div>
             </div>

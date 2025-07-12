@@ -1,0 +1,9 @@
+mybatis-flex:
+  datasource:
+    mysql:
+      url: jdbc:mysql://116.62.152.145:3006/edu-online?serverTimezone=Asia/Shanghai&timezone=GMT+8&useUnicode=true&characterEncoding=utf-8
+      username: edu-online
+      password: 20250708
+      type: com.alibaba.druid.pool.DruidDataSource
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

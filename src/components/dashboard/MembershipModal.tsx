@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, X } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface MembershipModalProps {
   isOpen: boolean;
@@ -12,54 +13,55 @@ interface MembershipModalProps {
 }
 
 const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
+  const { t, language } = useLanguage();
   const [showPayment, setShowPayment] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("");
 
   const plans = [
     {
       id: "monthly",
-      name: "月度会员",
+      name: language === 'zh' ? "月度会员" : "Monthly Membership",
       price: "¥198",
-      period: "/月",
+      period: language === 'zh' ? "/月" : "/month",
       originalPrice: "¥298",
       discount: "33% OFF",
       features: [
-        "无限制观看所有课程",
-        "下载课程离线观看",
-        "专属学习社群",
-        "1对1学习指导",
-        "课程完成证书"
+        language === 'zh' ? "无限制观看所有课程" : "Unlimited access to all courses",
+        language === 'zh' ? "下载课程离线观看" : "Download courses for offline viewing",
+        language === 'zh' ? "专属学习社群" : "Exclusive learning community",
+        language === 'zh' ? "1对1学习指导" : "1-on-1 learning guidance",
+        language === 'zh' ? "课程完成证书" : "Course completion certificates"
       ]
     },
     {
       id: "yearly",
-      name: "年度会员",
+      name: language === 'zh' ? "年度会员" : "Annual Membership",
       price: "¥1980",
-      period: "/年",
+      period: language === 'zh' ? "/年" : "/year",
       originalPrice: "¥2376",
       discount: "17% OFF",
       popular: true,
       features: [
-        "月度会员所有权益",
-        "专属VIP标识",
-        "优先客服支持",
-        "独家会员活动",
-        "课程更新优先体验"
+        language === 'zh' ? "月度会员所有权益" : "All monthly membership benefits",
+        language === 'zh' ? "专属VIP标识" : "Exclusive VIP badge",
+        language === 'zh' ? "优先客服支持" : "Priority customer support",
+        language === 'zh' ? "独家会员活动" : "Exclusive member events",
+        language === 'zh' ? "课程更新优先体验" : "Priority access to course updates"
       ]
     },
     {
       id: "lifetime",
-      name: "终身会员",
+      name: language === 'zh' ? "终身会员" : "Lifetime Membership",
       price: "¥3980",
-      period: "/终身",
+      period: language === 'zh' ? "/终身" : "/lifetime",
       originalPrice: "¥5980",
       discount: "33% OFF",
       features: [
-        "所有会员权益",
-        "终身免费更新",
-        "专属定制课程",
-        "一对一导师指导",
-        "职业规划咨询"
+        language === 'zh' ? "所有会员权益" : "All membership benefits",
+        language === 'zh' ? "终身免费更新" : "Lifetime free updates",
+        language === 'zh' ? "专属定制课程" : "Exclusive customized courses",
+        language === 'zh' ? "一对一导师指导" : "One-on-one mentor guidance",
+        language === 'zh' ? "职业规划咨询" : "Career planning consultation"
       ]
     }
   ];
@@ -84,7 +86,7 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
     }}>
       <DialogContent className="max-w-md bg-slate-800 border-slate-700 text-white">
         <div className="flex justify-between items-center mb-4">
-          <DialogTitle className="text-lg font-bold">支付订单</DialogTitle>
+          <DialogTitle className="text-lg font-bold">{t('membership.paymentTitle')}</DialogTitle>
           <Button 
             variant="ghost" 
             size="sm" 
@@ -111,12 +113,12 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
           <div className="bg-white p-4 rounded-lg">
             <div className="w-32 h-32 bg-gray-200 mx-auto mb-2 flex items-center justify-center">
               <div className="text-xs text-gray-600 text-center">
-                二维码
-                <br />
-                扫码支付
+                 {language === 'zh' ? '二维码' : 'QR Code'}
+                 <br />
+                 {language === 'zh' ? '扫码支付' : 'Scan to Pay'}
               </div>
             </div>
-            <p className="text-gray-600 text-sm">请使用微信或支付宝扫码支付</p>
+            <p className="text-gray-600 text-sm">{t('membership.paymentDesc')}</p>
           </div>
 
           <div className="flex space-x-3">
@@ -125,13 +127,13 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
               className="flex-1 border-slate-600 text-slate-300"
               onClick={() => setShowPayment(false)}
             >
-              取消支付
+               {t('membership.cancelPayment')}
             </Button>
             <Button 
               className="flex-1 bg-green-600 hover:bg-green-700"
               onClick={handleClose}
             >
-              支付完成
+               {t('membership.paymentComplete')}
             </Button>
           </div>
         </div>
@@ -145,10 +147,10 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-800 border-slate-700 text-white">
           <div className="p-6">
             <DialogTitle className="text-2xl font-bold mb-2 text-center">
-              选择您的会员套餐
+              {t('membership.title')}
             </DialogTitle>
             <p className="text-slate-400 text-center mb-8">
-              解锁全部课程内容，享受专属学习体验
+              {t('membership.subtitle')}
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -161,7 +163,7 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <Badge className="bg-green-600 text-white">最受欢迎</Badge>
+                      <Badge className="bg-green-600 text-white">{t('membership.recommended')}</Badge>
                     </div>
                   )}
                   
@@ -189,7 +191,7 @@ const MembershipModal = ({ isOpen, onOpenChange }: MembershipModalProps) => {
                       className="w-full bg-green-600 hover:bg-green-700 mb-6"
                       onClick={() => handlePlanSelect(plan.id)}
                     >
-                      立即开通
+                      {t('membership.orderNow')}
                     </Button>
 
                     <div className="space-y-3 text-left">
