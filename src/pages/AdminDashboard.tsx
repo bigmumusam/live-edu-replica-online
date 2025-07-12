@@ -156,6 +156,7 @@ const AdminDashboardContent = () => {
     { id: 'dashboard', label: t('nav.dashboard'), icon: Home },
     { id: 'users', label: t('nav.users'), icon: Users },
     { id: 'courses', label: t('nav.courses'), icon: BookOpen },
+    { id: 'permissions', label: t('nav.permissions'), icon: Settings },
     { id: 'topics', label: t('nav.topics'), icon: MessageSquare },
     { id: 'activities', label: t('nav.activities'), icon: Calendar },
     { id: 'analytics', label: t('nav.analytics'), icon: BarChart3 },
@@ -255,6 +256,7 @@ const AdminDashboardContent = () => {
                     {activeTab === 'dashboard' && t('dashboard.title')}
                     {activeTab === 'users' && t('users.title')}
                     {activeTab === 'courses' && t('courses.title')}
+                    {activeTab === 'permissions' && t('permissions.title')}
                     {activeTab === 'topics' && t('topics.title')}
                     {activeTab === 'activities' && t('activities.title')}
                     {activeTab === 'analytics' && t('analytics.title')}
@@ -263,6 +265,7 @@ const AdminDashboardContent = () => {
                     {activeTab === 'dashboard' && t('dashboard.subtitle')}
                     {activeTab === 'users' && t('users.subtitle')}
                     {activeTab === 'courses' && t('courses.subtitle')}
+                    {activeTab === 'permissions' && t('permissions.subtitle')}
                     {activeTab === 'topics' && t('topics.subtitle')}
                     {activeTab === 'activities' && t('activities.subtitle')}
                     {activeTab === 'analytics' && t('analytics.subtitle')}
@@ -537,6 +540,230 @@ const AdminDashboardContent = () => {
                           </TableCell>
                         </TableRow>
                       ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Permissions Tab */}
+            {activeTab === "permissions" && (
+              <Card className="bg-white/80 backdrop-blur-xl border border-blue-200 shadow-sm">
+                <CardHeader>
+                  <div className="flex justify-between items-center">
+                    <CardTitle className="text-slate-800">{t('permissions.title')}</CardTitle>
+                    <div className="flex space-x-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-white border-blue-200 text-blue-600 hover:bg-blue-50"
+                        onClick={() => {
+                          console.log('Permission filter clicked');
+                          toast({
+                            title: t('common.filter'),
+                            description: language === 'zh' ? '权限筛选功能已触发' : 'Permission filter function triggered',
+                          });
+                        }}
+                      >
+                        <Filter className="h-4 w-4 mr-2" />
+                        {t('common.filter')}
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="bg-purple-500 hover:bg-purple-600 text-white"
+                        onClick={() => {
+                          console.log('Add Role button clicked');
+                          toast({
+                            title: t('permissions.addRole'),
+                            description: language === 'zh' ? '添加角色对话框将打开' : 'Add role dialog will open',
+                          });
+                        }}
+                      >
+                        <Plus className="h-4 w-4 mr-2" />
+                        {t('permissions.addRole')}
+                      </Button>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-blue-200">
+                        <TableHead className="text-slate-600">{t('permissions.roleName')}</TableHead>
+                        <TableHead className="text-slate-600">{t('permissions.description')}</TableHead>
+                        <TableHead className="text-slate-600">{t('permissions.userCount')}</TableHead>
+                        <TableHead className="text-slate-600">{t('permissions.permissions')}</TableHead>
+                        <TableHead className="text-slate-600">{t('permissions.actions')}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow className="border-blue-200 hover:bg-blue-50">
+                        <TableCell>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              A
+                            </div>
+                            <div className="font-medium text-slate-800">{t('permissions.admin')}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-slate-600">{t('permissions.adminDesc')}</TableCell>
+                        <TableCell className="text-slate-600">3</TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-1">
+                            <Badge className="bg-red-100 text-red-600 border-red-200 text-xs">
+                              {language === 'zh' ? '全部权限' : 'All Permissions'}
+                            </Badge>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('View admin role clicked');
+                                toast({
+                                  title: t('common.view'),
+                                  description: `${language === 'zh' ? '查看管理员权限' : 'View admin permissions'}`,
+                                });
+                              }}
+                            >
+                              <Eye className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('Edit admin role clicked');
+                              }}
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow className="border-blue-200 hover:bg-blue-50">
+                        <TableCell>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              T
+                            </div>
+                            <div className="font-medium text-slate-800">{t('permissions.teacher')}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-slate-600">{t('permissions.teacherDesc')}</TableCell>
+                        <TableCell className="text-slate-600">15</TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-1">
+                            <Badge className="bg-green-100 text-green-600 border-green-200 text-xs">
+                              {language === 'zh' ? '课程管理' : 'Course Management'}
+                            </Badge>
+                            <Badge className="bg-blue-100 text-blue-600 border-blue-200 text-xs">
+                              {language === 'zh' ? '学生管理' : 'Student Management'}
+                            </Badge>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('View teacher role clicked');
+                                toast({
+                                  title: t('common.view'),
+                                  description: `${language === 'zh' ? '查看教师权限' : 'View teacher permissions'}`,
+                                });
+                              }}
+                            >
+                              <Eye className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('Edit teacher role clicked');
+                              }}
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-red-600"
+                              onClick={() => {
+                                console.log('Delete teacher role clicked');
+                              }}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow className="border-blue-200 hover:bg-blue-50">
+                        <TableCell>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              S
+                            </div>
+                            <div className="font-medium text-slate-800">{t('permissions.student')}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-slate-600">{t('permissions.studentDesc')}</TableCell>
+                        <TableCell className="text-slate-600">1,216</TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-1">
+                            <Badge className="bg-blue-100 text-blue-600 border-blue-200 text-xs">
+                              {language === 'zh' ? '课程学习' : 'Course Learning'}
+                            </Badge>
+                            <Badge className="bg-purple-100 text-purple-600 border-purple-200 text-xs">
+                              {language === 'zh' ? '论坛参与' : 'Forum Participation'}
+                            </Badge>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('View student role clicked');
+                                toast({
+                                  title: t('common.view'),
+                                  description: `${language === 'zh' ? '查看学生权限' : 'View student permissions'}`,
+                                });
+                              }}
+                            >
+                              <Eye className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-blue-600"
+                              onClick={() => {
+                                console.log('Edit student role clicked');
+                              }}
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-white border-slate-200 text-slate-600 hover:text-red-600"
+                              onClick={() => {
+                                console.log('Delete student role clicked');
+                              }}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </CardContent>

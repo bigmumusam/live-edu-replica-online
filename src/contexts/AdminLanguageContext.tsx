@@ -28,6 +28,7 @@ const translations = {
     'nav.dashboard': '仪表板',
     'nav.users': '用户管理',
     'nav.courses': '课程管理',
+    'nav.permissions': '权限管理',
     'nav.topics': '话题管理',
     'nav.activities': '活动管理',
     'nav.analytics': '数据分析',
@@ -115,6 +116,22 @@ const translations = {
     'common.reject': '拒绝',
     'common.save': '保存',
     'common.cancel': '取消',
+
+    // 权限管理
+    'permissions.title': '权限管理',
+    'permissions.subtitle': '管理用户角色和权限',
+    'permissions.roleName': '角色名称',
+    'permissions.description': '角色描述',
+    'permissions.userCount': '用户数量',
+    'permissions.permissions': '权限列表',
+    'permissions.actions': '操作',
+    'permissions.addRole': '添加角色',
+    'permissions.admin': '管理员',
+    'permissions.teacher': '教师',
+    'permissions.student': '学生',
+    'permissions.adminDesc': '系统管理员，拥有所有权限',
+    'permissions.teacherDesc': '教师用户，可管理课程和学生',
+    'permissions.studentDesc': '学生用户，可参与课程学习',
   },
   en: {
     // Login page
@@ -133,6 +150,7 @@ const translations = {
     'nav.dashboard': 'Dashboard',
     'nav.users': 'User Management',
     'nav.courses': 'Course Management',
+    'nav.permissions': 'Permission Management',
     'nav.topics': 'Topic Management',
     'nav.activities': 'Activity Management',
     'nav.analytics': 'Analytics',
@@ -220,6 +238,22 @@ const translations = {
     'common.reject': 'Reject',
     'common.save': 'Save',
     'common.cancel': 'Cancel',
+
+    // Permission management
+    'permissions.title': 'Permission Management',
+    'permissions.subtitle': 'Manage user roles and permissions',
+    'permissions.roleName': 'Role Name',
+    'permissions.description': 'Description',
+    'permissions.userCount': 'User Count',
+    'permissions.permissions': 'Permissions',
+    'permissions.actions': 'Actions',
+    'permissions.addRole': 'Add Role',
+    'permissions.admin': 'Administrator',
+    'permissions.teacher': 'Teacher',
+    'permissions.student': 'Student',
+    'permissions.adminDesc': 'System administrator with full access',
+    'permissions.teacherDesc': 'Teacher user who can manage courses and students',
+    'permissions.studentDesc': 'Student user who can participate in courses',
   }
 };
 
